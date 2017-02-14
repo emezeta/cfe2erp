@@ -1,9 +1,18 @@
 # -*- encoding:UTF-8 -*-
 #!/usr/bin/env python
 
+import sys
+import re
+import subprocess
+import json
+from time import strftime
+from lxml import etree, objectify
+from lib import template, applib, eFact
+
+from IPython import embed
+
 """
     **pyecee.py EnvioCFE_entreEmpresas - prueba de concepto**
-
 
     Estructura simplificada de un sobre xml "EnvioCFE_entreEmpresas"
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -13,8 +22,6 @@
                 CFE_Adenda( CFE, Adenda ),
                 ...
             }
-
-
     Ocurrencia de elemetos del sobre:
     '''''''''''''''''''''''''''''''''
         Encabezado  : mínimo = 1, máximo = 1
@@ -22,23 +29,21 @@
         CFE         : mínimo = 1, máximo = 1
         Adenda      : mínimo = 1, máximo = 1
 
-
-    Levanta los sobres xml de una carpeta y los parsea uno a uno a árboles
-    lxml (lxml.de)
+    Levanta los sobres xml de una carpeta y los parsea uno a uno
+    para crear árboles lxml (lxml.de)
 
     Por cada árbol analizado, se creará una lista de dos elementos:
-        ["Encabezado", "lista de CFE_Adenda"]
+        ["Encabezado", "lista de CFE_Adenda(s)"]
 
     Cargar estructuras simples:
     '''''''''''''''''''''''''''
     	Dos alternativas
-    	1. Usando un `teamplate` de estructura completa inicializada a None.
+    	1. Usa un `template` de estructura completa inicializada a None.
     	   Los los tipos de CFE descritos en EnvioCFE_entreEmpresas.xsd son
     	   seis: 'eTck', 'eFact', 'eFact_Exp', 'eRem', 'eRem_Exp' y 'eResg'
 
     	   Recorrer el dom cargando los elementos que corresponda.
-    	   Eliminar todos los elementos 'None' de la 'instancia' de tmplt.
-
+    	   Eliminar todos los elementos 'None' del template.
 
     	2. Sin usar tmplt recorrer el dom, cargar `element.tag = valor`.
     	   Recomponer la estrucutra.
@@ -46,26 +51,12 @@
     	Finalmente, armar cabezal/líneas de documentos a importar.
     	Serializar y almacenar.
 
-
     TODO::
         Deserializar (emezamos por json) y almacenar
         Documentar, agregar comentarios, pepochizar
-        Crear un módulo/clase(s) importable(s)
+        Crear módulo(s) importable(s)
 
 """
-
-import sys
-import re
-import subprocess
-import json
-from time import strftime
-from lxml import etree, objectify
-from lib import template, applib
-from lib import eFact
-
-# from IPython import embed
-
-
 
 prefix = re.compile('^{.*}')
 
@@ -116,78 +107,32 @@ def parse_str(xml_str):
     return res
 
 
-def caratula_py(catla):
-
-    caratula_obj= objectify.fromstring(etree.tostring(catla))
-    res = template.Caratula_tmp
-
-    ns  = prefix.match(caratula_obj.tag)
-    _tag = ns.string[ns.end():]
-
-    if _tag == 'Caratula':
-
-        for i in caratula_obj.getchildren():
-
-            try:
-                ns  = prefix.match(i.tag)
-                _tag = ns.string[ns.end():]
-                res[_tag] = i # i.text?
-            except:
-                print "Error ------ prefix /tag Caratula"
-                sys.exit()
-
-    else:
-        msg = "\tError ------ prefix /tag Caratula"
-
-    return res
-
-
-
 def efact_py(efact):
 
     res = dict()
     res.update(template.eFact_tmp)
-    efact_obj = objectify.fromstring(etree.tostring(efact))
-    """ no logré preguntarle amablemente al elemento si sus hijos
-        servían para algo o no. Sin embargo entendió. """
 
-    try:
-        tmstfirma  =  efact_obj['TmstFirma'].pyval
-        encabezado =  efact_obj['Encabezado']
-        caedata    =  efact_obj['CAEData']
-        detalle    =  efact_obj['Detalle']
-    except:
-        print "Cancela. Falta in elemento obligatorio."
-        sys.exit()
-
-    try:
-        subtotinfo = efact_obj['SubTotInfo']
-    except:
-        subtotinfo = None
-
-    try:
-        referencia = efact_obj['Referencia']
-    except:
-        referencia = None
-
-    res['TmstFirma'] = tmstfirma
     #import ipdb; ipdb.set_trace()
 
-    for i in [encabezado,caedata,detalle,subtotinfo,referencia]:
+    res = dict()
+    for i in efact:
         if i is not None:
             tag = tag_ns(i)
-            if   tag == 'Encabezado':
-                res[tag] = eFact.Encabezado(i)
+            if   tag == 'TmstFirma':
+                res[tag] = objectify.fromstring(etree.tostring(i))
+            elif tag == 'Encabezado':
+                res[tag]  = eFact.Encabezado(objectify.fromstring(etree.tostring(i)))
             elif tag == 'Detalle':
-                res[tag] = eFact.Detalle(i)
+                res[tag] = objectify.fromstring(etree.tostring(i))
             elif tag == 'CAEData':
-                res[tag] = eFact.CAEdata(i)
+                res[tag] = objectify.fromstring(etree.tostring(i))
             elif tag == 'SubTotInfo':
-                res[tag] = eFact.SubTotInfo(i)
+                res[tag] = objectify.fromstring(etree.tostring(i))
             elif tag == 'Referencia':
-                res[tag] = eFact.Referencia(i)
+                res[tag] = objectify.fromstring(etree.tostring(i))
             else:
-                print("Cancela, el elemento es desconocido :" % (i,))
+                res['error'] = "Cancela, el elemento es desconocido : %s" % (i,)
+                print("Cancela, el elemento es desconocido : %s" % (i,))
                 sys.exit()
     return res
 
@@ -219,15 +164,24 @@ def tag_ns(elem):
     return tag
 
 
+class Caratula(object):
+    def __init__(self,C):
+        self.CantCFE         = C.CantCFE.pyval
+        fe = C.Fecha.pyval
+        self.Fecha = "%s/%s/%s %s %s" % (fe[8:10], fe[5:7], fe[0:4], fe[11:19], fe[19:])
+        self.Idemisor        = C.Idemisor.pyval
+        self.RUCEmisor       = C.RUCEmisor.pyval
+        self.RutReceptor     = C.RutReceptor.pyval
+        self.X509Certificate = C.X509Certificate.pyval
+
 
 
 if __name__ == "__main__":
-
+    # import ipdb; ipdb.set_trace()
     entrada = sys.argv[-1:][0]
     files = subprocess.check_output('ls -1 %s/*.xml' % (entrada,),
                                     shell=True).split()
     sobres = list()
-
     for _file in files:
 
         xml_str = parse_file(_file)
@@ -235,39 +189,13 @@ if __name__ == "__main__":
         # documentos: todos los CFE_Adenda del Sobre
         caratula, documentos = parse_str(xml_str)
 
-        # es objeto python
-        Caratula = caratula_py(caratula)
+        # instancia la clase Caratula
+        Caratula = Caratula(objectify.fromstring( etree.tostring( caratula ) ))
 
-        fe = Caratula['Fecha'].text
-        fech = "%s/%s/%s %s %s" % (fe[8:10], fe[5:7], fe[0:4], fe[11:19], fe[19:])
-        cant = Caratula['CantCFE']
-        idem = Caratula['Idemisor']
-        rute = Caratula['RUCEmisor']
-        rutr = Caratula['RutReceptor']
+        print("CFEs en el sobre: %s" % (Caratula.CantCFE,))
 
-        print("Sobre %s  CFEs del sobre: %s" % (_file, cant))
-        #import ipdb;ipdb.set_trace()
-        for i in range(Caratula['CantCFE']):
-
-            CFE = Adenda = None
-            CFE_Adenda = documentos[0]
-
-            for j in CFE_Adenda:
-                tag = tag_ns(j)
-                if tag == 'CFE':
-                    CFE = j
-                elif tag == 'Adenda':
-                    Adenda = j
-                else:
-                    print "\tError ------ prefix /tag "
-                    # grabar log y continue.
-
-                    # ---- debug
-                    iok = raw_input("Intenta continuar s/n :")
-                    if iok not in ['S','s','Y','y']:
-                        sys.exit()
-                    else:
-                        continue
+        for i in range(Caratula.CantCFE):
+            CFE, Adenda = documentos[i].getchildren()
 
             eDoc,Signature = CFE.getchildren()
             tag = tag_ns(eDoc)
@@ -275,8 +203,7 @@ if __name__ == "__main__":
             if   tag == 'eTck':
                 pass
             elif tag == 'eFact':
-                eDoc_py = efact_py(eDoc)
-                encabezado = eDoc_py['Encabezado']
+                encabezado = efact_py(eDoc)['Encabezado']
             elif tag == 'eFact_Exp':
                 pass
             elif tag == 'eRem':
@@ -287,33 +214,6 @@ if __name__ == "__main__":
                 pass
             else:
                 print("Cancela: Elemento desconocido" % (tag,))
-            print("\n\tCantCFE       : %s\n\tFecha         : %s\n\tIdemisor      : %s\n\tRUCEmisor     : %s\n\tRutReceptor   : %s\n\n" % (cant, fech, idem, rute, rutr))
-
-            print("\tCfe Nro %s de %s\n\n" % (i+1,cant))
-
-            print("\t\t %s" % (encabezado.tag,))
-
-            print( "\tEmisor")
-            for i in encabezado.emisor():
-                print( "\t\t%s\t%s" % (i,encabezado.emisor()[i]))
-
-            print( "\tIdDoc")
-            for i in encabezado.iddoc():
-                print( "\t\t%s\t%s" % (i,encabezado.iddoc()[i]))
-
-            print( "\tReceptor")
-            for i in encabezado.receptor():
-                print( "\t\t%s\t%s" % (i,encabezado.receptor()[i]))
-
-            print( "\tTotales")
-            for i in encabezado.totales():
-                print( "\t\t%s\t%s" % (i,encabezado.totales()[i]))
-
-            print("x"*60)
-
-            #raw_input('%s...\n' % (25*' ',))
-
-
 
 
 
