@@ -49,6 +49,7 @@ class EnvioCFEentreEmpresas(object):
             sys.exit()
         self.prefix = re.compile('^{.*}')
 
+
     def Caratula(self,C):
 
         try:
@@ -62,6 +63,7 @@ class EnvioCFEentreEmpresas(object):
             msg = "ERROR: La carátula no ha podido ser inicializada\n XML : s%" % (self.xml_file,)
             print(msg)
             sys.exit()
+
 
     def parse_str(self):
         """
@@ -80,7 +82,7 @@ class EnvioCFEentreEmpresas(object):
             elif tag == "CFE_Adenda":
                 docs.append(e)
             else:
-                msg = "Error ------ prefix /tag %s " % (e,)
+                msg = "ERROR: El tag o elemento %s no debería estar allí." % (e,)
                 print(msg)
                 sys.exit(1)
         res = tuple((caratula_, docs))
@@ -98,6 +100,7 @@ class EnvioCFEentreEmpresas(object):
         assert isinstance(res, object)
         return res
 
+
     def tag_ns(self, elem):
         """
             elem: es un elemento, tiene un tag!
@@ -109,7 +112,6 @@ class EnvioCFEentreEmpresas(object):
             msg = "Error %s no tiene un tag..." % (elem,)
             print(msg)
             return False
-
         ns = prefix.match(_tag)
         if ns:
             tag = ns.string[ns.end():]
@@ -133,6 +135,7 @@ class eDoc(EnvioCFEentreEmpresas):
             msg = "ERROR: el tag %s es desconocido. Cancela." % (self.tag,)
             print(tag)
             sys.exit()
+
 
     def edoc_tmpl(self):
         res = dict()
@@ -165,62 +168,67 @@ class eDoc(EnvioCFEentreEmpresas):
         return res
 
 
+
 class Encabezado(eDoc):
 
     def __init__ (self, elem):
         self.elem = elem
         self.tag = self.tag_ns(elem)
 
+
     def emisor (self):
         e = self.elem['Emisor']
         res = dict(
-            CdgDGISucur=iv(e.CdgDGISucur),
-            Ciudad=iv(e.Ciudad),
-            Departamento=iv(e.Departamento),
-            DomFiscal=iv(e.DomFiscal),
-            RUCEmisor=iv(e.RUCEmisor),
-            RznSoc=iv(e.RznSoc),
+            CdgDGISucur = iv(e.CdgDGISucur),
+            Ciudad = iv(e.Ciudad),
+            Departamento = iv(e.Departamento),
+            DomFiscal = iv(e.DomFiscal),
+            RUCEmisor = iv(e.RUCEmisor),
+            RznSoc = iv(e.RznSoc),
         )
         return res
+
 
     def iddoc (self):
         i = self.elem['IdDoc']
         res = dict(
-            FchEmis=iv(i.FchEmis),
-            FchVenc=iv(i.FchVenc),  # No Obligatorio
-            FmaPago=iv(i.FmaPago),
-            Nro=iv(i.Nro),
-            Serie=iv(i.Serie),
+            FchEmis = iv(i.FchEmis),
+            FchVenc = iv(i.FchVenc),  # No Obligatorio
+            FmaPago = iv(i.FmaPago),
+            Nro = iv(i.Nro),
+            Serie = iv(i.Serie),
             TipoCFE=iv(i.TipoCFE),
         )
         return res
 
+
     def receptor (self):
         r = self.elem['Receptor']
         res = dict(
-            CiudadRecep=iv(r.CiudadRecep),
-            CodPaisRecep=iv(r.CodPaisRecep),
-            CompraID=iv(r.CompraID),  # NOO
-            DeptoRecep=iv(r.DeptoRecep),  # NOO
-            DirRecep=iv(r.DirRecep),
-            DocRecep=iv(r.DocRecep),
-            PaisRecep=iv(r.PaisRecep),  # NOO
-            RznSocRecep=iv(r.RznSocRecep),
-            TipoDocRecep=iv(r.TipoDocRecep),
-            InfoAdicional=iv(r.InfoAdicional),  # NOO
+            CiudadRecep = iv(r.CiudadRecep),
+            CodPaisRecep = iv(r.CodPaisRecep),
+            CompraID=iv(r.CompraID),  # No Obligatorio
+            DeptoRecep = iv(r.DeptoRecep),  # No Obligatorio
+            DirRecep = iv(r.DirRecep),
+            DocRecep = iv(r.DocRecep),
+            PaisRecep = iv(r.PaisRecep),  # No Obligatorio
+            RznSocRecep = iv(r.RznSocRecep),
+            TipoDocRecep = iv(r.TipoDocRecep),
+            InfoAdicional = iv(r.InfoAdicional),  # No Obligatorio
         )
         return res
+
 
     def totales (self):
         t = self.elem['Totales']
         res = dict(
-            CantLinDet=iv(t.CantLinDet),
-            IVATasaBasica=iv(t.IVATasaBasica),
-            MntIVATasaBasica=iv(t.MntIVATasaBasica),  # NOO
-            MntNetoIVATasaBasica=iv(t.MntNetoIVATasaBasica),  # NOO
-            MntPagar=iv(t.MntPagar),
-            MntTotal=iv(t.MntTotal),
-            MontoNF=iv(t.MontoNF),  # NOO
+            CantLinDet = iv(t.CantLinDet),
+            IVATasaBasica = iv(t.IVATasaBasica),
+            MntIVATasaBasica = iv(t.MntIVATasaBasica),  # No Obligatorio
+            MntNetoIVATasaBasica = iv(t.MntNetoIVATasaBasica),  # No Obligatorio
+            MntPagar = iv(t.MntPagar),
+            MntTotal = iv(t.MntTotal),
+            MontoNF = iv(t.MontoNF),  # No Obligatorio
         )
         return res
 
@@ -231,32 +239,42 @@ class Detalle(eDoc):
         self.elem = elem
         self.tag = self.tag_ns(elem)
 
+
     def cantidad (self):
         self.elem.Item.Cantidad
+
 
     def coditem (self):
         self.elem.Item.CodItem
 
+
     def descuentomonto (self):
         self.elem.Item.DescuentoMonto
+
 
     def descuentopct (self):
         self.elem.Item.DescuentoPct
 
+
     def indfact (self):
         self.elem.Item.IndFact
+
 
     def montoitem (self):
         self.elem.Item.MontoItem
 
+
     def nomitem (self):
         self.elem.Item.NomItem
+
 
     def nrolindet (self):
         self.elem.Item.NroLinDet
 
+
     def preciounitario (self):
         self.elem.Item.PrecioUnitario
+
 
     def unimed (self):
         self.elem.Item.UniMed

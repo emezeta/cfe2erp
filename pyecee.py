@@ -1,14 +1,13 @@
 # -*- encoding:UTF-8 -*-
 #!/usr/bin/env python
 
-import sys
-import re
-import subprocess
 import json
-import datetime, dateutil.parser
-from time import strftime
+import subprocess
+import sys
 from lxml import etree, objectify
-from lib import template, applib, eFact
+from time import strftime
+
+import lib.EnvioCFE_entreEmpresas as ecee
 
 #from IPython import embed
 
@@ -59,7 +58,6 @@ from lib import template, applib, eFact
 
 """
 
-prefix = re.compile('^{.*}')
 
 def write_json(out_path, jtags, out_name="eTags"):
 
@@ -77,34 +75,6 @@ def write_json(out_path, jtags, out_name="eTags"):
 
 
 
-
-
-def parse_str(xml_str):
-    """
-        @param: xml_str string de un sobre EnvioCFE_entreEmpresas
-
-        La salida es una tupla de largo 2. (documentos, Caratula)
-
-        Caratula    :  elemento Caratula del Sobre
-        documentos  :  lista de elementos `CFE_Adenda`
-    """
-    xml_doc = etree.fromstring(xml_str)
-    docs = list()
-    caratula_ = None
-    for e in xml_doc.getchildren():
-        tag = applib.tag_ns(e)
-        if tag == "Caratula":
-            caratula_ = e
-        elif tag == "CFE_Adenda":
-            docs.append(e)
-        else:
-            print("Error ------ prefix /tag %s " % (e,))
-            sys.exit(1)
-    res = tuple((caratula_, docs))
-    return res
-
-
-
 if __name__ == "__main__":
     # import ipdb; ipdb.set_trace()
     entrada = sys.argv[-1:][0]
@@ -113,7 +83,7 @@ if __name__ == "__main__":
     sobres = list()
     for _file in files:
 
-        xml_str = CFE_Adenda.parse_file(_file)
+        xml_str = ecee.parse_file(_file)
 
         # documentos: todos los CFE_Adenda del Sobre
         caratula, documentos = parse_str(xml_str)
