@@ -5,11 +5,12 @@ import sys
 import re
 import subprocess
 import json
+import datetime, dateutil.parser
 from time import strftime
 from lxml import etree, objectify
 from lib import template, applib, eFact
 
-from IPython import embed
+#from IPython import embed
 
 """
     **pyecee.py EnvioCFE_entreEmpresas - prueba de concepto**
@@ -75,12 +76,7 @@ def write_json(out_path, jtags, out_name="eTags"):
     return res
 
 
-def parse_file(_file):
 
-    with open(_file, "r") as fxml:
-        xmlstr = fxml.read().replace('&', '&amp;')
-
-    return xmlstr
 
 
 def parse_str(xml_str):
@@ -94,85 +90,18 @@ def parse_str(xml_str):
     """
     xml_doc = etree.fromstring(xml_str)
     docs = list()
-    _caratula = None
+    caratula_ = None
     for e in xml_doc.getchildren():
-        if e.tag == "{http://cfe.dgi.gub.uy}Caratula":
-            _caratula = e
-        elif e.tag == "{http://cfe.dgi.gub.uy}CFE_Adenda":
+        tag = applib.tag_ns(e)
+        if tag == "Caratula":
+            caratula_ = e
+        elif tag == "CFE_Adenda":
             docs.append(e)
         else:
-            print "Error ------ prefix /tag "
+            print("Error ------ prefix /tag %s " % (e,))
             sys.exit(1)
-    res = tuple((_caratula, docs))
+    res = tuple((caratula_, docs))
     return res
-
-
-def efact_py(efact):
-
-    res = dict()
-    res.update(template.eFact_tmp)
-
-    #import ipdb; ipdb.set_trace()
-
-    res = dict()
-    for i in efact:
-        if i is not None:
-            tag = tag_ns(i)
-            if   tag == 'TmstFirma':
-                res[tag] = objectify.fromstring(etree.tostring(i))
-            elif tag == 'Encabezado':
-                res[tag]  = eFact.Encabezado(objectify.fromstring(etree.tostring(i)))
-            elif tag == 'Detalle':
-                res[tag] = objectify.fromstring(etree.tostring(i))
-            elif tag == 'CAEData':
-                res[tag] = objectify.fromstring(etree.tostring(i))
-            elif tag == 'SubTotInfo':
-                res[tag] = objectify.fromstring(etree.tostring(i))
-            elif tag == 'Referencia':
-                res[tag] = objectify.fromstring(etree.tostring(i))
-            else:
-                res['error'] = "Cancela, el elemento es desconocido : %s" % (i,)
-                print("Cancela, el elemento es desconocido : %s" % (i,))
-                sys.exit()
-    return res
-
-
-def signature_py(signature):
-    res = dict()
-    return res
-
-
-def no_vacios(d):
-    return dict([(k, v) for k, v in d.iteritems() if(str(v).strip()) ])
-
-def tag_ns(elem):
-    """
-        elem: es un elemento, tiene un tag!
-        strip ns from tag/element name
-    """
-    try:
-        _tag = elem.tag
-    except:
-        print("Error %s no tiene un tag..." % (elem,))
-        return False
-
-    ns = prefix.match(_tag)
-    if ns:
-        tag = ns.string[ns.end():]
-    else:
-        tag = _tag
-    return tag
-
-
-class Caratula(object):
-    def __init__(self,C):
-        self.CantCFE         = C.CantCFE.pyval
-        fe = C.Fecha.pyval
-        self.Fecha = "%s/%s/%s %s %s" % (fe[8:10], fe[5:7], fe[0:4], fe[11:19], fe[19:])
-        self.Idemisor        = C.Idemisor.pyval
-        self.RUCEmisor       = C.RUCEmisor.pyval
-        self.RutReceptor     = C.RutReceptor.pyval
-        self.X509Certificate = C.X509Certificate.pyval
 
 
 
@@ -184,36 +113,44 @@ if __name__ == "__main__":
     sobres = list()
     for _file in files:
 
-        xml_str = parse_file(_file)
+        xml_str = CFE_Adenda.parse_file(_file)
 
         # documentos: todos los CFE_Adenda del Sobre
         caratula, documentos = parse_str(xml_str)
 
         # instancia la clase Caratula
-        Caratula = Caratula(objectify.fromstring( etree.tostring( caratula ) ))
+        Caratula = objectify.fromstring( etree.tostring( caratula ) )
 
         print("CFEs en el sobre: %s" % (Caratula.CantCFE,))
+        print("CFES %s:" % (_file,))
 
-        for i in range(Caratula.CantCFE):
-            CFE, Adenda = documentos[i].getchildren()
+        if not (len(documentos) == Caratula.CantCFE):
+            msg = "ERROR: La cantidad de CFE <%s> en el sobre no coincide " \
+                  "con la cantidad indicada en la carátula <%s>" \
+                  % ( len(documentos), Caratula.CantCFE)
+            print(msg)
+            sys.exit()
 
-            eDoc,Signature = CFE.getchildren()
-            tag = tag_ns(eDoc)
-
-            if   tag == 'eTck':
+        for i in documentos:
+            tag = applib.tag_ns(i)
+            if tag == 'CFE':
+                if   tag == 'eTck':
+                    pass
+                elif tag == 'eFact':
+                    eDoc = objectify.fromstring(etree.tostring(i))
+                    encabezado = efact_tmpl(eDoc)['Encabezado']
+                elif tag == 'eFact_Exp':
+                    pass
+                elif tag == 'eRem':
+                    pass
+                elif tag == 'eRem_Exp':
+                    pass
+                elif tag == 'eResg':
+                    pass
+                else:
+                    print("Cancela: Elemento desconocido" % (tag,))
+            elif tag == 'Adenda':
                 pass
-            elif tag == 'eFact':
-                encabezado = efact_py(eDoc)['Encabezado']
-            elif tag == 'eFact_Exp':
-                pass
-            elif tag == 'eRem':
-                pass
-            elif tag == 'eRem_Exp':
-                pass
-            elif tag == 'eResg':
-                pass
-            else:
-                print("Cancela: Elemento desconocido" % (tag,))
 
 
 

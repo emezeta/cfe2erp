@@ -14,16 +14,13 @@ Caratula_tmp = {
 
 # eDoc_tmp = 'eTck' or 'eFact' or 'eFact_Exp' or 'eRem' or 'eRem_Exp' or 'eResg'
 
-CFE_Adenda_tmp = {
-    'CFE'   :  { 'eDoc': None, 'Signature': None },
-    'Adenda': None,
-}
+CFE_Adenda_ = [ [ {'CFE': { 'eDoc': None, 'Signature': None }}, {'Adenda':None,} ] ]
 
 
 
 # faltan definir los tmp para  'eTck', 'eFact_Exp', 'eRem', 'eRem_Exp' y 'eResg'
 
-eFact_tmp = {
+eFact = {
     'TmstFirma' : None,
     'Encabezado': {
         'IdDoc'   : {
