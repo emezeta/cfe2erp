@@ -3,19 +3,11 @@
 
 from __future__ import print_function
 
-import dateutil
 import re
 import sys
-
+from dateutil import parser
+from lxml import etree, objectify
 import template
-
-
-# import subprocess
-# import json
-# from time import strftime
-# from lxml import etree, objectify
-# from IPython import embed
-# from apparmor.common import msg
 
 __author__ = "emezeta"
 __author_email__ = "emezeta@insiberia.net"
@@ -23,117 +15,164 @@ __copyright__ = "Copyright (C) 2017 eFacturaUy"
 __license__ = "GPL 3.0"
 __version__ = "0.99"
 
-
 """
     Los sobres xml del tipo `EnvioCFE_entreEmpresas` constan de 2 elementos:
-    Un CFE y su Adenda. Un atributo, la versión del esquema xsd.
 
+        @ Caratula
+        @ CFE_Adenda   ( lista de elementos mínimo 1 y máximo 250)
+
+    y un atributo, la versión del esquema xsd.  (no interesa para estas clases)
+
+    Se implementan clases útiles para leer (o escribir) sobres xml del tipo `EnvioCFE_entreEmpresas`
+
+    TODO: o escribir.
 """
+
+prefix = re.compile('^{.*}')
+
+
+def tag_ns(elem):
+    """
+        elem: es un elemento, tiene un tag!
+        strip ns from tag/element name
+    """
+    try:
+        _tag = elem.tag
+    except:
+        msg = "Error %s no tiene un tag..." % (elem,)
+        print(msg)
+        return False
+    ns = prefix.match(_tag)
+    if ns:
+        tag = ns.string[ns.end():]
+    else:
+        tag = _tag
+    return tag
 
 
 def no_vacios(d):
     return dict([(k, v) for k, v in d.iteritems() if(str(v).strip()) ])
 
 
-class EnvioCFEentreEmpresas(object):
+def iv(val=None):
+    """
+        `iv` function check for any value in the lxml.objectify `val`
+        :return: `val` value or None
+    """
+    try:
+        res = val.pyval
+    except:
+        msg = "Warning: no hay valor para %s" % (val,)
+        print(msg)
+        res = None
+    return res
+
+
+
+
+class initSobre(object):
+    """
+        Abre el archivo xml, inicializa el arbol element.tree y
+        separa la Carátula de su(s) CFE_Adenda(s)
+    """
 
 
     def __init__(self, xmlfile):
+        """
+            Lee el archivo xml y crea el arbol xml element tree
+            :param: xmlfile: archivo xml contiene un Sobre ecee
+        """
         self.xmlfile = xmlfile
         try:
             with open(xmlfile, "r") as fxml:
-                self.xmlstr = fxml.read().replace('&', '&amp;')
+                xmlstr = fxml.read().replace('&', '&amp;')
+            self.xmldoc = etree.fromstring(xmlstr)
         except Exception as ex:
-            msg = "El archivo xml %s no está disponible." % (self.xmlfile,)
-            print(msg)
-            sys.exit()
-        self.prefix = re.compile('^{.*}')
-
-
-    def Caratula(self,C):
-
-        try:
-            self.CantCFE         = C.CantCFE.pyval
-            self.Fecha           = dateutil.parser(C.Fecha.pyval)
-            self.Idemisor        = C.Idemisor.pyval
-            self.RUCEmisor       = C.RUCEmisor.pyval
-            self.RutReceptor     = C.RutReceptor.pyval
-            self.X509Certificate = C.X509Certificate.pyval
-        except:
-            msg = "ERROR: La carátula no ha podido ser inicializada\n XML : s%" % (self.xml_file,)
+            msg = "El archivo xml %s no está disponible o no es un sobre xml `EnvioCFE_entreEmpresas`" % (self.xmlfile,)
             print(msg)
             sys.exit()
 
 
-    def parse_str(self):
+    def carat_docs(self):
         """
-            @param: xml_str string de un sobre EnvioCFE_entreEmpresas
-            La salida es una tupla de largo 2. (documentos, Caratula)
-            Caratula    :  elemento Caratula del Sobre
-            documentos  :  lista de elementos `CFE_Adenda`
+            Divide el árbol en `Caratula` y `CFE_Adenda`
+            @Caratula: elementoetree `Caratula`
+            @documentos: Lista de elementos etree, cutos elementos son `CFE_Adenda`(s) del sobre.
+
+            :return:   tupla de largo 2. ([documentos CFE_Adenda,], Caratula)
         """
-        xml_doc = etree.fromstring(self.xmlstr)
-        docs = list()
-        caratula_ = None
-        for e in xml_doc.getchildren():
-            tag = self.tag_ns(e)
+
+        docs  = list()
+        cart = None
+        for e in self.xmldoc.getchildren():
+            tag = tag_ns(e)
             if tag == "Caratula":
-                caratula_ = e
+                cart = e
             elif tag == "CFE_Adenda":
                 docs.append(e)
             else:
                 msg = "ERROR: El tag o elemento %s no debería estar allí." % (e,)
                 print(msg)
                 sys.exit(1)
-        res = tuple((caratula_, docs))
+        res = tuple((cart, docs))
         return res
 
 
-    def iv(self, value=None):
-        # Is Value? - # menos líneas en la implementación de las clases.
+
+class Caratula(object):
+
+    def __init__(self, elemtree):
+        """
+            Crea el objeto Caratula a partir de un elemento etree lxml
+            :param elemtree: Un elemeto Catatula.
+            :return: Un objeto Caratula
+
+            C.Fecha.pyval == '2016-01-27T18:10:09-03:00'
+            # >>> Fecha = dateutil.parser.parse(C.Fecha.pyval)
+            # >>> Fecha.strftime('%Y-%m-%d %H:%M:%S')
+            ... 2016-11-11 18:10:09 ...etc
+        """
+
+        C = objectify.fromstring(etree.tostring(elemtree))
+        import ipdb; ipdb.set_trace()
         try:
-            res = value.pyval
+            self.CantCFE         = C.CantCFE.pyval
+            self.Fecha           = parser.parse(C.Fecha.pyval)
+            self.Idemisor        = C.Idemisor.pyval
+            self.RUCEmisor       = C.RUCEmisor.pyval
+            self.RutReceptor     = C.RutReceptor.pyval
+            self.X509Certificate = C.X509Certificate.pyval
         except:
-            msg = "\tWarning: no hay valor para %s" % (value,)
+            msg = "ERROR: La carátula no ha podido ser inicializada!"
             print(msg)
-            res = None
-        assert isinstance(res, object)
-        return res
+            sys.exit()
 
 
-    def tag_ns(self, elem):
-        """
-            elem: es un elemento, tiene un tag!
-            strip ns from tag/element name
-        """
-        try:
-            _tag = elem.tag
-        except:
-            msg = "Error %s no tiene un tag..." % (elem,)
-            print(msg)
-            return False
-        ns = prefix.match(_tag)
-        if ns:
-            tag = ns.string[ns.end():]
+class Adenda(object):
+    def __init__(self, adenda):
+        tag = tag_ns(adenda)
+        if tag == 'Adenda':
+            self.Adenda = objectify.fromstring(etree.tostring(adenda))
         else:
-            tag = _tag
-        return tag
+            msg = "ERROR: La Adenda del CFE no se ha encontrado."
+            print(msg)
 
 
-class eDoc(EnvioCFEentreEmpresas):
+
+class eDoc(object):
 
     """
-        Representa al elemento CFE del schema.
+        El elemento CFE de cada CFE_Adenda
         Iimpementa un wrapper para uno de:
         eTck, eFact, eFact_Exp, eRem, eRem_Exp, eResg
     """
 
     def __init__(self, edoc, *args, **kargs):
         self.eDoc = edoc
-        self.tag = self.tag_ns(edoc)
+        self.tag = tag_ns(edoc)
         if self.tag not in ('eTck', 'eFact', 'eFact_Exp', 'eRem', 'eRem_Exp', 'eResg'):
             msg = "ERROR: el tag %s es desconocido. Cancela." % (self.tag,)
-            print(tag)
+            print(self.tag)
             sys.exit()
 
 
@@ -142,7 +181,7 @@ class eDoc(EnvioCFEentreEmpresas):
         res.update(template.eDoc)
         for i in self.eDoc:
             if i is not None:
-                tag =self.tag_ns(i)
+                tag = tag_ns(i)
                 if   tag == 'TmstFirma':
                     res[tag] = objectify.fromstring(etree.tostring(i))
                 elif tag == 'Encabezado':
@@ -173,7 +212,7 @@ class Encabezado(eDoc):
 
     def __init__ (self, elem):
         self.elem = elem
-        self.tag = self.tag_ns(elem)
+        self.tag = tag_ns(elem)
 
 
     def emisor (self):
@@ -237,7 +276,7 @@ class Detalle(eDoc):
 
     def __init__ (self, elem):
         self.elem = elem
-        self.tag = self.tag_ns(elem)
+        self.tag = tag_ns(elem)
 
 
     def cantidad (self):
@@ -283,34 +322,34 @@ class Detalle(eDoc):
 class SubTotInfo(eDoc):
     def __init__ (self, elem):
         self.elem = elem
-        self.tag = self.tag_ns(elem)
+        self.tag = tag_ns(elem)
 
 
 class DscRecGlobal(eDoc):
     def __init__ (self, elem):
         self.elem = elem
-        self.tag = self.tag_ns(elem)
+        self.tag = tag_ns(elem)
 
 
 class MrdiosPago(eDoc):
     def __init__ (self, elem):
         self.elem = elem
-        self.tag = self.tag_ns(elem)
+        self.tag = tag_ns(elem)
 
 
 class Referencia(eDoc):
     def __init__ (self, elem):
         self.elem = elem
-        self.tag = self.tag_ns(elem)
+        self.tag = tag_ns(elem)
 
 
 class CAEdata(eDoc):
     def __init__ (self, elem):
         self.elem = elem
-        self.tag = self.tag_ns(elem)
+        self.tag = tag_ns(elem)
 
 
 class ComplFiscal(eDoc):
     def __init__ (self, elem):
         self.elem = elem
-        self.tag = self.tag_ns(elem)
+        self.tag = tag_ns(elem)

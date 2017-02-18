@@ -1,4 +1,4 @@
-# -*- encoding:UTF-8 -*-
+# coding:UTF-8
 #!/usr/bin/env python
 
 import json
@@ -7,7 +7,7 @@ import sys
 from lxml import etree, objectify
 from time import strftime
 
-import lib.EnvioCFE_entreEmpresas as ecee
+from libpyefuy import ecfeee, template
 
 #from IPython import embed
 
@@ -80,21 +80,22 @@ if __name__ == "__main__":
     entrada = sys.argv[-1:][0]
     files = subprocess.check_output('ls -1 %s/*.xml' % (entrada,),
                                     shell=True).split()
+
     sobres = list()
     for _file in files:
 
-        xml_str = ecee.parse_file(_file)
+        xml_doc =   ecfeee.initSobre(_file)
+        sobre = xml_doc.carat_docs()
 
-        # documentos: todos los CFE_Adenda del Sobre
-        caratula, documentos = parse_str(xml_str)
+        carat_element = sobre[0]
+        documentos = sobre[1]
 
-        # instancia la clase Caratula
-        Caratula = objectify.fromstring( etree.tostring( caratula ) )
+        Caratula = ecfeee.Caratula(carat_element)
 
         print("CFEs en el sobre: %s" % (Caratula.CantCFE,))
         print("CFES %s:" % (_file,))
 
-        if not (len(documentos) == Caratula.CantCFE):
+        if not (len(sobre[1]) == Caratula.CantCFE):
             msg = "ERROR: La cantidad de CFE <%s> en el sobre no coincide " \
                   "con la cantidad indicada en la carátula <%s>" \
                   % ( len(documentos), Caratula.CantCFE)
