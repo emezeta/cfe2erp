@@ -1,6 +1,10 @@
-# coding:UTF-8
+# coding: utf-8
 #!/usr/bin/env python
 
+from __future__ import print_function
+
+import StringIO
+import csv
 import json
 import subprocess
 import sys
@@ -74,107 +78,85 @@ def write_json(out_path, jtags, out_name="eTags"):
     return res
 
 
+def write_csv(fname, data):
+    path = "/tmp/" + fname
+    with open(path, "w") as f:
+        f.write(data)
+
+
 
 if __name__ == "__main__":
-    # import ipdb; ipdb.set_trace()
+
     entrada = sys.argv[-1:][0]
     files = subprocess.check_output('ls -1 %s/*.xml' % (entrada,),
                                     shell=True).split()
 
-    sobres = list()
+
     for _file in files:
 
-        xml_doc =   ecfeee.initSobre(_file)
-        sobre = xml_doc.carat_docs()
+        # salida csv ---------------
+        lin_csv = StringIO.StringIO()
+        writer = csv.writer(lin_csv, delimiter= '|', lineterminator='\r\n')
+        csv_fname = _file.split('/')[-1:][0][:-3] + 'csv'
+        # --------------------------
 
-        carat_element = sobre[0]
-        documentos = sobre[1]
+        try:
+            cfe_empresas = ecfeee.initSobre(_file)
+        except Exception as e:
+            msg = "\n\tERROR: %s \n\tal procesar %s." (e, _file)
+            print(msg)
 
-        Caratula = ecfeee.Caratula(carat_element)
+        root = cfe_empresas.xmldoc
 
-        print("CFEs en el sobre: %s" % (Caratula.CantCFE,))
-        print("CFES %s:" % (_file,))
+        elemento_cfe_adenda = cfe_empresas.sobre['CFE_Adenda']
 
-        if not (len(sobre[1]) == Caratula.CantCFE):
+        Caratula = ecfeee.Caratula( cfe_empresas.sobre['Caratula'] )
+
+        print("CFEs en el sobre: %s archivo %s" % (Caratula.CantCFE, _file))
+
+        if not (len(elemento_cfe_adenda) == Caratula.CantCFE):
             msg = "ERROR: La cantidad de CFE <%s> en el sobre no coincide " \
                   "con la cantidad indicada en la carátula <%s>" \
-                  % ( len(documentos), Caratula.CantCFE)
+                  % ( len(elemento_cfe_adenda), Caratula.CantCFE)
             print(msg)
             sys.exit()
 
-        for i in documentos:
-            tag = applib.tag_ns(i)
+        print("Dia: %s " % (Caratula.Fecha.strftime('%Y-%m-%d %H:%M:%S'), ))
+
+        for cfe_adenda in elemento_cfe_adenda:
+
+            csv_row = list()
+
+            cfe_adenda_obj = objectify.fromstring(etree.tostring(cfe_adenda))
+            cfe = cfe_adenda_obj.CFE
+            tag = ecfeee.tag_ns(cfe)
+
             if tag == 'CFE':
-                if   tag == 'eTck':
-                    pass
-                elif tag == 'eFact':
-                    eDoc = objectify.fromstring(etree.tostring(i))
-                    encabezado = efact_tmpl(eDoc)['Encabezado']
-                elif tag == 'eFact_Exp':
-                    pass
-                elif tag == 'eRem':
-                    pass
-                elif tag == 'eRem_Exp':
-                    pass
-                elif tag == 'eResg':
-                    pass
-                else:
-                    print("Cancela: Elemento desconocido" % (tag,))
-            elif tag == 'Adenda':
-                pass
 
+                cfe_doc, signature = cfe.getchildren()
+                eDoc_obj = objectify.fromstring(etree.tostring(cfe_doc))
 
+                linea = "Emisor: %s %s: %s %s " % (eDoc_obj.Encabezado.Emisor.RznSoc.pyval, ecfeee.tag_ns(eDoc_obj), eDoc_obj.Encabezado.IdDoc.Serie.pyval, eDoc_obj.Encabezado.IdDoc.Nro.pyval)
 
+                print(linea, "\n ===")
 
+            csv_row.append('C')
+            csv_row.append(Caratula.Fecha.strftime('%Y-%m-%d %H:%M:%S'))
+            csv_row.append(eDoc_obj.Encabezado.Emisor.RznSoc.pyval)
+            csv_row.append(ecfeee.tag_ns(eDoc_obj))
+            csv_row.append(eDoc_obj.Encabezado.IdDoc.Serie.pyval)
+            csv_row.append(eDoc_obj.Encabezado.IdDoc.Nro.pyval)
 
+            # lrpmqtp charset!
+            to_str = list()
+            for i in csv_row:
+                if isinstance(i, (int,long,float)):
+                    i = str(i)
+                to_str.append(i)
 
+            writer.writerow([campo.encode('utf_8') for campo in to_str])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        write_csv(csv_fname, lin_csv.getvalue())
 
 
 

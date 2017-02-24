@@ -1,7 +1,4 @@
-﻿# -*- encoding: utf-8 -*-
-
-# b = objectify.SubElement(root, "b")
-from lxml import etree, objectify
+﻿# coding: utf-8
 
 Caratula_tmp = {
     'CantCFE'        : None,
@@ -12,15 +9,11 @@ Caratula_tmp = {
     'X509Certificate': None,
 }
 
-# eDoc_tmp = 'eTck' or 'eFact' or 'eFact_Exp' or 'eRem' or 'eRem_Exp' or 'eResg'
-
-CFE_Adenda_ = [ [ {'CFE': { 'eDoc': None, 'Signature': None }}, {'Adenda':None,} ] ]
-
-
 
 # faltan definir los tmp para  'eTck', 'eFact_Exp', 'eRem', 'eRem_Exp' y 'eResg'
+# mmm.. será uno solo con todo lo necesario, este es el comienzo/
 
-eFact = {
+eDoc = {
     'TmstFirma' : None,
     'Encabezado': {
         'IdDoc'   : {
