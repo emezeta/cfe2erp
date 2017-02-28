@@ -9,6 +9,8 @@ from dateutil import parser
 from lxml import etree, objectify
 import template
 
+from IPython import embed
+
 __author__ = "emezeta"
 __author_email__ = "emezeta@insiberia.net"
 __copyright__ = "Copyright (C) 2017 eFacturaUy"
@@ -57,19 +59,25 @@ def no_vacios(d):
 def iv(val=None):
     """
         `iv` function check for any value in the lxml.objectify `val`
-        :return: `val` value or None
+        :param val: lxml.objectify `val` element
+        :return: `val` value or error message
     """
     try:
         res = val.pyval
     except:
         msg = "Warning: no hay valor para %s" % (val,)
         print(msg)
-        res = None
+        res = msg
     return res
+
 
 def try_decode(str_doc):
     # import ipdb;ipdb.set_trace()
     # ['cp850', 'cp858', 'cp437', 'cp1140', 'cp1250', 'cp1252', 'latin_1', 'iso8859_15', 'utf_8', 'ascii' ]
+
+    cod = None
+    res = False
+    doc = False
     codecs = ['utf_8', 'latin_1', 'cp1252', 'iso8859_15', 'cp850', 'cp437']
     for dec in codecs:
         cod = None
@@ -109,23 +117,24 @@ class initSobre(object):
             Lee el archivo xml y crea el arbol xml element tree
             :param: xmlfile: archivo xml contiene un Sobre ecee
 
-            Divide el árbol en `Caratula` y `CFE_Adenda`
+            Divide el árbol en `Caratula` (elemento único) y `CFE_Adenda` ( 1 a 250 elementos )
             @Caratula: elementoetree `Caratula`
-            @documentos: Lista de elementos etree, cutos elementos son `CFE_Adenda`(s) del sobre.
+            @documentos: Lista de elementos etree, tantos elementos como CFE_Adenda(s) contenga el sobre.
 
             :return:   tupla de largo 2. ([documentos CFE_Adenda,], Caratula)
         """
-
+        #import ipdb; ipdb.set_trace()
         try:
             # with open(xmlfile, "r") as fxml:
             #    xmlstr = fxml.read().replace('&', '&amp;')
             # xml_doc = try_decode(xmlstr)
-            self.xmldoc = etree.parse(xmlfile).getroot()
+            xmldoc = etree.parse(xmlfile)
+            self.xmldoc = xmldoc.getroot()
         except Exception as ex:
             msg = "El archivo xml %s no está disponible o no es un sobre xml `EnvioCFE_entreEmpresas` \n\t%s" % (xmlfile, ex)
             print(msg)
             sys.exit()
-        # import ipdb; ipdb.set_trace()
+
         cfe_ade = list()
         cartula = None
         res = {}
@@ -138,16 +147,15 @@ class initSobre(object):
             else:
                 msg = "ERROR: El tag o elemento %s no debería estar allí." % (e,)
                 print(msg)
-                sys.exit(1)
-        res['Caratula']   = cartula
-        res['CFE_Adenda'] = cfe_ade
-        self.sobre = res
+                sys.exit()
+        self.caratula   = cartula
+        self.cfe_adenda = cfe_ade
 
 
 
 class Caratula(object):
 
-    def __init__(self, elemtree):
+    def __init__(self, caratula):
         """
             Crea el objeto Caratula a partir de un elemento etree lxml
             :param elemtree: Un elemeto Catatula.
@@ -158,8 +166,8 @@ class Caratula(object):
             # >>> Fecha.strftime('%Y-%m-%d %H:%M:%S')
             ... 2016-11-11 18:10:09 ...etc
         """
+        C = objectify.fromstring(etree.tostring(caratula))
 
-        C = objectify.fromstring(etree.tostring(elemtree))
         # import ipdb; ipdb.set_trace()
         try:
             self.CantCFE         = C.CantCFE.pyval
@@ -175,161 +183,85 @@ class Caratula(object):
 
 
 class Adenda(object):
+
+    """ `initSobre.sobre['CFE_Adenda']` """
+
     def __init__(self, adenda):
+        """
+        :param adenda: etree/CFE_Adenda/Adenda
+        :return: texto adenda
+        """
         tag = tag_ns(adenda)
         if tag == 'Adenda':
-            self.Adenda = objectify.fromstring(etree.tostring(adenda))
+            adenda_obj = objectify.fromstring(etree.tostring(adenda))
+            self.Adenda_py = adenda_obj.pyval
+            self.Adenda_obj = adenda_obj.text
         else:
             msg = "ERROR: La Adenda del CFE no se ha encontrado."
             print(msg)
 
 
 
-class eDoc(object):
-    """ Template del elemento CFE.
+class Cfe(object):
+    """
+    Reprecentación del elemento CFE.
+    ================================
 
-        Crea un diccionarios inicializado a None.
-        El diccionario será uno de los elementos:
-        eTck, eFact, eFact_Exp, eRem, eRem_Exp, eResg
+    Usa un diccionarios inicializado a None.
+    El diccionario contendrá uno de los siguiente tipos de CFEs:
+        `eTck, eFact, eFact_Exp, eRem, eRem_Exp, eResg`
     """
 
-    def __init__(self, edoc):
+    def __init__(self, cfe):
+        """
+        :param cfe:  es un único CFE
+        :return:     un objeto python con todos los valores del CFE
+        """
 
-        self.eDoc = edoc
-        self.tmp = {
-            'TmstFirma' : None,
-            'Encabezado': {
-                'IdDoc'   : {
-                    'TipoCFE' : None,
-                    'Serie'   : None,
-                    'Nro'     : None,
-                    'FchEmis' : None,
-                    'MntBruto': None,
-                    'FmaPago' : None,
-                    'FchVenc' : None,
-                },
-                'Emisor'  : {
-                    'RUCEmisor'          : None,
-                    'RznSoc'             : None,
-                    'NomComercial'       : None,
-                    'Telefono'           : None,
-                    'CorreoEmisor'       : None,
-                    'EmiSucursal'        : None,
-                    'CdgDGISucur'        : None,
-                    'DomFiscal'          : None,
-                    'Ciudad'             : None,
-                    'Departamento'       : None,
-                    'InfoAdicionalEmisor': None,
-                },
-                'Receptor': {
-                    'TipoDocRecep' : None,
-                    'CodPaisRecep' : None,
-                    'DocRecep'     : None,
-                    'RznSocRecep'  : None,
-                    'DirRecep'     : None,
-                    'CiudadRecep'  : None,
-                    'DeptoRecep'   : None,
-                    'PaisRecep'    : None,
-                    'CP'           : None,
-                    'InfoAdicional': None,
-                    'CompraID'     : None,
-                },
-                'Totales' : {
-                    'TpoMoneda'           : None,
-                    'TpoCambio'           : None,
-                    'MntNoGrv'            : None,
-                    'MntExpoyAsim'        : None,
-                    'MntImpuestoPerc'     : None,
-                    'MntIVaenSusp'        : None,
-                    'MntNetoIvaTasaMin'   : None,
-                    'MntNetoIVATasaBasica': None,
-                    'MntNetoIVAOtra'      : None,
-                    'IVATasaMin'          : None,
-                    'IVATasaBasica'       : None,
-                    'MntIVATasaMin'       : None,
-                    'MntIVATasaBasica'    : None,
-                    'MntIVAOtra'          : None,
-                    'MntTotal'            : None,
-                    'MntTotRetenido'      : None,
-                    'CantLinDet'          : None,
-                    'MontoNF'             : None,
-                    'MntPagar'            : None,
-                }
-            },
-            'Detalle'   : [ {
-                'Item': {
-                    'NroLinDet'     : None,
-                    'IndFact'       : None,
-                    'CodItem'       : [{'TpoCod': None, 'Cod': None}],
-                    'NomItem'       : None,
-                    'Cantidad'      : None,
-                    'UniMed'        : None,
-                    'DscItem'       : None,
-                    'PrecioUnitario': None,
-                    'MontoItem'     : None,
-                },
-            } ],
-            'Referencia': [{
-               'Referencia': {
-                    'NroLinRef': None,
-                    'IndGlobal': None,
-                    'RazonRef' : None,
-                    'TpoDocRef': None,
-                    'Serie'    : None,
-                    'NroCFERef': None,
-                }
-            } ],
-            'CAEData'   : {
-                'CAE_ID' : None,
-                'DNro'   : None,
-                'HNro'   : None,
-                'FecVenc': None,
-            },
-            'SubTotInfo': {
-                "STI_Item": [{ "NroSTI": None, "GlosaSTI": None, "OrdenSTI": None,
-                                "ValSubtotSTI": None, }]
-            },
-        }
 
-    def wrap(self):
+        self.edoc = cfe[0]
+        self.signature = cfe[1]
+        self.tmp  = template.eDoc
+
         res = dict()
         res.update(self.tmp)
 
-
-        eDoc_obj = objectify.fromstring(etree.tostring(self.eDoc))
-        tag = tag_ns(self.eDoc)
+        cfe_obj = objectify.fromstring(etree.tostring(self.edoc))
+        tag = tag_ns(cfe_obj)
 
         if   tag == 'TmstFirma':
-            res[tag] = eDoc_obj.TmstFirma
+            res[tag] = cfe_obj.TmstFirma
         elif tag == 'Encabezado':
-            res[tag] = eDoc_obj.Encabezado()
+            res[tag] = cfe_obj.Encabezado()
         elif tag == 'Detalle':
-            res[tag] = eDoc_obj.Detalle()
+            res[tag] = cfe_obj.Detalle()
         elif tag == 'SubTotInfo':
-            res[tag] = eDoc_obj.SubTotInfo()
+            res[tag] = cfe_obj.SubTotInfo()
         elif tag == 'DscRcgGlobal':
-            res[tag] = eDoc_obj.DscRcgGlobal()
+            res[tag] = cfe_obj.DscRcgGlobal()
         elif tag == 'MediosPago':
-            res[tag] = eDoc_obj.MediosPago()
+            res[tag] = cfe_obj.MediosPago()
         elif tag == 'CAEData':
-            res[tag] = eDoc_obj.CAEData()
+            res[tag] = cfe_obj.CAEData()
         elif tag == 'Referencia':
-            res[tag] = eDoc_obj.Referencia()
+            res[tag] = cfe_obj.Referencia()
         elif tag == 'Compl_Fiscal':
-            res[tag] = eDoc_obj.Compl_Fiscal()
+            res[tag] = cfe_obj.Compl_Fiscal()
         else:
-            res['error'] = "Cancela, el elemento es desconocido : %s" % (i,)
-            print("Cancela, el elemento es desconocido : %s" % (i,))
+            res['error'] = "Cancela, el elemento es desconocido : %s" % (tag,)
+            print(res['error'])
             sys.exit()
-        return res
+        self.edoc = res
+        # embed
+        # import ipdb; ipdb.set_trace()
+        # return res
 
 
 
-class Encabezado(eDoc):
-
+class Encabezado(Cfe):
 
     def emisor(self):
-        e = self.eDoc['Emisor']
+        e = self.edoc['Emisor']
         res = dict(
             CdgDGISucur = iv(e.CdgDGISucur),
             Ciudad = iv(e.Ciudad),
@@ -342,20 +274,20 @@ class Encabezado(eDoc):
 
 
     def iddoc(self):
-        i = self.eDoc['IdDoc']
+        i = self.edoc['IdDoc']
         res = dict(
             FchEmis = iv(i.FchEmis),
             FchVenc = iv(i.FchVenc),  # No Obligatorio
             FmaPago = iv(i.FmaPago),
-            Nro = iv(i.Nro),
-            Serie = iv(i.Serie),
-            TipoCFE=iv(i.TipoCFE),
+            Nro     = iv(i.Nro),
+            Serie   = iv(i.Serie),
+            TipoCFE = iv(i.TipoCFE),
         )
         return res
 
 
     def receptor(self):
-        r = self.eDoc['Receptor']
+        r = self.edoc['Receptor']
         res = dict(
             CiudadRecep = iv(r.CiudadRecep),
             CodPaisRecep = iv(r.CodPaisRecep),
@@ -372,7 +304,7 @@ class Encabezado(eDoc):
 
 
     def totales(self):
-        t = self.eDoc['Totales']
+        t = self.edoc['Totales']
         res = dict(
             CantLinDet = iv(t.CantLinDet),
             IVATasaBasica = iv(t.IVATasaBasica),
@@ -385,84 +317,98 @@ class Encabezado(eDoc):
         return res
 
 
-class Detalle(eDoc):
+class Detalle(Cfe):
 
     def __init__(self, elem):
         self.elem = elem
         self.tag = tag_ns(elem)
+        super(Cfe, self).__init__()
 
 
     def cantidad(self):
-        self.elem.Item.Cantidad
+        res = self.elem.Item.Cantidad
+        return res
 
 
     def coditem(self):
-        self.elem.Item.CodItem
+        res = self.elem.Item.CodItem
 
 
     def descuentomonto(self):
-        self.elem.Item.DescuentoMonto
+        res = self.elem.Item.DescuentoMonto
 
 
     def descuentopct(self):
-        self.elem.Item.DescuentoPct
+        res = self.elem.Item.DescuentoPct
 
 
     def indfact(self):
-        self.elem.Item.IndFact
+        res = self.elem.Item.IndFact
 
 
     def montoitem(self):
-        self.elem.Item.MontoItem
+        res = self.elem.Item.MontoItem
 
 
     def nomitem(self):
-        self.elem.Item.NomItem
+        res = self.elem.Item.NomItem
 
 
     def nrolindet(self):
-        self.elem.Item.NroLinDet
+        res = self.elem.Item.NroLinDet
 
 
     def preciounitario(self):
-        self.elem.Item.PrecioUnitario
+        res = self.elem.Item.PrecioUnitario
 
 
     def unimed(self):
-        self.elem.Item.UniMed
+        res = self.elem.Item.UniMed
 
 
-class SubTotInfo(eDoc):
+
+class SubTotInfo(Cfe):
     def __init__(self, elem):
         self.elem = elem
         self.tag = tag_ns(elem)
+        super(Cfe, self).__init__()
 
 
-class DscRecGlobal(eDoc):
+
+class DscRecGlobal(Cfe):
     def __init__(self, elem):
         self.elem = elem
         self.tag = tag_ns(elem)
+        super(Cfe, self).__init__()
 
 
-class MrdiosPago(eDoc):
+
+class MediosPago(Cfe):
     def __init__(self, elem):
         self.elem = elem
         self.tag = tag_ns(elem)
+        super(Cfe, self).__init__()
 
 
-class Referencia(eDoc):
+
+class Referencia(Cfe):
     def __init__(self, elem):
         self.elem = elem
         self.tag = tag_ns(elem)
+        super(Cfe, self).__init__()
 
 
-class CAEdata(eDoc):
+
+class CAEdata(Cfe):
     def __init__(self, elem):
         self.elem = elem
         self.tag = tag_ns(elem)
+        super(Cfe, self).__init__()
 
 
-class ComplFiscal(eDoc):
+
+class ComplFiscal(Cfe):
     def __init__(self, elem):
         self.elem = elem
         self.tag = tag_ns(elem)
+        super(Cfe, self).__init__()

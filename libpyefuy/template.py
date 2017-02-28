@@ -1,6 +1,12 @@
 ﻿# coding: utf-8
 
-Caratula_tmp = {
+'''
+El template contiene todos los campos de un CFE para Envio entre empresas.
+Actualmente 24/02 solo aparecen los del tipo `eFact`, falta agregar los
+campos que resulten de la interseccion de los conjuntos
+'''
+
+Caratula = {
     'CantCFE'        : None,
     'Fecha'          : None,
     'Idemisor'       : None,
@@ -10,20 +16,27 @@ Caratula_tmp = {
 }
 
 
-# faltan definir los tmp para  'eTck', 'eFact_Exp', 'eRem', 'eRem_Exp' y 'eResg'
-# mmm.. será uno solo con todo lo necesario, este es el comienzo/
+'''
+eDoc:
+-----
+Contiene todos los campos de un CFE para Envio entre empresas. Las llaves
+del diccionario son la interseccion de los tipos de documentos:
+    `eTck`, `eFact`, `eFact_Exp`, `eRem`, `eRem_Exp` y `eResg`
+eDoc siempre adoptará los valores de uno de ellos.
+'''
 
 eDoc = {
     'TmstFirma' : None,
     'Encabezado': {
         'IdDoc'   : {
-            'TipoCFE' : None,
-            'Serie'   : None,
-            'Nro'     : None,
-            'FchEmis' : None,
-            'MntBruto': None,
-            'FmaPago' : None,
-            'FchVenc' : None,
+            'TipoCFE'    : None,
+            'Serie'      : None,
+            'Nro'        : None,
+            'FchEmis'    : None,
+            'MntBruto'   : None,
+            'FmaPago'    : None,
+            'FchVenc'    : None,
+            'CantLinDet' : None,
         },
         'Emisor'  : {
             'RUCEmisor'          : None,
@@ -86,6 +99,24 @@ eDoc = {
             'MontoItem'     : None,
         },
     } ],
+    'SubTotInfo': {
+        'STI_Item': [{ 'NroSTI': None, 'GlosaSTI': None, 'OrdenSTI': None,
+                        'ValSubtotSTI': None, }]
+    },
+
+    'DscRcgGlobal': [{'DRG_Item':
+                          [{'NroLinDR' : None,
+                            'TpoMovDR' : None,   #  D - Dto. / R - Rec.
+                            'TpoDR'    : None,   #  1 - %    / 2 - $
+                            'CodDR'    : None,
+                            'GlosaDR'  : None,
+                            'ValorDR'  : None,
+                            'IndFactDR': None,   #  [0]
+            }],
+    }, ],
+
+    'MediosPago': dict(),
+
     'Referencia': [{
        'Referencia': {
             'NroLinRef': None,
@@ -102,39 +133,39 @@ eDoc = {
         'HNro'   : None,
         'FecVenc': None,
     },
-    'SubTotInfo': {
-        "STI_Item": [{ "NroSTI": None, "GlosaSTI": None, "OrdenSTI": None,
-                        "ValSubtotSTI": None, }]
+
+    'Compl_Fiscal':{
+        'RUCEmisor': None,
+        'TipoDocMdte': None, # [1]
+        'Pais': None,
+        'DocMdte': None,
+        'NombreMdte': None,
     },
+
 }
 
-# por ahora no nos interesa.
-Signature_tmp = {}
+"""
+Información adicional para la interpretación de algunos ítems.
+==============================================================
+    [0] Indicador de facturación `IndFactDR`
+         1: Exento de IVA
+         2: Gravado a Tasa Mínima
+         3: Gravado a Tasa Básica
+         4: Gravado a Otra Tasa
+         6: Producto o servicio no facturable
+         7: Producto o servicio no facturable negativo
+        10: Exportación y asimiladas
+        11: Impuesto percibido
+        12: IVA en suspenso
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    [1] Tipo de Complemento Fiscal `TipoDocMdte`
+         1: NIE
+         2: RUC (Uruguay)
+         3: C.I. (Uruguay)
+         4: Otros
+         5: Pasaporte (todos los países)
+         6: DNI (documento de identidad de Argentina, Brasil, Chile o Paraguay)
+"""
 
 
 
