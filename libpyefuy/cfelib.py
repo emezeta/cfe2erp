@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 # código CFE, nombre, descripción.
-cfe_label = {
+tipocfe = {
  '101': ('eTck',      'e-Ticket'),
  '102': ('eTck',      'Nota de Crédito de e-Ticket'),
  '103': ('eTck',      'Nota de Débito de e-Ticket'),
@@ -20,8 +20,10 @@ cfe_label = {
  '142': ('eFact',     'Nota de Crédito de e-Factura Venta por Cuenta Ajena'),
  '143': ('eFact',     'Nota de Débito de e-Factura Venta por Cuenta Ajena'),
  '181': ('eRem',      'e-Remito'),
- '182': ('eResg',     'e-Resguardo CÓDIGO CFC'),
+ '182': ('eResg',     'e-Resguardo CÓDIGO CFC'),}
 
+# Contingencia
+"""
  '201': 'e-Ticket Contingencia',
  '202': 'Nota de Crédito de e-Ticket Contingencia',
  '203': 'Nota de Débito de e-Ticket Contingencia',
@@ -41,4 +43,15 @@ cfe_label = {
  '281': 'e-Remito Contingencia',
  '282': 'e-Resguardo Contingencia'
  }
-
+"""
+indfactdr = {
+         '1': u'Exento de IVA',
+         '2': u'Gravado a Tasa Mínima',
+         '3': u'Gravado a Tasa Básica',
+         '4': u'Gravado a Otra Tasa',
+         '6': u'Producto o servicio no facturable',
+         '7': u'Producto o servicio no facturable negativo',
+        '10': u'Exportación y asimiladas',
+        '11': u'Impuesto percibido',
+        '12': u'IVA en suspenso',
+}

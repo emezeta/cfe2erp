@@ -3,36 +3,45 @@
 
 from __future__ import print_function
 
-import StringIO
+import cStringIO
 import csv
 import config
+import lxml
+import sys
+import codecs
+
 
 SEP = config.delimiter
 EOL = config.lineterminator
-OUT_DIR = config.out_path
+ENCODING = config.encoding
+
+class csvUnicodeHandler(object):
+    """
+    A CSV writer which will write rows to CSV file "f",
+    which is encoded in the given encoding.
+    """
+
+    def __init__(self, f, encoding=ENCODING, **kwds):
+        # Redirect output to a queue
+        self.queue  = cStringIO.StringIO()
+        self.writer = csv.writer(self.queue, delimiter=SEP, lineterminator=EOL, **kwds)
+        self.stream = f
+        self.encoder = codecs.getincrementalencoder(encoding)()
+
+    def writerow(self, row):
+        self.writer.writerow([s.encode("utf-8") for s in row])
+        # Fetch UTF-8 output from the queue ...
+        data = self.queue.getvalue()
+        data = data.decode("utf-8")
+        # ... and reencode it into the target encoding
+        data = self.encoder.encode(data)
+        # write to the target stream
+        self.stream.write(data)
+        # empty queue
+        self.queue.truncate(0)
+
+    def writerows(self, rows):
+        for row in rows:
+            self.writerow(row)
 
 
-class handle(object):
-
-
-    def __init__(self, csv_fname):
-        self.csv_fname = csv_fname
-        self.lin_csv   = StringIO.StringIO()
-        self.writer    = csv.writer(self.lin_csv, delimiter=SEP, lineterminator=EOL)
-
-
-    def record(self, csv_row):
-        # lrpmqtp charset!
-        # no se puede int.encode int no es srtng! => pasar a str int, long y float
-        to_str = list()
-        for i in csv_row:
-            if isinstance(i, (int, long, float)):
-                i = str(i)
-            to_str.append(i)
-
-        self.writer.writerow([campo.encode('utf_8') for campo in to_str])
-
-
-    def write_csv(self):
-        with open(OUT_DIR + self.csv_fname, "w") as f:
-            f.write(self.lin_csv.getvalue())

@@ -6,11 +6,14 @@ from __future__ import print_function
 import json
 import subprocess
 import sys
-from lxml import etree, objectify
+#from lxml import etree, objectify
 from time import strftime
 
-from libpyefuy import ecfeee, csv_tools
+from libpyefuy import config, csv_tools, ecfeee_csv
+from libpyefuy.ecfeee import EnvioCFE_entreEmpresas as _ecfeee, Caratula, CFE_Adenda
 
+
+OUT_DIR = config.out_path
 
 
 """
@@ -109,94 +112,76 @@ def pare():
 # import ipdb; ipdb.set_trace()
 if __name__ == "__main__":
 
-    """ Los nombres de `Objetos` capitalizados.
-        Los nombres de `element` lxml en minúsculas.
-    """
-    # from IPython import embed; embed()
-    # import ipdb; ipdb.set_trace()
-    dir_entrada = sys.argv[-1:][0]
 
+    dir_entrada = sys.argv[-1:][0]
     cmd = 'ls -1 %s/*.xml' % (dir_entrada,)
     files = subprocess.check_output(cmd, shell=True).split()
 
+    nxml = 0
+    #files = ['./Sob_18.xml']
+
+    # se procesa un xml
     for _file in files:
-        '''
-        try:
-            cfe_empresas = ecfeee.initSobre(_file)
-        except Exception as e:
-            msg = '\n\tERROR: %s \n\tal procesar %s' % (e, _file)
-            print(msg)
-        '''
-        sobre = ecfeee.initSobre(_file)
-
-        Caratula = ecfeee.Caratula(sobre.caratula)
-        cfe_adenda_lst = sobre.cfe_adenda_lst
-        sobre_consitency_chk(cfe_adenda_lst, Caratula.CantCFE)
-
-        prn_caratula(Caratula, _file)
+        nxml += 1
+        #print("F", nxml),
+        root       = _ecfeee(_file)
+        caratula   = Caratula(root.caratula)
+        cfe_adenda = CFE_Adenda(root.cfe_adenda).cfead
+        sobre_consitency_chk(root.cfe_adenda, caratula.CantCFE)
 
         """ prepara el manejo de la salida `csv` """
-        csv_fname  = _file.split('/')[-1:][0][:-3] + 'csv'
-        csv_handle = csv_tools.handle(csv_fname)
-
-        """ Se itera sobre los CFE_Adenda contenidos en el sobre (1 a 250 veces) """
-        CFE_Adenda = list()
-        for cfe_adenda in cfe_adenda_lst:
-
-            ccsv_row = list()   # salida registro cabezal
-            lcvs_row = list()   # salida registro línea
-            """
-            Documentación
-                cfe = cfe_adenda[0]     # CFE
-                    eDoc = cfe[0] {Encabezado, Detalle, CAEData}
-                    Signature = cfe[1]
-
-                adenda = cfe_adenda[1]  # Adenda
-            """
-            if len(cfe_adenda) > 1:
-                Adenda = cfe_adenda[1].text
-            Signature = cfe_adenda[0][1]
-
-            # import ipdb; ipdb.set_trace()
-            cfe_doc   = ecfeee.eDoc(cfe_adenda[0][0])
-            CFE_Adenda.append(cfe_doc)
+        _csv_fname  = _file.split('/')[-1:][0][:-4]
 
 
-            #edo=CFE_Adenda[0]
+        """ Se itera sobre los CFE_Adenda del sobre. Entre 1 y 250 por cada _file """
+
+        #print(_file)
+        ncfe = 0
+        for cfead in cfe_adenda:
+            ncfe += 1
+            # print("c", ncfe)
+            Adenda = cfead['adenda']
+            csv_fname = OUT_DIR + _csv_fname + '_' + str(ncfe) + '.csv'
+
+            stream = open(csv_fname, "w")
+            csv_handle = csv_tools.csvUnicodeHandler(stream)
+
+            csv_handle.writerow(ecfeee_csv.campos_cabezal)
+
+            line = ecfeee_csv.arma_cabezal(cfead,caratula.Fecha.strftime('%Y-%m-%d %H:%M:%S'))
             #import ipdb; ipdb.set_trace()
-            #edo.Encabezado()
+            csv_handle.writerow(line)
 
 
-
-
-
-
-
+            # *** FIN   cabezal CSV ***
             """
-            print('Emisor_RznSoc '+'Ttpo_CFE '+'IdDoc_Serie '+'IdDoc_Nro '+'SubTotal')
-            linea = 'Emisor: %s %s: %s %s %s' % (cfe_doc.Encabezado.Emisor.RznSoc.pyval, cfe_doc.tag_ns(cfe_doc),cfe_doc.Encabezado.IdDoc.Serie.pyval, cfe.Encabezado.IdDoc.Nro.pyval,cfe_doc.SubTotInfo.STI_Item.ValSubtotSTI.pyval)
-            print(linea, '\n ===')
+            lin_cvs_row = list()
+            for procersar i[' :
+                lin_cvs_row.append('')
+                # lrpmqtp charset!
+                csv_handle.record(lin_cvs_row)      # nueva línea linea_csv       lcsv_row
+            """
 
-            # la línea es un cabezal
-            ccsv_row.append('C')
-            ccsv_row.append(Caratula.Fecha.strftime('%Y-%m-%d %H:%M:%S'))
-            ccsv_row.append(cfe_doc.Encabezado.Emisor.RznSoc.pyval)
-            ccsv_row.append(ecfeee.tag_ns(cfe_doc))
-            ccsv_row.append(cfe_doc.Encabezado.IdDoc.Serie.pyval)
-            ccsv_row.append(cfe_doc.Encabezado.IdDoc.Nro.pyval)
-
-            # lrpmqtp charset!
-            csv_handle.record(ccsv_row)
+            #csv_handle.write_csv()
 
 
-        csv_handle.write_csv()
-    """
+"""
+        # from IPython import embed; embed()
+        # import ipdb; ipdb.set_trace()
 
-
-
-
-
-
-
-
-
+Líneas:
+    serie                                               'NroLinDet'
+    numero                                              'IndFact'
+    proveedor_rut                                       'CodItem'
+    articulo                                            'NomItem'
+        codigo 1                                        'Cantidad'
+        codigo 2                                        'UniMed'
+    articulo_descripcion                                'DscItem'
+    cantidad                                            'PrecioUnitario'
+    unidad de medida                                    'MontoItem'
+    precio unitario sin impuesto                        'SubDescuento'
+    descuento                                           'DescuentoMonto'
+    tipo de iva                                         'DescuentoPct'
+    monto total iva
+    monto total linea
+"""
