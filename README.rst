@@ -53,6 +53,7 @@ Configuración
 Ubicación: `libpyefuy/config.py`. Modificar a gusto y piacere.
 
 ::
+
     delimiter = '|'
     lineterminator = '\r\n'
     out_path = '/tmp/'

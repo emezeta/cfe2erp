@@ -25,11 +25,12 @@ def arma_cabezal(cfead,fecha_caratula):
             ei = enc['IdDoc']
             et = enc['Totales']
             if rdg:
-                rd = dict(Valor = rdg[0], Deta = rdg[1], Nota = rdg[2])
+                rd = dict(Cant = rdg[0], Glosa = rdg[1], Valor = rdg[2], Deta = rdg[3])
             else:
-                rd = dict(Valor = 'None', Deta = 'None', Nota = 'None')
+                rd = dict(Cant = 'None', Glosa = 'None', Valor = 'None', Deta = 'None')
 
             td = tipodoc
+
             # *** crea línea de Cabezal CSV ***
             lcabezal = list()
 
@@ -69,9 +70,11 @@ def arma_cabezal(cfead,fecha_caratula):
             lcabezal.append(et['MntTotRetenido'])
             lcabezal.append(et['MntPagar'])
 
+            lcabezal.append(rd['Cant'])
+            lcabezal.append(rd['Glosa'])
             lcabezal.append(rd['Valor'])     # valor del dto.
             lcabezal.append(rd['Deta'])      # resumen del dto
-            lcabezal.append(rd['Nota'])
+
             res = record(lcabezal)
             return res
 
@@ -89,12 +92,12 @@ def record(csv_row):
             if getattr(i, 'pyval', False):
                 if isinstance(i.pyval, (tipos_num,)):
                     res.append(str(i.pyval))
-                elif isinstance(i.pyval, (str,)):
+                elif isinstance(i.pyval, (str,unicode)):
                     res.append(i.pyval)
             else:
                 if isinstance(i, (tipos_num,)):
                     res.append(str(i))
-                elif isinstance(i, (str,)):
+                elif isinstance(i, (str,unicode)):
                     res.append(i)
         except Exception as ex:
             #import ipdb; ipdb.set_trace()
@@ -125,5 +128,4 @@ tipodoc = {
  '182': u'e-Resguardo CÓDIGO CFC',
 }
 
-campos_cabezal = ('indicador_linea', 'cant_lin', 'fecha_emis', 'fecha_firma', 'tipo_cfe', 'tipo_documento', 'serie', 'numero', 'proveedor_nombre', 'proveedor_rsocial', 'proveedor_rut', 'moneda', 'tipo_cambio', 'monto_exp_asim', 'monto_imp_percibido', 'monto_no_gravado', 'monto_no_facturable', 'neto_tminima', 'neto_tbasica', 'neto_otra', 'monto_iva_min', 'monto_iva_bas', 'monto_iva_otr', 'monto_iva_suspenso', 'monto_total', 'monto_tot_retenido',
- 'monto_pagar', 'dto_recargo', 'det_dto_rec', 'dto_rec_nota')
+campos_cabezal = ('indicador_linea', 'cant_lin', 'fecha_emis', 'fecha_firma', 'tipo_cfe', 'tipo_documento', 'serie', 'numero', 'proveedor_nombre', 'proveedor_rsocial', 'proveedor_rut', 'moneda', 'tipo_cambio', 'monto_exp_asim', 'monto_imp_percibido', 'monto_no_gravado', 'monto_no_facturable', 'neto_tminima', 'neto_tbasica', 'neto_otra', 'monto_iva_min', 'monto_iva_bas', 'monto_iva_otr', 'monto_iva_suspenso', 'monto_total', 'monto_tot_retenido', 'monto_pagar', 'dr_cant', 'dr0_glosa', 'dr0_valor', 'dr0_deta')

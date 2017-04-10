@@ -1,7 +1,13 @@
 # coding: utf-8
 # !/usr/bin/env python3
-
 from __future__ import print_function
+
+__author__ = "emezeta"
+__author_email__ = "emezeta@insiberia.net"
+__copyright__ = "Copyright (C) 2017 eFacturaUy"
+__license__ = "GPL 3.0"
+__version__ = "0.99"
+
 import re
 import sys
 from dateutil import parser
@@ -345,6 +351,8 @@ class Encabezado(object):
             MontoNF              = t.MontoNF                    if hasattr(t, 'MontoNF'             ) else 'None',
             MntPagar             = t.MntPagar                   if hasattr(t, 'MntPagar'            ) else 'None',
         )
+        if tmp_totales['TpoMoneda'] == 'UYU':
+            tmp_totales['TpoCambio'] = 1.0
 
         self.Encabezado = dict(
             Emisor = tmp_emisor, IdDoc = tmp_iddoc, Receptor = tmp_receptor, Totales = tmp_totales
@@ -386,28 +394,22 @@ class Detalle(object):
 class DscRcgGlobal(object):
 
     def __init__(self, dscrcgglobal):
-        self.DscRcgGlobal = ('None','None','None')
+        self.DscRcgGlobal = ('None','None','None','None')
         self.drg_item_wrap(dscrcgglobal)
 
-    def drg_item_wrap(self,dscrcgglobal):
+    def drg_item_wrap(self, dscrcgglobal):
 
         if hasattr(dscrcgglobal,'DRG_Item'):
             dtos = [self._dscrcgglobal(drgi) for drgi in dscrcgglobal.DRG_Item]
+
             i = dtos[0]
-            valor =  i['ValorDR']
-            deta  =  "Tasa/Valor: %s - Dto/Rec: %s - Concepto: %s - Tipo: %s" % (i['TpoDR'],i['TpoMovDR'],i['GlosaDR'],i['IndFactDR'],)
-            nota  =  'None'
-            if len(dtos) > 1:
-                #import ipdb; ipdb.set_trace()
-                nota = "Verificar descuentos globales"
-            """
-                valor: negativo o positivo,
-                detalles:,
-                nota: avisa si hay otros descuentos a considerar.
-            """
-            #print(valor,deta,nota)
+            cant  = str(len(dtos))
+            glosa = i['GlosaDR'],
+            valor = i['ValorDR']
+            deta  = "Tasa/Valor: %s - Dto/Rec: %s - Tipo: %s" % (i['TpoDR'],i['TpoMovDR'],i['IndFactDR'],)
+
             if valor:
-                self.DscRcgGlobal = (valor, deta, nota)
+                self.DscRcgGlobal = (cant, glosa, valor, deta)
 
     def _dscrcgglobal(self, drgi):
 
