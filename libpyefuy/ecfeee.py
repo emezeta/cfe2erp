@@ -233,6 +233,7 @@ class CFE_Adenda(object):
                 eDoc_obj[tag] = echild_obj
             elif tag == 'DscRcgGlobal':
                 eDoc_obj[tag] = DscRcgGlobal(echild_obj) # n/o   dscrcgglobal
+
             elif tag == 'MediosPago':
                 eDoc_obj[tag] = echild_obj
             elif tag == 'CAEData':
@@ -260,6 +261,9 @@ class CFE_Adenda(object):
             if tag == 'Adenda':
                 res = objectify.fromstring(etree.tostring(adenda)).text
         return res
+
+
+
 
 
 
@@ -394,23 +398,31 @@ class Detalle(object):
 class DscRcgGlobal(object):
 
     def __init__(self, dscrcgglobal):
-        self.DscRcgGlobal = ('None','None','None','None')
-        self.drg_item_wrap(dscrcgglobal)
+        self._dscrcgglobal(dscrcgglobal)
 
-    def drg_item_wrap(self, dscrcgglobal):
+    def _dscrcgglobal(self, dscrcgglobal):
+        drg_items = list()
 
-        if hasattr(dscrcgglobal,'DRG_Item'):
-            dtos = [self._dscrcgglobal(drgi) for drgi in dscrcgglobal.DRG_Item]
+        if hasattr(dscrcgglobal,'DRG_Item') and len(dscrcgglobal.DRG_Item):
+            for drgi in dscrcgglobal.DRG_Item:
+                tmp_drgitem = dict(
+                        TpoMovDR    =  drgi.TpoMovDR       if hasattr(drgi,'TpoMovDR'  ) else 'None',  # ValorDR  D=dto   r=recgo.
+                        TpoDR       =  drgi.TpoDR          if hasattr(drgi,'TpoDR'     ) else 'None',  # TipoDRType 1=% 2=$
+                        GlosaDR     =  drgi.GlosaDR        if hasattr(drgi,'GlosaDR'   ) else 'None',
+                        ValorDR     =  drgi.ValorDR        if hasattr(drgi,'ValorDR'   ) else 'None',
+                        IndFactDR   =  drgi.IndFactDR      if hasattr(drgi,'IndFactDR' ) else 'None'   # ver tabla  "indfactdr"
+                )
+                if tmp_drgitem['ValorDR']:
+                    tmp_drgitem['TpoDR'] = "%" if tmp_drgitem['TpoDR'] == '1' else '2'
+                    if tmp_drgitem['IndFactDR'] is not 'None':
+                        tmp_drgitem['IndFactDR'] = indfactdr[str(tmp_drgitem['IndFactDR'])]
 
-            i = dtos[0]
-            cant  = str(len(dtos))
-            glosa = i['GlosaDR'],
-            valor = i['ValorDR']
-            deta  = "Tasa/Valor: %s - Dto/Rec: %s - Tipo: %s" % (i['TpoDR'],i['TpoMovDR'],i['IndFactDR'],)
+                    drg_items.append(tmp_drgitem)
 
-            if valor:
-                self.DscRcgGlobal = (cant, glosa, valor, deta)
+        self.DscRcgGlobal = drg_items or []
 
+    """
+    drg_items = [self._dscrcgglobal(drgi) for drgi in dscrcgglobal.DRG_Item if len(dscrcgglobal.DRG_Item) ]
     def _dscrcgglobal(self, drgi):
 
         tmp_drgitem = dict(
@@ -422,13 +434,15 @@ class DscRcgGlobal(object):
             ValorDR     =  drgi.ValorDR        if hasattr(drgi,'ValorDR'   ) else 'None',
             IndFactDR   =  drgi.IndFactDR      if hasattr(drgi,'IndFactDR' ) else 'None'   # ver tabla  "indfactdr"
         )
-
-        tmp_drgitem['TpoDR'] = "%" if tmp_drgitem['TpoDR'] == '1' else '2'
+        if not tmp_drgitem['ValorDR']:
+            return dict()
+        tmp_drgitem['TpoDR'] = "%" if tmp_drgitem['TpoDR'] == '1' else '$'
 
         tmp_drgitem['IndFactDR'] = indfactdr[str(tmp_drgitem['IndFactDR'])] \
             if tmp_drgitem['IndFactDR'] is not 'None' else tmp_drgitem['IndFactDR']
 
         return tmp_drgitem
+    """
 
 """
     def _coditem(self,coditem=None):

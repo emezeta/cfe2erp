@@ -10,26 +10,30 @@ from lxml import etree, objectify
 
 prefix = re.compile('^{.*}')
 
+def dscreg(drg):
+    "Reducir la cantidad de Items"
+    res = list()
+
+    items = getattr(drg, 'DscRcgGlobal', [])
+    #print(items)
+    if items is None:
+        return res
+    for i in items:
+        if float(i['ValorDR']) > 0.0:
+            dscreg = dict( GlosaDR=i['GlosaDR'], ValorDR = i['ValorDR'], DetalDR="Tasa/Valor: %s - Dto/Rec: %s - Tipo: %s" % (i['TpoDR'],i['TpoMovDR'],i['IndFactDR']))
+            res.append(dscreg)
+    return res
 
 def arma_cabezal(cfead,fecha_caratula):
 
+            # import ipdb; ipdb.set_trace()
+
             # *** COMIENZO Cabezal CSV ***
-
-
-            # enc    = cfead['cfe']['Encabezado'].Encabezado
             enc    = cfead['cfe']['Encabezado'].Encabezado
-            rdg    = getattr(cfead['cfe'],'DscRcgGlobal', False)
-
             ee = enc['Emisor']
             er = enc['Receptor']
             ei = enc['IdDoc']
             et = enc['Totales']
-            if rdg:
-                rd = dict(Cant = rdg[0], Glosa = rdg[1], Valor = rdg[2], Deta = rdg[3])
-            else:
-                rd = dict(Cant = 'None', Glosa = 'None', Valor = 'None', Deta = 'None')
-
-            td = tipodoc
 
             # *** crea línea de Cabezal CSV ***
             lcabezal = list()
@@ -70,17 +74,34 @@ def arma_cabezal(cfead,fecha_caratula):
             lcabezal.append(et['MntTotRetenido'])
             lcabezal.append(et['MntPagar'])
 
-            lcabezal.append(rd['Cant'])
-            lcabezal.append(rd['Glosa'])
-            lcabezal.append(rd['Valor'])     # valor del dto.
-            lcabezal.append(rd['Deta'])      # resumen del dto
+            if cfead['cfe'].has_key('DscRcgGlobal') and len(cfead['cfe']['DscRcgGlobal'].DscRcgGlobal):
 
-            res = record(lcabezal)
+                #drg = dscreg(cfead['cfe']['DscRcgGlobal'])
+                drg_items = cfead['cfe']['DscRcgGlobal'].DscRcgGlobal
+                #import ipdb; ipdb.set_trace()
+
+                for dr in drg_items:
+                    #print(dr)
+                    
+                    lcabezal.append(dr['GlosaDR'])
+                    lcabezal.append(dr['ValorDR'])
+                    datal = "Tasa/Valor: %s - Dto/Rec: %s - Tipo: %s" % (dr['TpoDR'],dr['TpoMovDR'],dr['IndFactDR'])
+                    lcabezal.append()
+
+                for header in range(len(drg_items)):
+                    campos_cabezal.append('dr%s_glosa' % (str(header),))
+                    campos_cabezal.append('dr%s_valor' % (str(header),))
+                    campos_cabezal.append('dr%s_deta'  % (str(header),))
+                    #print('dr%s_glosa, dr%s_valor, dr%s_deta' % (str(header), str(header), str(header) ))
+
+
+            res = (campos_cabezal, record(lcabezal))
             return res
 
 def record(csv_row):
 
-    """ Convertir todo a string (`int.encode` => ERROR )
+    """ Convertir a string todo lo que no sea strig
+        (`int.encode` => ERROR )
         `int`, `long` y `float` deben pasar a ser strings
     """
     res = list()
@@ -106,7 +127,8 @@ def record(csv_row):
 
     return res
 
-tipodoc = {
+# Tipos de Documentos
+td = {
  '101': u'e-Ticket',
  '102': u'Nota de Crédito de e-Ticket',
  '103': u'Nota de Débito de e-Ticket',
@@ -128,4 +150,6 @@ tipodoc = {
  '182': u'e-Resguardo CÓDIGO CFC',
 }
 
-campos_cabezal = ('indicador_linea', 'cant_lin', 'fecha_emis', 'fecha_firma', 'tipo_cfe', 'tipo_documento', 'serie', 'numero', 'proveedor_nombre', 'proveedor_rsocial', 'proveedor_rut', 'moneda', 'tipo_cambio', 'monto_exp_asim', 'monto_imp_percibido', 'monto_no_gravado', 'monto_no_facturable', 'neto_tminima', 'neto_tbasica', 'neto_otra', 'monto_iva_min', 'monto_iva_bas', 'monto_iva_otr', 'monto_iva_suspenso', 'monto_total', 'monto_tot_retenido', 'monto_pagar', 'dr_cant', 'dr0_glosa', 'dr0_valor', 'dr0_deta')
+campos_cabezal = ['indicador_linea', 'cant_lin', 'fecha_emis', 'fecha_firma', 'tipo_cfe', 'tipo_documento', 'serie', 'numero', 'proveedor_nombre', 'proveedor_rsocial', 'proveedor_rut', 'moneda', 'tipo_cambio', 'monto_exp_asim', 'monto_imp_percibido', 'monto_no_gravado', 'monto_no_facturable', 'neto_tminima', 'neto_tbasica', 'neto_otra', 'monto_iva_min', 'monto_iva_bas', 'monto_iva_otr', 'monto_iva_suspenso', 'monto_total', 'monto_tot_retenido', 'monto_pagar' ]
+
+

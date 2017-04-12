@@ -50,8 +50,12 @@ OUT_DIR = config.out_path
     	   Recorrer el dom cargando los elementos que corresponda.
     	   Eliminar todos los elementos 'None' del template.
 
-    	2. Sin usar tmplt recorrer el dom, cargar `element.tag = valor`.
-    	   Recomponer la estrucutra.
+    	2. Sin usar tmplt recorrer el dom, cargar `element.tag = valor`,
+           asignando valor 'None' a los elementos opcionales ausentes, que
+           no obstante hayan sido definidos para componer el conjunto de
+           datos a extraer del xml.
+    	   
+        Para la interfase CSV se toma la alternativa 2.
 
     	Finalmente, armar cabezal/líneas de documentos a importar.
     	Serializar y almacenar.
@@ -112,18 +116,17 @@ def pare():
 # import ipdb; ipdb.set_trace()
 if __name__ == "__main__":
 
-
     dir_entrada = sys.argv[-1:][0]
     cmd = 'ls -1 %s/*.xml' % (dir_entrada,)
     files = subprocess.check_output(cmd, shell=True).split()
 
-    nxml = 0
+    nroxml = 0
     #files = ['./Sob_18.xml']
 
     # se procesa un xml
     for _file in files:
-        nxml += 1
-        #print("F", nxml),
+        nroxml += 1
+        #print("F", nroxml),
         root       = _ecfeee(_file)
         caratula   = Caratula(root.caratula)
         cfe_adenda = CFE_Adenda(root.cfe_adenda).cfead
@@ -135,22 +138,21 @@ if __name__ == "__main__":
 
         """ Se itera sobre los CFE_Adenda del sobre. Entre 1 y 250 por cada _file """
 
-        #print(_file)
+
         ncfe = 0
         for cfead in cfe_adenda:
             ncfe += 1
-            # print("c", ncfe)
+
             Adenda = cfead['adenda']
             csv_fname = OUT_DIR + _csv_fname + '_' + str(ncfe) + '.csv'
 
             stream = open(csv_fname, "w")
             csv_handle = csv_tools.csvUnicodeHandler(stream)
+            print('\n',_file)
+            header_cabezal, linea_cabezal = ecfeee_csv.arma_cabezal(cfead,caratula.Fecha.strftime('%Y-%m-%d %H:%M:%S'))
 
-            csv_handle.writerow(ecfeee_csv.campos_cabezal)
-
-            line = ecfeee_csv.arma_cabezal(cfead,caratula.Fecha.strftime('%Y-%m-%d %H:%M:%S'))
-            #import ipdb; ipdb.set_trace()
-            csv_handle.writerow(line)
+            csv_handle.writerow(header_cabezal)
+            csv_handle.writerow(linea_cabezal)
 
 
             # *** FIN   cabezal CSV ***

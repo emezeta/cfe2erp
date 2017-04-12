@@ -3,6 +3,6 @@
 
 delimiter = '|'
 lineterminator = '\r\n'
-out_path = '/tmp/'
+out_path = './dscrec/'
 encoding="utf-8"
 
