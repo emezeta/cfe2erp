@@ -81,17 +81,17 @@ class EnvioCFE_entreEmpresas(object):
         """
 
         if xmlfile is not None:
-            self.xmlfile = xmlfile
             try:
                 xmldoc = etree.parse(xmlfile)
-                xmldoc = xmldoc.getroot()
-            except Exception as ex:
+                root = xmldoc.getroot()
+            except: # Exception as ex:
+
                 msg = "Archivo %s no disponible o no es un `EnvioCFE_entreEmpresas` \n\t%s" % (xmlfile, ex)
                 print(msg)  # raise Exception("Error: %s" % (msg,))
                 sys.exit()
 
             self.cfe_adenda = list()
-            for elem in xmldoc.getchildren():
+            for elem in root.getchildren():
                 tag = tag_ns(elem)
                 if tag == "Caratula":
                     self.caratula = elem
@@ -104,7 +104,7 @@ class EnvioCFE_entreEmpresas(object):
 
 
 
-class Caratula(object):
+class Caratula(EnvioCFE_entreEmpresas):
 
     """
         Crea el objeto Caratula a partir de un elemento etree lxml
@@ -116,7 +116,8 @@ class Caratula(object):
         # >>> Fecha.strftime('%Y-%m-%d %H:%M:%S')
         ... 2016-11-11 18:10:09 ...etc
     """
-    def __init__(self, caratula=None):
+
+    def __init__(self, caratula):
 
         if caratula is not None:
             C = objectify.fromstring(etree.tostring(caratula))
@@ -217,7 +218,7 @@ class CFE_Adenda(object):
                 y permite pasar un llamado a función diferente para
                 diferentes elementos.
 
-                Notese:
+                Note:
                     Algunos elementos no son obligatorios 'n/o'. En aquellos CFE que no definan los n/o
                     el objeto correpondiento no existirá. Para el caso de la salida CSV es necesario
                     completar los valores necesarios con 'None'. Ejemplo. Descuento global.
@@ -233,7 +234,6 @@ class CFE_Adenda(object):
                 eDoc_obj[tag] = echild_obj
             elif tag == 'DscRcgGlobal':
                 eDoc_obj[tag] = DscRcgGlobal(echild_obj) # n/o   dscrcgglobal
-
             elif tag == 'MediosPago':
                 eDoc_obj[tag] = echild_obj
             elif tag == 'CAEData':
@@ -263,10 +263,6 @@ class CFE_Adenda(object):
         return res
 
 
-
-
-
-
 class TmstFirma(object):
 
     def __init__(self, tmstfirma=None):
@@ -293,6 +289,7 @@ class Encabezado(object):
         """
             Se inicializan todos los miembros del dict() de salida
         """
+
         e = encab_obj.Emisor
         tmp_emisor = dict(
             CdgDGISucur          = e.CdgDGISucur.pyval         if hasattr(e, 'CdgDGISucur'        ) else 'None',
@@ -369,29 +366,35 @@ class Detalle(object):
         self._detalle(detalle)
 
     def _detalle(self, detalle):
-        i = detalle.Item
-        tmp_item = dict(
-            NroLinDet       = i.NroLinDet       if hasattr(i,'NroLinDet'     ) else 'None',
-            IndFact         = i.IndFact         if hasattr(i,'IndFact'       ) else 'None',
-            CodItem         = i.CodItem         if hasattr(i,'CodItem'       ) else 'None',
-            NomItem         = i.NomItem         if hasattr(i,'NomItem'       ) else 'None',
-            Cantidad        = i.Cantidad        if hasattr(i,'Cantidad'      ) else 'None',
-            UniMed          = i.UniMed          if hasattr(i,'UniMed'        ) else 'None',
-            DscItem         = i.DscItem         if hasattr(i,'DscItem'       ) else 'None',  # Descripción
-            PrecioUnitario  = i.PrecioUnitario  if hasattr(i,'PrecioUnitario') else 'None',
-            MontoItem       = i.MontoItem       if hasattr(i,'MontoItem'     ) else 'None',
-            SubDescuento    = i.SubDescuento    if hasattr(i,'SubDescuento'  ) else 'None',
-            DescuentoMonto  = i.DescuentoMonto  if hasattr(i,'DescuentoMonto') else 'None',
-            DescuentoPct    = i.DescuentoPct    if hasattr(i,'DescuentoPct'  ) else 'None',
-        )
+        detalle_lineas = list()
+        for i in detalle.getchildren():
+            tmp_item = dict(
+                NroLinDet       = i.NroLinDet.pyval       if hasattr(i,'NroLinDet'     ) else 'None',
+                IndFact         = i.IndFact.pyval         if hasattr(i,'IndFact'       ) else 'None',
+                CodItem         = i.CodItem               if hasattr(i,'CodItem'       ) else 'None',
+                NomItem         = i.NomItem.pyval         if hasattr(i,'NomItem'       ) else 'None',
+                Cantidad        = i.Cantidad.pyval        if hasattr(i,'Cantidad'      ) else 'None',
+                UniMed          = i.UniMed.pyval          if hasattr(i,'UniMed'        ) else 'None',
+                DscItem         = i.DscItem.pyval         if hasattr(i,'DscItem'       ) else 'None',  # Descripción
+                PrecioUnitario  = i.PrecioUnitario.pyval  if hasattr(i,'PrecioUnitario') else 'None',
+                MontoItem       = i.MontoItem.pyval       if hasattr(i,'MontoItem'     ) else 'None',
+                SubDescuento    = i.SubDescuento          if hasattr(i,'SubDescuento'  ) else 'None',
+                DescuentoMonto  = i.DescuentoMonto.pyval  if hasattr(i,'DescuentoMonto') else 'None',
+                DescuentoPct    = i.DescuentoPct.pyval    if hasattr(i,'DescuentoPct'  ) else 'None',
+            )
 
-        if tmp_item['CodItem'] is not 'None':
-            tmp_item['CodItem'] = [cdi for cdi in tmp_item['CodItem']]
+            if tmp_item['CodItem'] is not 'None':
+                tmp_item['CodItem'] = [{'TpoCod': cdi.TpoCod, 'Cod': cdi.Cod} for cdi in tmp_item['CodItem']]
 
-        if tmp_item['SubDescuento'] is not 'None':
-            tmp_item['SubDescuento'] = [{'DescTipo': sdto.DescTipo , 'DescVal':sdto.DescVal} for sdto in tmp_item['SubDescuento']]
+            if tmp_item['SubDescuento'] is not 'None': # 1 = $ o 2 = %
+                tmp_item['SubDescuento'] = [{'DescTipo': '$' if sdto.DescTipo.pyval == '1' else '%', \
+                    'DescVal':sdto.DescVal.pyval} for sdto in tmp_item['SubDescuento']]
 
-        self.Detalle = tmp_item
+            if tmp_item['IndFact'] is not 'None':
+                tmp_item['IndFact'] = indfact[str(tmp_item['IndFact'])]
+
+            detalle_lineas.append(tmp_item)
+        self.Detalle = detalle_lineas
 
 
 
@@ -413,36 +416,51 @@ class DscRcgGlobal(object):
                         IndFactDR   =  drgi.IndFactDR      if hasattr(drgi,'IndFactDR' ) else 'None'   # ver tabla  "indfactdr"
                 )
                 if tmp_drgitem['ValorDR']:
-                    tmp_drgitem['TpoDR'] = "%" if tmp_drgitem['TpoDR'] == '1' else '2'
+                    tmp_drgitem['TpoDR'] = "%" if tmp_drgitem['TpoDR'] == '1' else '$'
                     if tmp_drgitem['IndFactDR'] is not 'None':
                         tmp_drgitem['IndFactDR'] = indfactdr[str(tmp_drgitem['IndFactDR'])]
 
                     drg_items.append(tmp_drgitem)
 
-        self.DscRcgGlobal = drg_items or []
+        self.Items = drg_items or []
 
     """
-    drg_items = [self._dscrcgglobal(drgi) for drgi in dscrcgglobal.DRG_Item if len(dscrcgglobal.DRG_Item) ]
-    def _dscrcgglobal(self, drgi):
-
-        tmp_drgitem = dict(
-            #NroLinDR    =  drgi.NroLinDR       if hasattr(drgi,'NroLinDR'  ) else 'None',
-            #CodDR       =  drgi.CodDR          if hasattr(drgi,'CodDR'     ) else 'None', # basura
-            TpoMovDR    =  drgi.TpoMovDR       if hasattr(drgi,'TpoMovDR'  ) else 'None',  # ValorDR  D=dto   r=recgo.
-            TpoDR       =  drgi.TpoDR          if hasattr(drgi,'TpoDR'     ) else 'None',  # TipoDRType 1=% 2=$
-            GlosaDR     =  drgi.GlosaDR        if hasattr(drgi,'GlosaDR'   ) else 'None',
-            ValorDR     =  drgi.ValorDR        if hasattr(drgi,'ValorDR'   ) else 'None',
-            IndFactDR   =  drgi.IndFactDR      if hasattr(drgi,'IndFactDR' ) else 'None'   # ver tabla  "indfactdr"
-        )
-        if not tmp_drgitem['ValorDR']:
-            return dict()
-        tmp_drgitem['TpoDR'] = "%" if tmp_drgitem['TpoDR'] == '1' else '$'
-
-        tmp_drgitem['IndFactDR'] = indfactdr[str(tmp_drgitem['IndFactDR'])] \
-            if tmp_drgitem['IndFactDR'] is not 'None' else tmp_drgitem['IndFactDR']
-
-        return tmp_drgitem
+        Se eleiminaron estos dos elementos.
+            NroLinDR    =  drgi.NroLinDR       if hasattr(drgi,'NroLinDR'  ) else 'None', # sin función útil
+            CodDR       =  drgi.CodDR          if hasattr(drgi,'CodDR'     ) else 'None', # sin función útil
     """
+
+indfact = indfactdr = \
+    {
+         '1': u'Exento de IVA',
+         '2': u'Gravado a Tasa Mínima',
+         '3': u'Gravado a Tasa Básica',
+         '4': u'Gravado a Otra Tasa',
+         '6': u'Prod/Serv no facturable',
+         '7': u'Prod/Serv no facturable negativo',
+         '8': u'Ítem a rebajar(remito)',
+         '9': u'Ítem a ajustar(resgdo)',
+        '10': u'Exportación y asimiladas',
+        '11': u'Impuesto percibido',
+        '12': u'IVA en suspenso',
+    }
+
+"""
+Indicador de Facturación:
+ 1: Exento de IVA
+ 2: Gravado a Tasa Mínima
+ 3: Gravado a Tasa Básica
+ 4: Gravado a Otra Tasa
+ 6: Producto o servicio no facturable
+ 7: Producto o servicio no facturable negativo
+ 8: Solo para remitos: Ítem a rebajar en remitos. En área de referencia se debe indicar el N° de remito que ajusta
+ 9: Solo para resguardos: Ítem a ajustar en resguardos. En área de referencia se debe indicar el N° de remito que ajusta
+10: Exportación y asimiladas
+11: Impuesto percibido
+12: IVA en suspenso
+"""
+
+
 
 """
     def _coditem(self,coditem=None):
@@ -509,15 +527,3 @@ class ComplFiscal(eDoc):
 """
 
 
-
-indfactdr = {
-         '1': u'Exento de IVA',
-         '2': u'Gravado a Tasa Mínima',
-         '3': u'Gravado a Tasa Básica',
-         '4': u'Gravado a Otra Tasa',
-         '6': u'Producto o servicio no facturable',
-         '7': u'Producto o servicio no facturable negativo',
-        '10': u'Exportación y asimiladas',
-        '11': u'Impuesto percibido',
-        '12': u'IVA en suspenso',
-}

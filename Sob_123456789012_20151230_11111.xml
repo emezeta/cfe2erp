@@ -1,0 +1,3707 @@
+﻿<EnvioCFE_entreEmpresas xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<Caratula version="1.0">
+<RutReceptor>210987654321</RutReceptor>
+<RUCEmisor>123456789012</RUCEmisor>
+<Idemisor>1234567</Idemisor>
+<CantCFE>18</CantCFE>
+<Fecha>2015-12-30T09:05:41.567625-03:00</Fecha>
+<X509Certificate>esteeselcertificado</X509Certificate>
+</Caratula>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-10-24T12:32:46.021125-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>112</TipoCFE>
+<Serie>A</Serie>
+<Nro>19525</Nro>
+<FchEmis>2015-10-24</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>29.181</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>73.83</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>192.11</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>7.38</MntIVATasaMin>
+<MntIVATasaBasica>42.25</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>315.57</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>4</CantLinDet>
+<MontoNF>0.43</MontoNF>
+<MntPagar>316.00</MntPagar>
+</Totales>
+</Encabezado>
+
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>30 SAL SEK YODOFLUORADA FINA 1/2</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>2.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>36.91700</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>73.83</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>120 TOMATE GOURMET 1030 GRS.</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>4.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>28.27900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>113.11</MontoItem>
+</Item>
+<Item>
+<NroLinDet>3</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>536 TOMATE DE LEY 1.020 GRS.</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>2.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>25.57400</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>51.14</MontoItem>
+</Item>
+<Item>
+<NroLinDet>4</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3107 PURE DE ZAPALLO X 100 G</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>1.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>27.86900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>27.86</MontoItem>
+</Item>
+</Detalle>
+
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>R</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>0.43</ValorDR>
+<IndFactDR>6</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia>
+<Referencia>
+<NroLinRef>1</NroLinRef>
+<TpoDocRef>111</TpoDocRef>
+<Serie>A</Serie>
+<NroCFERef>31891</NroCFERef>
+<RazonRef />
+<FechaCFEref>2015-09-08</FechaCFEref>
+</Referencia>
+</Referencia>
+<CAEData>
+<CAE_ID>90150027929</CAE_ID>
+<DNro>1</DNro>
+<HNro>25000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Cantidad Articulos:          4..........Kilos Documento:     8.70<br/>
+<br/>Hora: 12:31:16..........  Vendedor: Ti VENDO BARATO<br/>Zona: ZONA 1                        <br/>Plazo:         30..........Vencimiento: 23/11/16<br/>Obs. 1: Afecta Factura Nº      31891      Salio Stock = S           <br/>Obs. 2: segun rto 136892                                            <br/>Nº Interno: A     247339<br/>Pedido Genero Documentos:          1<br/>* FLETE CONTRATADO POR EL CLIENTE *<br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-12-19T15:48:13.60675-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>112</TipoCFE>
+<Serie>A</Serie>
+<Nro>21571</Nro>
+<FchEmis>2015-12-19</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>29.400</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>18.45</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>31.31</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>1.84</MntIVATasaMin>
+<MntIVATasaBasica>6.88</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>58.48</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>2</CantLinDet>
+<MontoNF>-0.48</MontoNF>
+<MntPagar>58.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>32 SAL SEK YODOFLUORADA GRU. 1/2</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.50</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>36.91818</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>18.45</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3550 TOMATE GOURMET SIN AZUCAR 1020</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>1.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>31.31148</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>31.31</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>D</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>-0.48</ValorDR>
+<IndFactDR>7</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia>
+<Referencia>
+<NroLinRef>1</NroLinRef>
+<TpoDocRef>111</TpoDocRef>
+<Serie>A</Serie>
+<NroCFERef>36819</NroCFERef>
+<RazonRef />
+<FechaCFEref>2015-12-01</FechaCFEref>
+</Referencia>
+</Referencia>
+<CAEData>
+<CAE_ID>90150027929</CAE_ID>
+<DNro>1</DNro>
+<HNro>25000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Cantidad Articulos:          2..........Kilos Documento:     1.60<br/>
+<br/>Hora: 15:45:18..........  Vendedor: Ti VENDO BARATO<br/>Zona: ZONA 1                        <br/>Plazo:         30..........Vencimiento: 18/01/17<br/>Obs. 1: Afecta Factura Nº      36819      Salio Stock = S           <br/>Obs. 2: SEGUN RTO 137950                                            <br/>Nº Interno: A     249429<br/>Pedido Genero Documentos:          1<br/>* FLETE CONTRATADO POR EL CLIENTE *<br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-06-20T11:45:09.36775-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>112</TipoCFE>
+<Serie>A</Serie>
+<Nro>14570</Nro>
+<FchEmis>2015-06-20</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>32.345</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>36.90</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>95.93</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>3.68</MntIVATasaMin>
+<MntIVATasaBasica>21.09</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>157.60</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>4</CantLinDet>
+<MontoNF>0.40</MontoNF>
+<MntPagar>158.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>30 SAL SEK YODOFLUORADA FINA 1/2</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.50</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>36.91700</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>18.45</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>32 SAL SEK YODOFLUORADA GRU. 1/2</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.50</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>36.91700</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>18.45</MontoItem>
+</Item>
+<Item>
+<NroLinDet>3</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>120 TOMATE GOURMET 1030 GRS.</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>2.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>31.31200</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>62.62</MontoItem>
+</Item>
+<Item>
+<NroLinDet>4</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3343 SALSA GOURMET C/ALBAHACA 1030G</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>1.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>33.31200</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>33.31</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>R</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>0.40</ValorDR>
+<IndFactDR>6</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia>
+<Referencia>
+<NroLinRef>1</NroLinRef>
+<TpoDocRef>111</TpoDocRef>
+<Serie>A</Serie>
+<NroCFERef>24007</NroCFERef>
+<RazonRef />
+<FechaCFEref>2015-05-12</FechaCFEref>
+</Referencia>
+</Referencia>
+<CAEData>
+<CAE_ID>90150027929</CAE_ID>
+<DNro>1</DNro>
+<HNro>25000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Cantidad Articulos:          4..........Kilos Documento:     4.30<br/>
+<br/>Hora: 11:45:36..........  Vendedor: Ti VENDO BARATO<br/>Zona: ZONA 1                        <br/>Plazo:         30..........Vencimiento: 20/07/16<br/>Obs. 1: Afecta Factura Nº     526719      Salio Stock = S           <br/>Obs. 2: SEGUN RTO 135513                                            <br/>Nº Interno: A     242288<br/>Pedido Genero Documentos:          1<br/>* FLETE CONTRATADO POR EL CLIENTE *<br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-06-02T11:31:16.96325-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>112</TipoCFE>
+<Serie>A</Serie>
+<Nro>13825</Nro>
+<FchEmis>2015-06-02</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>31.055</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>228.86</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>0.00</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>22.88</MntIVATasaMin>
+<MntIVATasaBasica>0.00</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>251.74</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>2</CantLinDet>
+<MontoNF>0.26</MontoNF>
+<MntPagar>252.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>30 SAL SEK YODOFLUORADA FINA 1/2</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>166.44</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>166.44</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>32 SAL SEK YODOFLUORADA GRU. 1/2</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>62.42</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>62.42</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>R</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>0.26</ValorDR>
+<IndFactDR>6</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia>
+<Referencia>
+<NroLinRef>1</NroLinRef>
+<TpoDocRef>111</TpoDocRef>
+<Serie>A</Serie>
+<NroCFERef>25377</NroCFERef>
+<RazonRef />
+<FechaCFEref>2015-06-02</FechaCFEref>
+</Referencia>
+</Referencia>
+<CAEData>
+<CAE_ID>90150027929</CAE_ID>
+<DNro>1</DNro>
+<HNro>25000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Hora: 11:31:47..........  Vendedor. Ti VENDO BARATO<br/>Nº Interno: A     241523<br/>Obs. 1: Afecta Factura Nº     527977                                <br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-06-02T11:31:20.807-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>112</TipoCFE>
+<Serie>A</Serie>
+<Nro>13826</Nro>
+<FchEmis>2015-06-02</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>31.055</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>0.00</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>102.30</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>0.00</MntIVATasaMin>
+<MntIVATasaBasica>22.50</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>124.80</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>1</CantLinDet>
+<MontoNF>0.20</MontoNF>
+<MntPagar>125.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3550 TOMATE GOURMET SIN AZUCAR 1020</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>102.30</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>102.30</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>R</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>0.20</ValorDR>
+<IndFactDR>6</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia>
+<Referencia>
+<NroLinRef>1</NroLinRef>
+<TpoDocRef>111</TpoDocRef>
+<Serie>A</Serie>
+<NroCFERef>25379</NroCFERef>
+<RazonRef />
+<FechaCFEref>2015-06-02</FechaCFEref>
+</Referencia>
+</Referencia>
+<CAEData>
+<CAE_ID>90150027929</CAE_ID>
+<DNro>1</DNro>
+<HNro>25000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Hora: 11:31:51..........  Vendedor. Ti VENDO BARATO<br/>Nº Interno: A     241525<br/>Obs. 1: Afecta Factura Nº     527979                                <br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-06-02T11:31:22.916375-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>112</TipoCFE>
+<Serie>A</Serie>
+<Nro>10101</Nro>
+<FchEmis>2015-06-02</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>31.055</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>0.00</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>3267.47</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>0.00</MntIVATasaMin>
+<MntIVATasaBasica>718.83</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>3986.30</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>5</CantLinDet>
+<MontoNF>-0.30</MontoNF>
+<MntPagar>3986.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>120 TOMATE GOURMET 1030 GRS.</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>1227.50</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>1227.50</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>121 NAPOLITANA GOURMET 1.030 GRS.</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>511.46</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>511.46</MontoItem>
+</Item>
+<Item>
+<NroLinDet>3</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>536 TOMATE DE LEY 1.020 GRS.</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>914.76</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>914.76</MontoItem>
+</Item>
+<Item>
+<NroLinDet>4</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3061 TOMATE GOURMET SIN SAL 1 KG.</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>102.29</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>102.29</MontoItem>
+</Item>
+<Item>
+<NroLinDet>5</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3343 SALSA GOURMET C/ALBAHACA 1030G</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>511.46</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>511.46</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>D</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>-0.30</ValorDR>
+<IndFactDR>7</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia>
+<Referencia>
+<NroLinRef>1</NroLinRef>
+<TpoDocRef>111</TpoDocRef>
+<Serie>A</Serie>
+<NroCFERef>25378</NroCFERef>
+<RazonRef />
+<FechaCFEref>2015-06-02</FechaCFEref>
+</Referencia>
+</Referencia>
+<CAEData>
+<CAE_ID>90150027929</CAE_ID>
+<DNro>1</DNro>
+<HNro>25000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Hora: 11:31:49..........  Vendedor. Ti VENDO BARATO<br/>Nº Interno: A     241524<br/>Obs. 1: Afecta Factura Nº     527978                                <br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-12-19T12:56:39.638-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>111</TipoCFE>
+<Serie>A</Serie>
+<Nro>37826</Nro>
+<FchEmis>2015-12-19</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>29.250</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>10808.25</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>0.00</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>1080.82</MntIVATasaMin>
+<MntIVATasaBasica>0.00</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>11889.07</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>4</CantLinDet>
+<MontoNF>-0.07</MontoNF>
+<MntPagar>11889.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>30 SAL SEK YODOFLUORADA FINA 1/2</NomItem>
+<DscItem>10</DscItem>
+<Cantidad>150.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>47.88000</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>20</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>5745.60</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>32 SAL SEK YODOFLUORADA GRU. 1/2</NomItem>
+<DscItem>7</DscItem>
+<Cantidad>105.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>47.88000</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>20</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>4021.92</MontoItem>
+</Item>
+<Item>
+<NroLinDet>3</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>605 SALERO YODOFLUORADA 12X500 GR</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>36.72800</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>440.73</MontoItem>
+</Item>
+<Item>
+<NroLinDet>4</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>3012 SALERO YODOFLUORADA 100G X</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>40.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>15.00000</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>600.00</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>D</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>-0.07</ValorDR>
+<IndFactDR>7</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia />
+<CAEData>
+<CAE_ID>90150027910</CAE_ID>
+<DNro>1</DNro>
+<HNro>50000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Cantidad Articulos:          4..........Kilos Documento:   269.87<br/>
+<br/>Hora: 12:54:01..........  Vendedor: Ti VENDO BARATO<br/>Zona: ZONA 1                        <br/>Plazo:         30..........Vencimiento: 18/01/17<br/>Obs. 1: RET. AREQUITA                                               <br/>Obs. 2: 30 32-28.20R/GOU-38.20/                                     <br/>Nº Interno: A     539379<br/>Pedido Genero Documentos:          1<br/>* FLETE CONTRATADO POR EL CLIENTE *<br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-12-19T12:56:43.559875-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>111</TipoCFE>
+<Serie>A</Serie>
+<Nro>37827</Nro>
+<FchEmis>2015-12-19</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>29.250</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>0.00</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>4936.31</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>0.00</MntIVATasaMin>
+<MntIVATasaBasica>1085.96</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>6022.27</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>6</CantLinDet>
+<MontoNF>-0.27</MontoNF>
+<MntPagar>6022.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>120 TOMATE GOURMET 1030 GRS.</NomItem>
+<DscItem>5</DscItem>
+<Cantidad>60.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>51.76900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>2390.19</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3061 TOMATE GOURMET SIN SAL 1 KG.</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>51.76900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>478.04</MontoItem>
+</Item>
+<Item>
+<NroLinDet>3</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3107 PURE DE ZAPALLO X 100 G</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>27.86900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>334.42</MontoItem>
+</Item>
+<Item>
+<NroLinDet>4</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3194 PURE DE PAPA GOURMET 120G</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>20.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>14.18100</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>283.62</MontoItem>
+</Item>
+<Item>
+<NroLinDet>5</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3343 SALSA GOURMET C/ALBAHACA 1030G</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>51.76900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>478.04</MontoItem>
+</Item>
+<Item>
+<NroLinDet>6</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3689 SALERO YODOFLUOR.LIGHT 12X500G</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>81.00000</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>972.00</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>D</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>-0.27</ValorDR>
+<IndFactDR>7</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia />
+<CAEData>
+<CAE_ID>90150027910</CAE_ID>
+<DNro>1</DNro>
+<HNro>50000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Cantidad Articulos:          6..........Kilos Documento:   102.48<br/>
+<br/>Hora: 12:54:03..........  Vendedor: Ti VENDO BARATO<br/>Zona: ZONA 1                        <br/>Plazo:          0..........Vencimiento: 19/12/16<br/>Obs. 1: RET. AREQUITA                                               <br/>Obs. 2: 30 32-28.20R/GOU-38.20/                                     <br/>Nº Interno: A     539380<br/>Pedido Genero Documentos:          1<br/>* FLETE CONTRATADO POR EL CLIENTE *<br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-12-19T13:03:20.638-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>112</TipoCFE>
+<Serie>A</Serie>
+<Nro>21519</Nro>
+<FchEmis>2015-12-19</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>29.250</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>353.72</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>0.00</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>35.36</MntIVATasaMin>
+<MntIVATasaBasica>0.00</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>389.08</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>2</CantLinDet>
+<MontoNF>-0.08</MontoNF>
+<MntPagar>389.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>30 SAL SEK YODOFLUORADA FINA 1/2</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>208.05</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>208.05</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>32 SAL SEK YODOFLUORADA GRU. 1/2</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>145.67</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>145.67</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>D</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>-0.08</ValorDR>
+<IndFactDR>7</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia>
+<Referencia>
+<NroLinRef>1</NroLinRef>
+<TpoDocRef>111</TpoDocRef>
+<Serie>A</Serie>
+<NroCFERef>37826</NroCFERef>
+<RazonRef />
+<FechaCFEref>2015-12-19</FechaCFEref>
+</Referencia>
+</Referencia>
+<CAEData>
+<CAE_ID>90150027929</CAE_ID>
+<DNro>1</DNro>
+<HNro>25000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Hora: 13:00:42..........  Vendedor. Ti VENDO BARATO<br/>Nº Interno: A     249377<br/>Obs. 1: Afecta Factura Nº      37826                                <br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-11-03T15:31:53.515-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>111</TipoCFE>
+<Serie>A</Serie>
+<Nro>35095</Nro>
+<FchEmis>2015-11-03</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>28.252</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>4462.65</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>0.00</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>446.26</MntIVATasaMin>
+<MntIVATasaBasica>0.00</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>4908.91</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>2</CantLinDet>
+<MontoNF>0.09</MontoNF>
+<MntPagar>4909.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>30 SAL SEK YODOFLUORADA FINA 1/2</NomItem>
+<DscItem>7</DscItem>
+<Cantidad>105.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>47.88000</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>20</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>4021.92</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>605 SALERO YODOFLUORADA 12X500 GR</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>36.72800</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>440.73</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>R</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>0.09</ValorDR>
+<IndFactDR>6</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia />
+<CAEData>
+<CAE_ID>90150027910</CAE_ID>
+<DNro>1</DNro>
+<HNro>50000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Cantidad Articulos:          2..........Kilos Documento:   113.60<br/>
+<br/>Nº Orden de Compra:     137300..........Hora: 15:30:06..........  Vendedor: Ti VENDO BARATO<br/>Zona: ZONA 1                        <br/>Plazo:         30..........Vencimiento: 03/12/16<br/>Obs. 1: 30-28.10 / 465-102 / 536-31.10 / 120-34.50                  <br/>Nº Interno: A     536951<br/>Pedido Genero Documentos:          1<br/>* FLETE CONTRATADO POR EL CLIENTE *<br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-11-03T15:31:53.60875-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>111</TipoCFE>
+<Serie>A</Serie>
+<Nro>35096</Nro>
+<FchEmis>2015-11-03</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>28.252</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>0.00</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>18802.93</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>0.00</MntIVATasaMin>
+<MntIVATasaBasica>4136.56</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>22939.49</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>13</CantLinDet>
+<MontoNF>-0.49</MontoNF>
+<MntPagar>22939.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>120 TOMATE GOURMET 1030 GRS.</NomItem>
+<DscItem>10</DscItem>
+<Cantidad>120.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>51.76900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>4780.36</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>121 NAPOLITANA GOURMET 1.030 GRS.</NomItem>
+<DscItem>2</DscItem>
+<Cantidad>24.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>51.76900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>956.08</MontoItem>
+</Item>
+<Item>
+<NroLinDet>3</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>330 PURA VIDA SALSA SOJA LIGHT 340</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>24.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>46.47600</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>1115.42</MontoItem>
+</Item>
+<Item>
+<NroLinDet>4</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>465 PURE DE PAPA GOURMET X 1 K</NomItem>
+<DscItem>9</DscItem>
+<Cantidad>36.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>96.72200</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>3481.99</MontoItem>
+</Item>
+<Item>
+<NroLinDet>5</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>536 TOMATE DE LEY 1.020 GRS.</NomItem>
+<DscItem>10</DscItem>
+<Cantidad>120.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>35.49200</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>4259.04</MontoItem>
+</Item>
+<Item>
+<NroLinDet>6</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>746 PURA VIDA SIN SAL 340G DOYPACK</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>46.47600</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>557.71</MontoItem>
+</Item>
+<Item>
+<NroLinDet>7</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3051 TOMATE GOURMET 260 X 27</NomItem>
+<DscItem>2</DscItem>
+<Cantidad>54.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>18.00300</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>748.08</MontoItem>
+</Item>
+<Item>
+<NroLinDet>8</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3061 TOMATE GOURMET SIN SAL 1 KG.</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>51.76900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>478.04</MontoItem>
+</Item>
+<Item>
+<NroLinDet>9</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3090 TOMATE GOURMET SIN SAL 250G</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>27.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>18.00300</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>374.05</MontoItem>
+</Item>
+<Item>
+<NroLinDet>10</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3107 PURE DE ZAPALLO X 100 G</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>27.86900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>334.42</MontoItem>
+</Item>
+<Item>
+<NroLinDet>11</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3194 PURE DE PAPA GOURMET 120G</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>20.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>14.18100</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>283.62</MontoItem>
+</Item>
+<Item>
+<NroLinDet>12</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3343 SALSA GOURMET C/ALBAHACA 1030G</NomItem>
+<DscItem>2</DscItem>
+<Cantidad>24.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>51.76900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>956.08</MontoItem>
+</Item>
+<Item>
+<NroLinDet>13</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3550 TOMATE GOURMET SIN AZUCAR 1020</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>51.76900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>478.04</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>D</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>-0.49</ValorDR>
+<IndFactDR>7</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia />
+<CAEData>
+<CAE_ID>90150027910</CAE_ID>
+<DNro>1</DNro>
+<HNro>50000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Cantidad Articulos:         13..........Kilos Documento:   416.55<br/>
+<br/>Nº Orden de Compra:     137300..........Hora: 15:30:09..........  Vendedor: Ti VENDO BARATO<br/>Zona: ZONA 1                        <br/>Plazo:         30..........Vencimiento: 03/12/16<br/>Obs. 1: 30-28.10 / 465-102 / 536-31.10 / 120-34.50                  <br/>Nº Interno: A     536952<br/>Pedido Genero Documentos:          1<br/>* FLETE CONTRATADO POR EL CLIENTE *<br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-04-20T10:31:23.73325-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>112</TipoCFE>
+<Serie>A</Serie>
+<Nro>12363</Nro>
+<FchEmis>2015-04-20</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>31.360</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>0.00</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>501.64</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>0.00</MntIVATasaMin>
+<MntIVATasaBasica>110.36</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>612.00</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>1</CantLinDet>
+<MontoNF>0.00</MontoNF>
+<MntPagar>612.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>120 TOMATE GOURMET 1030 GRS.</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>501.64</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>501.64</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>R</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>0.00</ValorDR>
+<IndFactDR>6</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia>
+<Referencia>
+<NroLinRef>1</NroLinRef>
+<TpoDocRef>111</TpoDocRef>
+<Serie>A</Serie>
+<NroCFERef>21979</NroCFERef>
+<RazonRef />
+<FechaCFEref>2015-04-07</FechaCFEref>
+</Referencia>
+</Referencia>
+<CAEData>
+<CAE_ID>90150027929</CAE_ID>
+<DNro>1</DNro>
+<HNro>25000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Hora: 10:31:50..........  Vendedor. Ti VENDO BARATO<br/>Nº Interno: A     240034<br/>Obs. 1: Afecta Factura Nº     524855                                <br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-07-21T10:57:37.072875-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>112</TipoCFE>
+<Serie>A</Serie>
+<Nro>15953</Nro>
+<FchEmis>2015-07-21</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>31.055</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>18.45</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>69.59</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>1.84</MntIVATasaMin>
+<MntIVATasaBasica>15.30</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>105.18</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>3</CantLinDet>
+<MontoNF>-0.18</MontoNF>
+<MntPagar>105.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>32 SAL SEK YODOFLUORADA GRU. 1/2</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.50</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>36.91700</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>18.45</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3051 TOMATE GOURMET 260 X 27</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>1.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>18.00300</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>13.86</MontoItem>
+</Item>
+<Item>
+<NroLinDet>3</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3107 PURE DE ZAPALLO X 100 G</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>2.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>27.86900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>55.73</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>D</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>-0.18</ValorDR>
+<IndFactDR>7</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia>
+<Referencia>
+<NroLinRef>1</NroLinRef>
+<TpoDocRef>111</TpoDocRef>
+<Serie>A</Serie>
+<NroCFERef>25379</NroCFERef>
+<RazonRef />
+<FechaCFEref>2015-06-02</FechaCFEref>
+</Referencia>
+</Referencia>
+<CAEData>
+<CAE_ID>90150027929</CAE_ID>
+<DNro>1</DNro>
+<HNro>25000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Cantidad Articulos:          3..........Kilos Documento:     1.01<br/>
+<br/>Hora: 10:58:09..........  Vendedor: Ti VENDO BARATO<br/>Zona: ZONA 1                        <br/>Plazo:         30..........Vencimiento: 20/08/16<br/>Obs. 1: Afecta Factura Nº      25379      Salio Stock = S           <br/>Obs. 2: segun rto 135924                                            <br/>Nº Interno: A     243695<br/>Pedido Genero Documentos:          1<br/>* FLETE CONTRATADO POR EL CLIENTE *<br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-08-01T12:31:29.41225-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>111</TipoCFE>
+<Serie>A</Serie>
+<Nro>29385</Nro>
+<FchEmis>2015-08-01</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>29.812</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>13681.05</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>0.00</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>1368.10</MntIVATasaMin>
+<MntIVATasaBasica>0.00</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>15049.15</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>4</CantLinDet>
+<MontoNF>-0.15</MontoNF>
+<MntPagar>15049.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>30 SAL SEK YODOFLUORADA FINA 1/2</NomItem>
+<DscItem>15</DscItem>
+<Cantidad>225.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>47.88000</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>20</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>8618.40</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>32 SAL SEK YODOFLUORADA GRU. 1/2</NomItem>
+<DscItem>7</DscItem>
+<Cantidad>105.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>47.88000</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>20</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>4021.92</MontoItem>
+</Item>
+<Item>
+<NroLinDet>3</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>605 SALERO YODOFLUORADA 12X500 GR</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>36.72800</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>440.73</MontoItem>
+</Item>
+<Item>
+<NroLinDet>4</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>3012 SALERO YODOFLUORADA 100G X</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>40.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>15.00000</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>600.00</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>D</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>-0.15</ValorDR>
+<IndFactDR>7</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia />
+<CAEData>
+<CAE_ID>90150027910</CAE_ID>
+<DNro>1</DNro>
+<HNro>50000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Cantidad Articulos:          4..........Kilos Documento:   346.37<br/>
+<br/>Nº Orden de Compra:     135696..........Hora: 12:31:54..........  Vendedor: Ti VENDO BARATO<br/>Zona: ZONA 1                        <br/>Plazo:         30..........Vencimiento: 31/08/16<br/>Obs. 1: FIRMA                                                       <br/>Obs. 2: 30 32-28.20R/465-102/GOU-38.20/536-34                       <br/>Nº Interno: A     531734<br/>Pedido Genero Documentos:          1<br/>* FLETE CONTRATADO POR EL CLIENTE *<br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-08-01T12:31:34.552875-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>111</TipoCFE>
+<Serie>A</Serie>
+<Nro>29386</Nro>
+<FchEmis>2015-08-01</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>29.812</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>0.00</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>20113.45</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>0.00</MntIVATasaMin>
+<MntIVATasaBasica>4424.89</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>24538.34</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>11</CantLinDet>
+<MontoNF>-0.34</MontoNF>
+<MntPagar>24538.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>120 TOMATE GOURMET 1030 GRS.</NomItem>
+<DscItem>12</DscItem>
+<Cantidad>144.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>51.76900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>5736.43</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>121 NAPOLITANA GOURMET 1.030 GRS.</NomItem>
+<DscItem>3</DscItem>
+<Cantidad>36.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>51.76900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>1434.12</MontoItem>
+</Item>
+<Item>
+<NroLinDet>3</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>465 PURE DE PAPA GOURMET X 1 K</NomItem>
+<DscItem>10</DscItem>
+<Cantidad>40.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>96.72200</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>3868.88</MontoItem>
+</Item>
+<Item>
+<NroLinDet>4</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>536 TOMATE DE LEY 1.020 GRS.</NomItem>
+<DscItem>10</DscItem>
+<Cantidad>120.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>35.49200</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>4259.04</MontoItem>
+</Item>
+<Item>
+<NroLinDet>5</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>746 PURA VIDA SIN SAL 340G DOYPACK</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>46.47600</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>557.71</MontoItem>
+</Item>
+<Item>
+<NroLinDet>6</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>960 SOPA GOURMET 1L VERDURAS</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>38.03300</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>456.39</MontoItem>
+</Item>
+<Item>
+<NroLinDet>7</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3035 PURA VIDA SALSA OLIVA 200 GR.</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>38.73000</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>464.76</MontoItem>
+</Item>
+<Item>
+<NroLinDet>8</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3051 TOMATE GOURMET 260 X 27</NomItem>
+<DscItem>3</DscItem>
+<Cantidad>81.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>18.00300</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>1122.13</MontoItem>
+</Item>
+<Item>
+<NroLinDet>9</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3061 TOMATE GOURMET SIN SAL 1 KG.</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>51.76900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>478.04</MontoItem>
+</Item>
+<Item>
+<NroLinDet>10</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3090 TOMATE GOURMET SIN SAL 250G</NomItem>
+<DscItem>2</DscItem>
+<Cantidad>54.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>18.00300</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>748.08</MontoItem>
+</Item>
+<Item>
+<NroLinDet>11</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3157 PURE DE ZAPALLO GOURMET 1 KG.</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>4.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>246.96800</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>987.87</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>D</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>-0.34</ValorDR>
+<IndFactDR>7</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia />
+<CAEData>
+<CAE_ID>90150027910</CAE_ID>
+<DNro>1</DNro>
+<HNro>50000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Cantidad Articulos:         11..........Kilos Documento:   441.89<br/>
+<br/>Nº Orden de Compra:     135696..........Hora: 12:31:59..........  Vendedor: Ti VENDO BARATO<br/>Zona: ZONA 1                        <br/>Plazo:         30..........Vencimiento: 31/08/16<br/>Obs. 1: FIRMA                                                       <br/>Obs. 2: 30 32-28.20R/465-102/GOU-38.20/536-34                       <br/>Nº Interno: A     531735<br/>Pedido Genero Documentos:          1<br/>* FLETE CONTRATADO POR EL CLIENTE *<br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-08-01T12:31:38.834125-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>111</TipoCFE>
+<Serie>A</Serie>
+<Nro>29387</Nro>
+<FchEmis>2015-08-01</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>29.812</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>0.00</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>3544.66</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>0.00</MntIVATasaMin>
+<MntIVATasaBasica>779.78</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>4324.44</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>6</CantLinDet>
+<MontoNF>-0.44</MontoNF>
+<MntPagar>4324.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3194 PURE DE PAPA GOURMET 120G</NomItem>
+<DscItem>5</DscItem>
+<Cantidad>100.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>14.18100</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>1418.10</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3343 SALSA GOURMET C/ALBAHACA 1030G</NomItem>
+<DscItem>2</DscItem>
+<Cantidad>24.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>51.76900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>956.08</MontoItem>
+</Item>
+<Item>
+<NroLinDet>3</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3457 PURE MIX DE VEGETALES X 100 GR</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>24.09900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>289.18</MontoItem>
+</Item>
+<Item>
+<NroLinDet>4</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3550 TOMATE GOURMET SIN AZUCAR 1020</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>51.76900</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>19</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>5</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>478.04</MontoItem>
+</Item>
+<Item>
+<NroLinDet>5</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3595 PURE DE PAPA PANC.Y QUESO 100G</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>16.80300</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>201.63</MontoItem>
+</Item>
+<Item>
+<NroLinDet>6</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3596 PURE DE PAPA CEB.Y QUESO 100G</NomItem>
+<DscItem>1</DscItem>
+<Cantidad>12.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>16.80300</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>201.63</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>D</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>-0.44</ValorDR>
+<IndFactDR>7</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia />
+<CAEData>
+<CAE_ID>90150027910</CAE_ID>
+<DNro>1</DNro>
+<HNro>50000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Cantidad Articulos:          6..........Kilos Documento:    57.32<br/>
+<br/>Nº Orden de Compra:     135696..........Hora: 12:32:03..........  Vendedor: Ti VENDO BARATO<br/>Zona: ZONA 1                        <br/>Plazo:         30..........Vencimiento: 31/08/16<br/>Obs. 1: FIRMA                                                       <br/>Obs. 2: 30 32-28.20R/465-102/GOU-38.20/536-34                       <br/>Nº Interno: A     531736<br/>Pedido Genero Documentos:          1<br/>* FLETE CONTRATADO POR EL CLIENTE *<br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-08-01T12:35:10.834125-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>112</TipoCFE>
+<Serie>A</Serie>
+<Nro>16431</Nro>
+<FchEmis>2015-08-01</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>29.812</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>457.72</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>0.00</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>45.76</MntIVATasaMin>
+<MntIVATasaBasica>0.00</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>503.48</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>2</CantLinDet>
+<MontoNF>-0.48</MontoNF>
+<MntPagar>503.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>30 SAL SEK YODOFLUORADA FINA 1/2</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>312.08</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>312.08</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>2</IndFact>
+<NomItem>32 SAL SEK YODOFLUORADA GRU. 1/2</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>145.64</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>145.64</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>D</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>-0.48</ValorDR>
+<IndFactDR>7</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia>
+<Referencia>
+<NroLinRef>1</NroLinRef>
+<TpoDocRef>111</TpoDocRef>
+<Serie>A</Serie>
+<NroCFERef>29385</NroCFERef>
+<RazonRef />
+<FechaCFEref>2015-08-01</FechaCFEref>
+</Referencia>
+</Referencia>
+<CAEData>
+<CAE_ID>90150027929</CAE_ID>
+<DNro>1</DNro>
+<HNro>25000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Hora: 12:35:35..........  Vendedor. Ti VENDO BARATO<br/>Nº Interno: A     244181<br/>Obs. 1: Afecta Factura Nº      29385                                <br/>
+</Adenda>
+</CFE_Adenda>
+<CFE_Adenda>
+<CFE xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xmlns="http://cfe.dgi.gub.uy">
+<eFact>
+<TmstFirma>2015-08-01T12:35:27.459125-03:00</TmstFirma>
+<Encabezado>
+<IdDoc>
+<TipoCFE>112</TipoCFE>
+<Serie>A</Serie>
+<Nro>16432</Nro>
+<FchEmis>2015-08-01</FchEmis>
+<FmaPago>2</FmaPago>
+<InfoAdicionalDoc />
+</IdDoc>
+<Emisor>
+<RUCEmisor>123456789012</RUCEmisor>
+<RznSoc>EMISOR S.A.</RznSoc>
+<NomComercial>EMISOR S.A.</NomComercial>
+<Telefono>12345678</Telefono>
+<CorreoEmisor>emisoir@emisor.com.uy</CorreoEmisor>
+<CdgDGISucur>1</CdgDGISucur>
+<DomFiscal>Richard Stallman 1234</DomFiscal>
+<Ciudad>PARIS</Ciudad>
+<Departamento>PARIS</Departamento>
+<InfoAdicionalEmisor />
+</Emisor>
+<Receptor>
+<TipoDocRecep>2</TipoDocRecep>
+<CodPaisRecep>UY</CodPaisRecep>
+<DocRecep>210987654321</DocRecep>
+<RznSocRecep>RECEPTOR S.A.</RznSocRecep>
+<DirRecep>19 DE ABRIL Y BLANES</DirRecep>
+<CiudadRecep>BERLIN</CiudadRecep>
+</Receptor>
+<Totales>
+<TpoMoneda>UYU</TpoMoneda>
+<TpoCambio>29.812</TpoCambio>
+<MntNoGrv>0.00</MntNoGrv>
+<MntExpoyAsim>0.00</MntExpoyAsim>
+<MntImpuestoPerc>0.00</MntImpuestoPerc>
+<MntIVaenSusp>0.00</MntIVaenSusp>
+<MntNetoIvaTasaMin>0.00</MntNetoIvaTasaMin>
+<MntNetoIVATasaBasica>3076.03</MntNetoIVATasaBasica>
+<MntNetoIVAOtra>0.00</MntNetoIVAOtra>
+<IVATasaMin>10.000</IVATasaMin>
+<IVATasaBasica>22.000</IVATasaBasica>
+<MntIVATasaMin>0.00</MntIVATasaMin>
+<MntIVATasaBasica>676.71</MntIVATasaBasica>
+<MntIVAOtra>0.00</MntIVAOtra>
+<MntTotal>3752.74</MntTotal>
+<MntTotRetenido>0.00</MntTotRetenido>
+<MntTotCredFisc>0</MntTotCredFisc>
+<CantLinDet>5</CantLinDet>
+<MontoNF>0.26</MontoNF>
+<MntPagar>3753.00</MntPagar>
+</Totales>
+</Encabezado>
+<Detalle>
+<Item>
+<NroLinDet>1</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>120 TOMATE GOURMET 1030 GRS.</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>1227.50</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>1227.50</MontoItem>
+</Item>
+<Item>
+<NroLinDet>2</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>121 NAPOLITANA GOURMET 1.030 GRS.</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>306.88</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>306.88</MontoItem>
+</Item>
+<Item>
+<NroLinDet>3</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>465 PURE DE PAPA GOURMET X 1 K</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Kg.</UniMed>
+<PrecioUnitario>524.60</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>524.60</MontoItem>
+</Item>
+<Item>
+<NroLinDet>4</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>536 TOMATE DE LEY 1.020 GRS.</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>914.76</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>914.76</MontoItem>
+</Item>
+<Item>
+<NroLinDet>5</NroLinDet>
+<IndFact>3</IndFact>
+<NomItem>3061 TOMATE GOURMET SIN SAL 1 KG.</NomItem>
+<DscItem>0</DscItem>
+<Cantidad>0.00</Cantidad>
+<UniMed>Ud.</UniMed>
+<PrecioUnitario>102.29</PrecioUnitario>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<SubDescuento>
+<DescTipo>2</DescTipo>
+<DescVal>0</DescVal>
+</SubDescuento>
+<MontoItem>102.29</MontoItem>
+</Item>
+</Detalle>
+<SubTotInfo />
+<DscRcgGlobal>
+<DRG_Item>
+<NroLinDR>1</NroLinDR>
+<TpoMovDR>R</TpoMovDR>
+<TpoDR>1</TpoDR>
+<GlosaDR>REDONDEO</GlosaDR>
+<ValorDR>0.26</ValorDR>
+<IndFactDR>6</IndFactDR>
+</DRG_Item>
+</DscRcgGlobal>
+<MediosPago />
+<Referencia>
+<Referencia>
+<NroLinRef>1</NroLinRef>
+<TpoDocRef>111</TpoDocRef>
+<Serie>A</Serie>
+<NroCFERef>29386</NroCFERef>
+<RazonRef />
+<FechaCFEref>2015-08-01</FechaCFEref>
+</Referencia>
+</Referencia>
+<CAEData>
+<CAE_ID>90150027929</CAE_ID>
+<DNro>1</DNro>
+<HNro>25000</HNro>
+<FecVenc>2016-04-26</FecVenc>
+</CAEData>
+</eFact>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>digestvalue=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>signaturevalue==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509IssuerSerial>
+<X509IssuerName>C=UY, O=Administración Nacional de Correos, CN=Correo Uruguayo - CA</X509IssuerName>
+<X509SerialNumber>1234567890987654321234567890987654321234567890</X509SerialNumber>
+</X509IssuerSerial>
+</X509Data>
+</KeyInfo>
+</Signature>
+</CFE>
+<Adenda>Hora: 12:35:52..........  Vendedor. Ti VENDO BARATO<br/>Nº Interno: A     244182<br/>Obs. 1: Afecta Factura Nº      29386                                <br/>
+</Adenda>
+</CFE_Adenda>
+</EnvioCFE_entreEmpresas>

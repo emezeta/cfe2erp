@@ -1,17 +1,15 @@
 # coding: utf-8
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from __future__ import print_function
 
-import json
+
 import subprocess
 import sys
-#from lxml import etree, objectify
-from time import strftime
 
 from libpyefuy import config, csv_tools, ecfeee_csv
-from libpyefuy.ecfeee import EnvioCFE_entreEmpresas as _ecfeee, Caratula, CFE_Adenda
-
+from libpyefuy.ecfeee import EnvioCFE_entreEmpresas as ecfeee
+from libpyefuy.ecfeee import Caratula, CFE_Adenda
 
 OUT_DIR = config.out_path
 
@@ -19,68 +17,51 @@ OUT_DIR = config.out_path
 """
     **pyecee.py EnvioCFE_entreEmpresas**
 
-    Estructura simplificada de un sobre xml "EnvioCFE_entreEmpresas"
-    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Envio de CFE entre Empresas es parte del `esquema xml` usado en el sistema
+    eFactura por DGI (dgi.gub.uy) para el sistema eFactura. La estructura
+    completa de un Sobre XML está descrita en "EnvioCFE_entreEmpresas.xsd"
+
+    Estructura simplificada del sobre "EnvioCFE_entreEmpresas"
+    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
     Sobre = {
                 Encabezado,
-                CFE_Adenda( CFE, Adenda ),
-                CFE_Adenda( CFE, Adenda ),
+                CFE_Adenda = { CFE, Adenda },
+                CFE_Adenda = { CFE, Adenda },
                 ...
+                CFE_Adenda = { CFE, Adenda }
             }
+
     Ocurrencia de elemetos del sobre:
     '''''''''''''''''''''''''''''''''
         Encabezado  : mínimo = 1, máximo = 1
         CFE_Adenda  : mínimo = 1, máximo = 250
-        CFE         : mínimo = 1, máximo = 1
-        Adenda      : mínimo = 1, máximo = 1
+            CFE         : mínimo = 1, máximo = 1
+            Adenda      : mínimo = 0, máximo = 1
 
-    Levanta los sobres xml de una carpeta y los parsea uno a uno
-    para crear árboles lxml (lxml.de)
 
-    Por cada árbol analizado, se creará una lista de dos elementos:
-        ["Encabezado", "lista de CFE_Adenda(s)"]
+    Pyecee leerá los `sobres` xml a ser ptocrsados desde de una carpeta dada.
+    Cada `sobre` será un arbol lxml (lxml.de). Cada uno de los CFE contenidos en
+    el sobre dará lugar a un documento (factura, nota de crédito, etc.)
+    expresado en un formato estandar (csv, json, xml, ...) que permita ser
+    importado a diversas aplicaciones.
+
+    A partir de las listas predefinidas de atributos o campos de interés se
+    recorre el arbol resumiendo su contenido en dos elementos compuestos:
+    el "Encabezado" y una "lista de CFE_Adendas", respectivamente un diccionario
+    y una lista.
 
     Cargar estructuras simples:
     '''''''''''''''''''''''''''
-    	Dos alternativas
-    	1. Usa un `template` de estructura completa inicializada a None.
-    	   Los los tipos de CFE descritos en EnvioCFE_entreEmpresas.xsd son
-    	   seis: 'eTck', 'eFact', 'eFact_Exp', 'eRem', 'eRem_Exp' y 'eResg'
 
-    	   Recorrer el dom cargando los elementos que corresponda.
-    	   Eliminar todos los elementos 'None' del template.
+    Se captura todos los valores de los atributos predefinidos presentes en el
+    CFE en curso en objetos de la forma `elemento = valor`, asignando el valor
+    'None' a los restantes atributos predefinidos.
 
-    	2. Sin usar tmplt recorrer el dom, cargar `element.tag = valor`,
-           asignando valor 'None' a los elementos opcionales ausentes, que
-           no obstante hayan sido definidos para componer el conjunto de
-           datos a extraer del xml.
-    	   
-        Para la interfase CSV se toma la alternativa 2.
-
-    	Finalmente, armar cabezal/líneas de documentos a importar.
-    	Serializar y almacenar.
-
-    TODO::
-        Deserializar (emezamos por json) y almacenar
-        Documentar, agregar comentarios, pepochizar
-        Crear módulo(s) importable(s)
+    Finalmente se serializará y almacenará, según el caso, en el formato
+    correpondiente.
 
 """
-
-
-def write_json(out_path, jtags, out_name="eTags"):
-
-    if jtags:
-            dt = strftime('%0d%0m%0H%M%0S')
-            json_file = '%s%s%s%s' % (out_path, out_name, dt, '.json')
-            print("Json          : %s" % (json_file,))
-
-            with open(json_file, 'w') as fp:
-                json.dump(jtags, fp, indent=4, sort_keys=True, separators=(',', ':'))
-            res = True
-    else:
-        res = False
-    return res
 
 
 def sobre_consitency_chk(lista_cfe_adenda, caratula):
@@ -106,12 +87,6 @@ def prn_caratula(caratula, xml_file):
     return True
 
 
-def pare():
-    msg = 'ERROR: forzado'
-    print(msg)
-    sys.exit()
-
-
 # from IPython import embed; embed()
 # import ipdb; ipdb.set_trace()
 if __name__ == "__main__":
@@ -127,63 +102,39 @@ if __name__ == "__main__":
     for _file in files:
         nroxml += 1
         #print("F", nroxml),
-        root       = _ecfeee(_file)
-        caratula   = Caratula(root.caratula)
-        cfe_adenda = CFE_Adenda(root.cfe_adenda).cfead
-        sobre_consitency_chk(root.cfe_adenda, caratula.CantCFE)
+        try:
+            root       = ecfeee(_file)
+            caratula   = Caratula(root.caratula)
+            cfe_adenda = CFE_Adenda(root.cfe_adenda).cfead
+            sobre_consitency_chk(root.cfe_adenda, caratula.CantCFE)
+        except Exception:
+            import ipdb, sys
+            ipdb.post_mortem(sys.exc_info()[2])
 
         """ prepara el manejo de la salida `csv` """
         _csv_fname  = _file.split('/')[-1:][0][:-4]
 
-
         """ Se itera sobre los CFE_Adenda del sobre. Entre 1 y 250 por cada _file """
-
-
         ncfe = 0
         for cfead in cfe_adenda:
-            ncfe += 1
-
-            Adenda = cfead['adenda']
             csv_fname = OUT_DIR + _csv_fname + '_' + str(ncfe) + '.csv'
-
+            ncfe += 1
             stream = open(csv_fname, "w")
             csv_handle = csv_tools.csvUnicodeHandler(stream)
-            print('\n',_file)
-            header_cabezal, linea_cabezal = ecfeee_csv.arma_cabezal(cfead,caratula.Fecha.strftime('%Y-%m-%d %H:%M:%S'))
+
+            fecha_caratula = caratula.Fecha.strftime('%Y-%m-%d %H:%M:%S')
+
+            try:
+                csv_doc = ecfeee_csv.csv_Doc(cfead,fecha_caratula)
+            except Exception:
+                import ipdb, sys
+                ipdb.post_mortem(sys.exc_info()[2])
+
+            header_cabezal, linea_cabezal = csv_doc.cabezal
+            header_lineas, lineas = csv_doc.lineas
 
             csv_handle.writerow(header_cabezal)
             csv_handle.writerow(linea_cabezal)
-
-
-            # *** FIN   cabezal CSV ***
-            """
-            lin_cvs_row = list()
-            for procersar i[' :
-                lin_cvs_row.append('')
-                # lrpmqtp charset!
-                csv_handle.record(lin_cvs_row)      # nueva línea linea_csv       lcsv_row
-            """
-
-            #csv_handle.write_csv()
-
-
-"""
-        # from IPython import embed; embed()
-        # import ipdb; ipdb.set_trace()
-
-Líneas:
-    serie                                               'NroLinDet'
-    numero                                              'IndFact'
-    proveedor_rut                                       'CodItem'
-    articulo                                            'NomItem'
-        codigo 1                                        'Cantidad'
-        codigo 2                                        'UniMed'
-    articulo_descripcion                                'DscItem'
-    cantidad                                            'PrecioUnitario'
-    unidad de medida                                    'MontoItem'
-    precio unitario sin impuesto                        'SubDescuento'
-    descuento                                           'DescuentoMonto'
-    tipo de iva                                         'DescuentoPct'
-    monto total iva
-    monto total linea
-"""
+            csv_handle.writerow(header_lineas)
+            for linea in lineas:
+                csv_handle.writerow(linea)
