@@ -2,6 +2,7 @@
 # !/usr/bin/env python3
 
 from __future__ import print_function
+import lxml
 import sys
 
 
@@ -90,36 +91,38 @@ campos_linea = \
 
 class csv_Doc(object):
 
-    def __init__(self, cfe_adenda, fecha):
+    def __init__(self, cfe_adenda, fecha_caratula):
 
         if cfe_adenda is not None:
 
-            self._cfe        = cfe_adenda['cfe']
-            self._adenda     = cfe_adenda['adenda']
-            self._fecha      = fecha
-            self._encabezado = self._cfe['Encabezado'].Encabezado
-            self._detalle    = self._cfe['Detalle'].Detalle
-            if self._cfe.has_key('DscRcgGlobal'):
-                drg = getattr(cfe_adenda['cfe']['DscRcgGlobal'], 'Items', False)
-                self._drg_items = drg if drg and len(drg) else None
+            self.cfe        = cfe_adenda.CFE()
+            self.adenda     = cfe_adenda.Adenda()
+            self.fecha      = fecha_caratula
+            self.encabezado = self.cfe['Encabezado'].Encabezado
+            self.detalle    = self.cfe['Detalle'].Detalle
+
+            if self.cfe.has_key('DscRcgGlobal'):
+                drg = getattr(self.cfe['DscRcgGlobal'], 'Items', False)
+                self.drg_items = drg if drg and len(drg) else None
             else:
-                self._drg_items = None
+                self.drg_items = None
+
 
     @property
     def cabezal(self):
 
         # *** COMIENZO Cabezal CSV ***#
 
-        Emisor  = self._encabezado['Emisor']
-        IdDoc   = self._encabezado['IdDoc']
-        Totales = self._encabezado['Totales']
+        Emisor  = self.encabezado['Emisor']
+        IdDoc   = self.encabezado['IdDoc']
+        Totales = self.encabezado['Totales']
         nom_doc = cfe_nombre[str( IdDoc['TipoCFE'] )]
         # *** crea línea de Cabezal CSV ***
         cabezal = list()
         cabezal.append('C')                                   # 'id_cabezal',
         cabezal.append( Totales['CantLinDet'] )               # 'cant_lin',
         cabezal.append( IdDoc['FchEmis'] )                    # 'fecha_emis',
-        cabezal.append( self._fecha )                               # 'fecha_firma',  Caratula
+        cabezal.append( self.fecha )                          # 'fecha_firma',  Caratula
         cabezal.append( IdDoc['TipoCFE'] )                    # 'tipo_cfe',
         cabezal.append( nom_doc )                             # 'tipo_documento',
         cabezal.append( IdDoc['Serie'] )                      # 'serie',
@@ -127,6 +130,7 @@ class csv_Doc(object):
         cabezal.append( Emisor['NomComercial'] )              # 'proveedor_nombre',
         cabezal.append( Emisor['RznSoc'] )                    # 'proveedor_rsocial',
         cabezal.append( Emisor['RUCEmisor'] )                 # 'proveedor_rut',
+
         cabezal.append( Totales['TpoMoneda'] )                # 'moneda',
         cabezal.append( Totales['TpoCambio'] )                # 'tipo_cambio',
         cabezal.append( Totales['MntExpoyAsim'] )             # 'monto_exp_asim',
@@ -143,11 +147,14 @@ class csv_Doc(object):
         cabezal.append( Totales['MntTotal'] )                 # 'monto_total',
         cabezal.append( Totales['MntTotRetenido'] )           # 'monto_tot_retenido',
         cabezal.append( Totales['MntPagar'] )                 # 'monto_pagar'
+
+
+
         cc = list(campos_cabezal)
         # si hay descuentos/recargos globales (redondeos)
-        if self._drg_items is not None:
+        if self.drg_items is not None:
             hdr = 0
-            for dr in self._drg_items:
+            for dr in self.drg_items:
                 cabezal.append(dr['GlosaDR'])
                 cabezal.append(dr['ValorDR'])
                 detal = "Tasa/Valor: %s - Dto/Rec: %s - Tipo: %s" % (dr['TpoDR'],dr['TpoMovDR'],dr['IndFactDR'])
@@ -156,10 +163,7 @@ class csv_Doc(object):
                 cc.append('dr%s_valor' % (str(hdr),))
                 cc.append('dr%s_deta'  % (str(hdr),))
                 hdr += 1
-        if self._adenda:
-            cabezal.append(self._adenda)
-        else:
-            cabezal.append('None')
+        cabezal.append(self.adenda)
         cc.append('adenda')
         res = (cc, self.record(cabezal))
         return res
@@ -171,7 +175,8 @@ class csv_Doc(object):
         # *** COMIENZO líneas CSV ***
 
         lineas = list()
-        for lin in self._detalle:
+        for lin in self.detalle:
+            
             linea = list()
             linea.append('L')                        # 'id_linea',
             linea.append(lin['NroLinDet'])           # 'nrolindet',
@@ -189,10 +194,10 @@ class csv_Doc(object):
                 hdr = 0
                 for coditem in lin['CodItem']:
                     linea.append(coditem)
-                    hdr =+ 1
+                    hdr += 1
+                # rango = range(5-hdr)
                 for i in range(5-hdr):
                     linea.append('None')
-                    hdr =+ 1
             else:
                 for i in range(5):
                     linea.append('None')
@@ -203,15 +208,18 @@ class csv_Doc(object):
                     # tipo y valor del descuento
                     linea.append(dto['DescTipo'])
                     linea.append(dto['DescVal'])
-                    hdr =+ 1
+                    hdr += 1
+                # rango = range(5-hdr)
                 for i in range(5-hdr):
                     linea.append('None')
                     linea.append('None')
-                    hdr += 1
+                    #hdr += 1
             else:
                 for i in range(5):
                     linea.append('None')
+
             lineas.append(self.record(linea))
+
         res =  (campos_linea, lineas)
         return res
 
@@ -223,9 +231,11 @@ class csv_Doc(object):
             (`int.encode` => ERROR )
             `int`, `long` y `float` deben pasar a ser strings
         """
+
         res = list()
-        tipos_num = (int, long, float, complex)
+        tipos_num = (int, long, float, complex, lxml.objectify.FloatElement, lxml.objectify.IntElement, lxml.objectify.LongElement, lxml.objectify.NumberElement)
         for i in csv_row:
+
             try:
                 if getattr(i, 'pyval', False):
                     if isinstance(i.pyval, (tipos_num,)):
@@ -237,8 +247,10 @@ class csv_Doc(object):
                         res.append(str(i))
                     elif isinstance(i, (str,unicode)):
                         res.append(i)
+
             except Exception as ex:
                 #import ipdb; ipdb.set_trace()
                 print('no hay valor, que feo', ex)
                 sys.exit()
+
         return res

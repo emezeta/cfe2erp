@@ -7,9 +7,8 @@ from __future__ import print_function
 import subprocess
 import sys
 
-from libpyefuy import config, csv_tools, ecfeee_csv
-from libpyefuy.ecfeee import EnvioCFE_entreEmpresas as ecfeee
-from libpyefuy.ecfeee import Caratula, CFE_Adenda
+from libpyefuy import config, ecfeee, csv_tools, ecfeee_csv
+
 
 OUT_DIR = config.out_path
 
@@ -97,44 +96,67 @@ if __name__ == "__main__":
 
     nroxml = 0
     #files = ['./Sob_18.xml']
+    #files = ['../recibidos/Sob_63457.xml']
 
     # se procesa un xml
     for _file in files:
         nroxml += 1
-        #print("F", nroxml),
-        try:
-            root       = ecfeee(_file)
-            caratula   = Caratula(root.caratula)
-            cfe_adenda = CFE_Adenda(root.cfe_adenda).cfead
-            sobre_consitency_chk(root.cfe_adenda, caratula.CantCFE)
-        except Exception:
-            import ipdb, sys
-            ipdb.post_mortem(sys.exc_info()[2])
+
+        tag_ctula = "{http://cfe.dgi.gub.uy}Caratula"
+        tag_cfead = "{http://cfe.dgi.gub.uy}CFE_Adenda"
+
+        sobre     = ecfeee.XmlLoad(_file)
+        caratula  = ecfeee.Caratula( sobre.xml_doc.find(tag_ctula) )
+
+        # Lista de los `CFE_Adenda` del sobre. mín. 1, máx. 250 elementos.
+        cfea_list = sobre.xml_doc.findall(tag_cfead)
+
+        sobre_consitency_chk(cfea_list, caratula.CantCFE)
+
 
         """ prepara el manejo de la salida `csv` """
         _csv_fname  = _file.split('/')[-1:][0][:-4]
 
-        """ Se itera sobre los CFE_Adenda del sobre. Entre 1 y 250 por cada _file """
+        """ Se itera sobre la lista de CFE_Adenda del Sobre. de 1 a 250 """
         ncfe = 0
-        for cfead in cfe_adenda:
-            csv_fname = OUT_DIR + _csv_fname + '_' + str(ncfe) + '.csv'
-            ncfe += 1
+        for cfead in cfea_list:
+
+            # nombre de archivo para el cabezal del CFE
+            csv_fname = OUT_DIR + _csv_fname + '_' + str(ncfe) + 'C' +'.csv'
+
             stream = open(csv_fname, "w")
             csv_handle = csv_tools.csvUnicodeHandler(stream)
 
             fecha_caratula = caratula.Fecha.strftime('%Y-%m-%d %H:%M:%S')
 
-            try:
-                csv_doc = ecfeee_csv.csv_Doc(cfead,fecha_caratula)
-            except Exception:
-                import ipdb, sys
-                ipdb.post_mortem(sys.exc_info()[2])
+            # instancia elemento cfe_adenda
+            cfe_adenda = ecfeee.CFE_Adenda(cfead)
+
+            # crear cabezales y líneas del CFE formato csv
+            csv_doc = ecfeee_csv.csv_Doc(cfe_adenda, fecha_caratula)
 
             header_cabezal, linea_cabezal = csv_doc.cabezal
+
+            # escribir nombres de campos de cabezal
+            csv_handle.writerow(header_cabezal)
+
+            # escribir datos de cabezal
+            csv_handle.writerow(linea_cabezal)
+            stream.close()
+
+            # nombre de archivo para las líneas del CFE
+            csv_fname = OUT_DIR + _csv_fname + '_' + str(ncfe) + 'L' +'.csv'
+
+            stream = open(csv_fname, "w")
+            csv_handle = csv_tools.csvUnicodeHandler(stream)
+
             header_lineas, lineas = csv_doc.lineas
 
-            csv_handle.writerow(header_cabezal)
-            csv_handle.writerow(linea_cabezal)
+            # escribir nombres de campos de linea
             csv_handle.writerow(header_lineas)
+
             for linea in lineas:
+                # escribir datos de linea
                 csv_handle.writerow(linea)
+            stream.close()
+            ncfe += 1

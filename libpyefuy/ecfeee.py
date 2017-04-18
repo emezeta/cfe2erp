@@ -65,46 +65,33 @@ def _str_none(self,tmp_val=None):
 
 
 
-class EnvioCFE_entreEmpresas(object):
+class XmlLoad(object):
     """
-        Parsea el contenido del xml y crea un arbol `lxml.etree`
-        Luego almacena la `Caratula` en la variable de clase `caratula`
-        y la lista de CFE_Adenda(s) en `cfe_adenda`
+        Lee el archivo del xml y crea un arbol `lxml.etree`
     """
 
     def __init__(self, xmlfile=None):
         """
             :param: xmlfile: archivo xml contiene un Sobre ecee
 
-            @caratula:  Elemento `etree` único.
-            @cfe_adenda: Lista de elementos etree, mín. 1, máx. 250
+            @self.xml_doc: es el root del lxml corresponsidente al Sobre
         """
-
-        if xmlfile is not None:
-            try:
-                xmldoc = etree.parse(xmlfile)
-                root = xmldoc.getroot()
-            except: # Exception as ex:
-
-                msg = "Archivo %s no disponible o no es un `EnvioCFE_entreEmpresas` \n\t%s" % (xmlfile, ex)
-                print(msg)  # raise Exception("Error: %s" % (msg,))
+        try:
+            doc_root = etree.parse(xmlfile).getroot()
+            if len(doc_root):
+                self.xml_doc = doc_root
+            else:
+                msg = "Archivo %s no es un `EnvioCFE_entreEmpresas`" % (xmlfile)
+                raise Exception("Error: %s" % (msg,))
                 sys.exit()
-
-            self.cfe_adenda = list()
-            for elem in root.getchildren():
-                tag = tag_ns(elem)
-                if tag == "Caratula":
-                    self.caratula = elem
-                elif tag == "CFE_Adenda":
-                    self.cfe_adenda.append(elem)
-                else:
-                    msg = "ERROR: El tag o elemento %s no debería estar allí." % (elem,)
-                    print(msg)
-                    sys.exit()  # raise Exception("Error: %s" % (msg,))
+        except Exception as ex:
+            msg = "Archivo %s no disponible o no es un `EnvioCFE_entreEmpresas` \n\t%s" % (xmlfile, ex)
+            print(msg)  # raise Exception("Error: %s" % (msg,))
+            sys.exit()
 
 
 
-class Caratula(EnvioCFE_entreEmpresas):
+class Caratula(object):
 
     """
         Crea el objeto Caratula a partir de un elemento etree lxml
@@ -116,13 +103,12 @@ class Caratula(EnvioCFE_entreEmpresas):
         # >>> Fecha.strftime('%Y-%m-%d %H:%M:%S')
         ... 2016-11-11 18:10:09 ...etc
     """
-
-    def __init__(self, caratula):
+    def __init__(self, caratula=None):
 
         if caratula is not None:
             C = objectify.fromstring(etree.tostring(caratula))
         else:
-            print('La clase `Caratula` debe ser instanciada con el valor de `self.caratula` de la clase `EnvioCFE_entreEmpresas` como parámetro')
+            print(u'La clase `Caratula` debe ser instanciada con el valor de `self.caratula` de la clase `EnvioCFE_entreEmpresas` como parámetro')
             sys.exit()
         try:
             self.CantCFE         = C.CantCFE.pyval
@@ -132,7 +118,7 @@ class Caratula(EnvioCFE_entreEmpresas):
             self.RutReceptor     = C.RutReceptor.pyval
             self.X509Certificate = C.X509Certificate.pyval
         except Exception as ex:
-            _msg = "ERROR: %s \n\tNo se ha podido inicializar la carátula!" % (ex,)
+            _msg = u"ERROR: %s \n\tNo se ha podido inicializar la carátula!" % (ex,)
             print(_msg)
             sys.exit()  # raise Exception("Error: %s" % (msg,))
 
@@ -140,90 +126,78 @@ class Caratula(EnvioCFE_entreEmpresas):
 
 class CFE_Adenda(object):
     """
-    xml = <CFE_Adenda>
-                <CFE>
-                    <eDoc/> *** uno de {`eTck, eFact, eFact_Exp, eRem, eRem_Exp, eResg`} ***
-                    <Signature/>
-                </CFE>
-                <Adenda/>      *** no obligatorio ***
-          <CFE_Adenda/>
+        Representa al elemento `CFE_Adenda`. Un CFE y su eventual Adenda.
+        El parámetro es un elemento con la siguiente estructura:
+            cfe   :
+                    elemento eDoc
+                    elemento Signature
 
-        La instancia creará un lista de diccionarios. El largo de la lista será entre 1 y 250
-        Cada diccionario contiene 2 elementos y será de la forma:
-            CFE_Adenda =  {   cfe: ( {elementos del eDoc, ...}, elemento Signature ),
-                           Adenda: "texto de la adenda"
-            }
+            Adenda:
+                    texto de la adenda o `None` (no obligatorio)
+        La instancia será una tupla de 2 elementos (cfe, adenda)
     """
-    def __init__(self, cfe_adenda=None):
+    def __init__(self, elem_cfead=None):
         """
-           :param cfe_adenda:   lista `CFE_Adenda`(s) de elementos del sobre
-                                cada elemento sería <CFE, Adenda*> *si existe adenda
-                                mín. 1, máx. 250 elementos en la lista (en general es 1)
+           :param elem:     El parámetro es un elemento con la estructura:
+                                cfe   :
+                                        elemento eDoc
+                                        elemento Signature
+                                Adenda:
+                                        texto de la adenda o `None`
+                                        (no obligatorio)
+
         """
-        if cfe_adenda is None:
-            msg = 'La clase `CFE_Adenda` debe ser instanciada con el valor de `self.cfe_adenda` de la clase "EnvioCFE_entreEmpresas" como parámetro. Verificar xml de entrada'
+        if elem_cfead is None:
+            msg = u'La clase `CFE_Adenda` debe ser instanciada con el valor de `self.cfe_adenda` de la clase "EnvioCFE_entreEmpresas" como parámetro. Verificar xml de entrada'
             print(msg)
             sys.exit() # raise Exception("Error: %s" % (msg,))
 
-        self.cfead = list()
+        tag_cfe    = "{http://cfe.dgi.gub.uy}CFE"
+        tag_adenda = "{http://cfe.dgi.gub.uy}Adenda"
 
-        for elem in cfe_adenda:                    # [cfe_adenda, ...] 1 a 250, en general es 1
-            _cfe    = None
-            _adenda = None
-            for child_elem in elem.getchildren():  # [cfe, adenda]  o [cfe]
-                tag = tag_ns(child_elem)
-                if   tag == "CFE":
-                    _cfe    = self._CFE(child_elem)        # child_elem [ eDoc, Signature ]
-                elif tag == "Adenda":
-                    _adenda = self._Adenda(child_elem)     # child_elem [ Adenda ]
-                else:
-                    msg = "ERROR: El tag o elemento %s no debería estar allí." % (child_elem,)
-                    print(msg)
-                    sys.exit() # raise Exception("Cancela, el elemento es desconocido : %s" % (tag,))
-            self.cfead.append( dict(cfe=_cfe, adenda=_adenda) )
+        self._cfe     = elem_cfead.find(tag_cfe)
+        self._adenda  = elem_cfead.find(tag_adenda)
 
 
-
-    def _CFE(self, cfe=None):
+    def CFE(self):
         """
         :param cfe:    cfe [eDoc, Signature]
         :return eDoc_obj
 
         @eDoc_obj:  Objeto a cuyos valores se accede mediante el operador punto (.)
-                    ejemplo: edoc.Encabezado
+
+
+        Estos son los objetos que componen cada CFE
+            'TmstFirma', 'Encabezado', 'Detalle', 'SubTotInfo', 'DscRcgGlobal',
+            'MediosPago', 'CAEData', 'Referencia', 'Compl_Fiscal'
+
+
         @Signature: es la eFirma del eDoc
         """
 
-        if cfe is None:
-            msg = 'El método `_CFE` debe recibir un elemento `CFE` (eDoc, Signature) como parámetro'
+        if self._cfe is None:
+            msg = u'El método `_CFE` debe recibir un elemento `CFE` (eDoc, Signature) como parámetro'
             print(msg) # raise Exception("El método `_CFE` debe recibir un elemento `CFE` (eDoc, Signature) como parámetro")
             sys.exit()
 
-        _edoc = cfe[0]  # uno de {`eTck, eFact, eFact_Exp, eRem, eRem_Exp, eResg`}
-        eDoc_obj = dict()
-        eDoc_obj['Signature'] = cfe[1]
+        eDoc_obj = dict( TmstFirma=None, Encabezado=None, Detalle=None,
+                         SubTotInfo=None, DscRcgGlobal=None,
+                         MediosPago=None, CAEData=None, Referencia=None,
+                         Compl_Fiscal=None, Signature=None )
 
-        elementos = ['TmstFirma', 'Encabezado', 'Detalle', 'SubTotInfo', 'DscRcgGlobal', 'MediosPago', 'CAEData', 'Referencia', 'Compl_Fiscal']
-
-
-
+        eDoc_obj['Signature'] = self._cfe[1]
+        """
+            Note:
+                Algunos elementos no son obligatorios 'n/o'. En aquellos CFE que no definan los n/o
+                el objeto correpondiento no existirá. Para el caso de la salida CSV es necesario
+                completar los valores necesarios con 'None'. Ejemplo. Descuento global.
+                Asimismo para todos los sub_elementos de cada elemento analizado.
+        """
+        _edoc = self._cfe[0] # uno de {`eTck, eFact, eFact_Exp, eRem, eRem_Exp, eResg`}
         for edoc_child in _edoc.getchildren():
             echild_obj = objectify.fromstring(etree.tostring(edoc_child))
             tag = tag_ns(edoc_child)
-            """
-                Formalmente este switch no es estricatamente innecesario.
-                Alcanzaba con:
-                    `eDoc_obj[tag] = echild_obj`
-                Su existencia simplifica tareas de debug t/o mantenimientos
-                y permite pasar un llamado a función diferente para
-                diferentes elementos.
 
-                Note:
-                    Algunos elementos no son obligatorios 'n/o'. En aquellos CFE que no definan los n/o
-                    el objeto correpondiento no existirá. Para el caso de la salida CSV es necesario
-                    completar los valores necesarios con 'None'. Ejemplo. Descuento global.
-
-            """
             if   tag == 'TmstFirma':
                 eDoc_obj[tag] = TmstFirma(echild_obj)
             elif tag == 'Encabezado':
@@ -231,36 +205,36 @@ class CFE_Adenda(object):
             elif tag == 'Detalle':
                 eDoc_obj[tag] = Detalle(echild_obj)
             elif tag == 'SubTotInfo':
-                eDoc_obj[tag] = echild_obj
+                eDoc_obj[tag] = SubTotInfo(echild_obj)
             elif tag == 'DscRcgGlobal':
-                eDoc_obj[tag] = DscRcgGlobal(echild_obj) # n/o   dscrcgglobal
+                eDoc_obj[tag] = DscRcgGlobal(echild_obj)
             elif tag == 'MediosPago':
-                eDoc_obj[tag] = echild_obj
+                eDoc_obj[tag] = None #echild_obj
             elif tag == 'CAEData':
-                eDoc_obj[tag] = echild_obj
+                eDoc_obj[tag] = None #echild_obj
             elif tag == 'Referencia':
-                eDoc_obj[tag] = echild_obj
+                eDoc_obj[tag] = None #echild_obj
             elif tag == 'Compl_Fiscal':
-                eDoc_obj[tag] = echild_obj
+                eDoc_obj[tag] = None #echild_obj
             else:
-                raise Exception("Cancela, el elemento  %s es desconocido o en CFE no es válido." % (tag,))
+                raise Exception(u"Cancela, el elemento %s es desconocido o en CFE no es válido." % (tag,))
 
         return eDoc_obj
 
 
-
-    def _Adenda(self, adenda=None):
+    def Adenda(self):
 
         """
             :param adenda: etree/CFE_Adenda/Adenda
-            :return: texto adenda
+            :return: texto adenda or 'None'
         """
-        res = "n/a"
-        if adenda is not None:
-            tag = tag_ns(adenda)
+        res = "None"
+        if self._adenda is not None:
+            tag = tag_ns(self._adenda)
             if tag == 'Adenda':
-                res = objectify.fromstring(etree.tostring(adenda)).text
+                res = objectify.fromstring(etree.tostring(self._adenda)).text
         return res
+
 
 
 class TmstFirma(object):
@@ -268,8 +242,8 @@ class TmstFirma(object):
     def __init__(self, tmstfirma=None):
 
         if tmstfirma is None:
-            msg = 'La clase `TmstFirma` debe ser instanciada con el valor de ' \
-                  'TmstFirma del objeto `CFE.eDoc`, clase `CFE_Adenda` como parámetro'
+            msg = u'La clase `TmstFirma` debe ser instanciada con el valor de ' \
+                  u'TmstFirma del objeto `CFE.eDoc`, clase `CFE_Adenda` como parámetro'
             print(msg)
             sys.exit() # raise Exception("Error: %s" % (msg,))
         else:
@@ -289,7 +263,6 @@ class Encabezado(object):
         """
             Se inicializan todos los miembros del dict() de salida
         """
-
         e = encab_obj.Emisor
         tmp_emisor = dict(
             CdgDGISucur          = e.CdgDGISucur.pyval         if hasattr(e, 'CdgDGISucur'        ) else 'None',
@@ -331,32 +304,33 @@ class Encabezado(object):
         )
 
         t = encab_obj.Totales
+
         tmp_totales = dict(
-            CantLinDet           = t.CantLinDet                 if hasattr(t, 'CantLinDet'          ) else 'None',
-            TpoMoneda            = t.TpoMoneda                  if hasattr(t, 'TpoMoneda'           ) else 'None',
-            TpoCambio            = t.TpoCambio                  if hasattr(t, 'TpoCambio'           ) else 'None',
-            MntNoGrv             = t.MntNoGrv                   if hasattr(t, 'MntNoGrv'            ) else 'None',
-            MntExpoyAsim         = t.MntExpoyAsim               if hasattr(t, 'MntExpoyAsim'        ) else 'None',
-            MntImpuestoPerc      = t.MntImpuestoPerc            if hasattr(t, 'MntImpuestoPerc'     ) else 'None',
-            MntIVaenSusp         = t.MntIVaenSusp               if hasattr(t, 'MntIVaenSusp'        ) else 'None',
-            IVATasaMin           = t.IVATasaMin                 if hasattr(t, 'IVATasaMin'          ) else 'None',
-            IVATasaBasica        = t.IVATasaBasica              if hasattr(t, 'IVATasaBasica'       ) else 'None',
-            MntIVATasaMin        = t.MntIVATasaMin              if hasattr(t, 'MntIVATasaMin'       ) else 'None',
-            MntIVATasaBasica     = t.MntIVATasaBasica           if hasattr(t, 'MntIVATasaBasica'    ) else 'None',
-            MntIVAOtra           = t.MntIVAOtra                 if hasattr(t, 'MntIVAOtra'          ) else 'None',
-            MntNetoIvaTasaMin    = t.MntNetoIvaTasaMin          if hasattr(t, 'MntNetoIvaTasaMin'   ) else 'None',
-            MntNetoIVATasaBasica = t.MntNetoIVATasaBasica       if hasattr(t, 'MntNetoIVATasaBasica') else 'None',
-            MntNetoIVAOtra       = t.MntNetoIVAOtra             if hasattr(t, 'MntNetoIVAOtra'      ) else 'None',
-            MntTotal             = t.MntTotal                   if hasattr(t, 'MntTotal'            ) else 'None',
-            MntTotRetenido       = t.MntTotRetenido             if hasattr(t, 'MntTotRetenido'      ) else 'None',
-            MontoNF              = t.MontoNF                    if hasattr(t, 'MontoNF'             ) else 'None',
-            MntPagar             = t.MntPagar                   if hasattr(t, 'MntPagar'            ) else 'None',
+            CantLinDet           = t.CantLinDet.pyval                 if hasattr(t, 'CantLinDet'          ) else 'None',
+            TpoMoneda            = t.TpoMoneda.pyval                  if hasattr(t, 'TpoMoneda'           ) else 'None',
+            TpoCambio            = t.TpoCambio.pyval                  if hasattr(t, 'TpoCambio'           ) else 'None',
+            MntNoGrv             = t.MntNoGrv.pyval                   if hasattr(t, 'MntNoGrv'            ) else 'None',
+            MntExpoyAsim         = t.MntExpoyAsim.pyval               if hasattr(t, 'MntExpoyAsim'        ) else 'None',
+            MntImpuestoPerc      = t.MntImpuestoPerc.pyval            if hasattr(t, 'MntImpuestoPerc'     ) else 'None',
+            MntIVaenSusp         = t.MntIVaenSusp.pyval               if hasattr(t, 'MntIVaenSusp'        ) else 'None',
+            IVATasaMin           = t.IVATasaMin.pyval                 if hasattr(t, 'IVATasaMin'          ) else 'None',
+            IVATasaBasica        = t.IVATasaBasica.pyval              if hasattr(t, 'IVATasaBasica'       ) else 'None',
+            MntIVATasaMin        = t.MntIVATasaMin.pyval              if hasattr(t, 'MntIVATasaMin'       ) else 'None',
+            MntIVATasaBasica     = t.MntIVATasaBasica.pyval           if hasattr(t, 'MntIVATasaBasica'    ) else 'None',
+            MntIVAOtra           = t.MntIVAOtra.pyval                 if hasattr(t, 'MntIVAOtra'          ) else 'None',
+            MntNetoIvaTasaMin    = t.MntNetoIvaTasaMin.pyval          if hasattr(t, 'MntNetoIvaTasaMin'   ) else 'None',
+            MntNetoIVATasaBasica = t.MntNetoIVATasaBasica.pyval       if hasattr(t, 'MntNetoIVATasaBasica') else 'None',
+            MntNetoIVAOtra       = t.MntNetoIVAOtra.pyval             if hasattr(t, 'MntNetoIVAOtra'      ) else 'None',
+            MntTotal             = t.MntTotal.pyval                   if hasattr(t, 'MntTotal'            ) else 'None',
+            MntTotRetenido       = t.MntTotRetenido.pyval             if hasattr(t, 'MntTotRetenido'      ) else 'None',
+            MontoNF              = t.MontoNF.pyval                    if hasattr(t, 'MontoNF'             ) else 'None',
+            MntPagar             = t.MntPagar.pyval                   if hasattr(t, 'MntPagar'            ) else 'None',
         )
         if tmp_totales['TpoMoneda'] == 'UYU':
             tmp_totales['TpoCambio'] = 1.0
 
         self.Encabezado = dict(
-            Emisor = tmp_emisor, IdDoc = tmp_iddoc, Receptor = tmp_receptor, Totales = tmp_totales
+            Emisor=tmp_emisor, IdDoc=tmp_iddoc, Receptor=tmp_receptor, Totales=tmp_totales
         )
 
 
@@ -368,6 +342,7 @@ class Detalle(object):
     def _detalle(self, detalle):
         detalle_lineas = list()
         for i in detalle.getchildren():
+
             tmp_item = dict(
                 NroLinDet       = i.NroLinDet.pyval       if hasattr(i,'NroLinDet'     ) else 'None',
                 IndFact         = i.IndFact.pyval         if hasattr(i,'IndFact'       ) else 'None',
@@ -375,7 +350,7 @@ class Detalle(object):
                 NomItem         = i.NomItem.pyval         if hasattr(i,'NomItem'       ) else 'None',
                 Cantidad        = i.Cantidad.pyval        if hasattr(i,'Cantidad'      ) else 'None',
                 UniMed          = i.UniMed.pyval          if hasattr(i,'UniMed'        ) else 'None',
-                DscItem         = i.DscItem.pyval         if hasattr(i,'DscItem'       ) else 'None',  # Descripción
+                DscItem         = i.DscItem.pyval         if hasattr(i,'DscItem') and i.DscItem is not '0' else 'None',  # Descripción
                 PrecioUnitario  = i.PrecioUnitario.pyval  if hasattr(i,'PrecioUnitario') else 'None',
                 MontoItem       = i.MontoItem.pyval       if hasattr(i,'MontoItem'     ) else 'None',
                 SubDescuento    = i.SubDescuento          if hasattr(i,'SubDescuento'  ) else 'None',
@@ -386,10 +361,11 @@ class Detalle(object):
             if tmp_item['CodItem'] is not 'None':
                 tmp_item['CodItem'] = [{'TpoCod': cdi.TpoCod, 'Cod': cdi.Cod} for cdi in tmp_item['CodItem']]
 
-            if tmp_item['SubDescuento'] is not 'None': # 1 = $ o 2 = %
-                tmp_item['SubDescuento'] = [{'DescTipo': '$' if sdto.DescTipo.pyval == '1' else '%', \
-                    'DescVal':sdto.DescVal.pyval} for sdto in tmp_item['SubDescuento']]
-
+            if tmp_item['SubDescuento'] is not 'None':
+                # DescTipo [ 1 = $ o 2 = % ]
+                tmp_item['SubDescuento'] = [ { 'DescTipo': '$' if sdto.DescTipo.pyval == 1 else '%', \
+                                               'DescVal' : sdto.DescVal.pyval } for sdto in tmp_item['SubDescuento'] \
+                                                   if sdto['DescVal'].pyval is not 0 ]
             if tmp_item['IndFact'] is not 'None':
                 tmp_item['IndFact'] = indfact[str(tmp_item['IndFact'])]
 
@@ -405,18 +381,17 @@ class DscRcgGlobal(object):
 
     def _dscrcgglobal(self, dscrcgglobal):
         drg_items = list()
-
         if hasattr(dscrcgglobal,'DRG_Item') and len(dscrcgglobal.DRG_Item):
             for drgi in dscrcgglobal.DRG_Item:
                 tmp_drgitem = dict(
-                        TpoMovDR    =  drgi.TpoMovDR       if hasattr(drgi,'TpoMovDR'  ) else 'None',  # ValorDR  D=dto   r=recgo.
-                        TpoDR       =  drgi.TpoDR          if hasattr(drgi,'TpoDR'     ) else 'None',  # TipoDRType 1=% 2=$
-                        GlosaDR     =  drgi.GlosaDR        if hasattr(drgi,'GlosaDR'   ) else 'None',
-                        ValorDR     =  drgi.ValorDR        if hasattr(drgi,'ValorDR'   ) else 'None',
-                        IndFactDR   =  drgi.IndFactDR      if hasattr(drgi,'IndFactDR' ) else 'None'   # ver tabla  "indfactdr"
+                        TpoMovDR    =  drgi.TpoMovDR.pyval  if hasattr(drgi,'TpoMovDR'  ) else 'None',  # ValorDR  D=dto   R=recgo.
+                        TpoDR       =  drgi.TpoDR.pyval     if hasattr(drgi,'TpoDR'     ) else 'None',  # TipoDRType 1=% 2=$
+                        GlosaDR     =  drgi.GlosaDR.pyval   if hasattr(drgi,'GlosaDR'   ) else 'None',
+                        ValorDR     =  drgi.ValorDR.pyval   if hasattr(drgi,'ValorDR'   ) else 'None',
+                        IndFactDR   =  drgi.IndFactDR.pyval if hasattr(drgi,'IndFactDR' ) else 'None'   # ver tabla  "indfactdr"
                 )
-                if tmp_drgitem['ValorDR']:
-                    tmp_drgitem['TpoDR'] = "%" if tmp_drgitem['TpoDR'] == '1' else '$'
+                if tmp_drgitem['ValorDR'] is not 'None':
+                    tmp_drgitem['TpoDR'] = "%" if tmp_drgitem['TpoDR'] == 1 else '$'
                     if tmp_drgitem['IndFactDR'] is not 'None':
                         tmp_drgitem['IndFactDR'] = indfactdr[str(tmp_drgitem['IndFactDR'])]
 
@@ -430,12 +405,39 @@ class DscRcgGlobal(object):
             CodDR       =  drgi.CodDR          if hasattr(drgi,'CodDR'     ) else 'None', # sin función útil
     """
 
+
+class SubTotInfo(object):
+
+    def __init__(self, elem):
+        if tag_ns(elem) not in "SubTotInfo":
+            print(u'La clase `SubTotInfo` debe ser instanciada con un elemento `SubTotInfo`, sin embargo se encontró %s' % (elem,))
+            sys.exit()
+        self._subtotinfo(elem)
+
+
+    def _subtotinfo(self, elem):
+        sti_items = list()
+
+        if hasattr(elem,'STI_Item') and len(elem.STI_Item):
+            for sti in elem.STI_Item:
+                tmp_stiitem = dict(
+                        NroSTI       =  sti.NroSTI       if hasattr(sti,'NroSTI'      ) else 'None',
+                        GlosaSTI     =  sti.GlosaSTI     if hasattr(sti,'GlosaSTI'    ) else 'None',
+                        OrdenSTI     =  sti.OrdenSTI     if hasattr(sti,'OrdenSTI'    ) else 'None',
+                        ValSubtotSTI =  sti.ValSubtotSTI if hasattr(sti,'ValSubtotSTI') else 'None'
+                )
+                sti_items.append(tmp_stiitem)
+
+        self.Items = sti_items or []
+
+
 indfact = indfactdr = \
     {
          '1': u'Exento de IVA',
          '2': u'Gravado a Tasa Mínima',
          '3': u'Gravado a Tasa Básica',
          '4': u'Gravado a Otra Tasa',
+         '5': u'Entrega Gratuita',
          '6': u'Prod/Serv no facturable',
          '7': u'Prod/Serv no facturable negativo',
          '8': u'Ítem a rebajar(remito)',
@@ -451,6 +453,7 @@ Indicador de Facturación:
  2: Gravado a Tasa Mínima
  3: Gravado a Tasa Básica
  4: Gravado a Otra Tasa
+ 5: Entrega Gratuita
  6: Producto o servicio no facturable
  7: Producto o servicio no facturable negativo
  8: Solo para remitos: Ítem a rebajar en remitos. En área de referencia se debe indicar el N° de remito que ajusta
