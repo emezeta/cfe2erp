@@ -13,6 +13,8 @@ import sys
 from dateutil import parser
 
 from lxml import etree, objectify
+from libpyefuy import config
+
 
 prefix = re.compile('^{.*}')
 
@@ -228,11 +230,15 @@ class CFE_Adenda(object):
             :param adenda: etree/CFE_Adenda/Adenda
             :return: texto adenda or 'None'
         """
-        res = "None"
+        res = 'None'
         if self._adenda is not None:
             tag = tag_ns(self._adenda)
             if tag == 'Adenda':
-                res = objectify.fromstring(etree.tostring(self._adenda)).text
+                adenda = objectify.fromstring(etree.tostring(self._adenda)).text
+                if not adenda:
+                    res = 'None'
+                else:
+                    res = adenda.replace(config.delimiter, '~') if len(adenda.strip())>1 else 'None'
         return res
 
 
@@ -370,6 +376,7 @@ class Detalle(object):
                 tmp_item['IndFact'] = indfact[str(tmp_item['IndFact'])]
 
             detalle_lineas.append(tmp_item)
+        
         self.Detalle = detalle_lineas
 
 

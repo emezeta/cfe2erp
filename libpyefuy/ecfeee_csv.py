@@ -107,7 +107,6 @@ class csv_Doc(object):
             else:
                 self.drg_items = None
 
-
     @property
     def cabezal(self):
 
@@ -130,7 +129,6 @@ class csv_Doc(object):
         cabezal.append( Emisor['NomComercial'] )              # 'proveedor_nombre',
         cabezal.append( Emisor['RznSoc'] )                    # 'proveedor_rsocial',
         cabezal.append( Emisor['RUCEmisor'] )                 # 'proveedor_rut',
-
         cabezal.append( Totales['TpoMoneda'] )                # 'moneda',
         cabezal.append( Totales['TpoCambio'] )                # 'tipo_cambio',
         cabezal.append( Totales['MntExpoyAsim'] )             # 'monto_exp_asim',
@@ -147,8 +145,6 @@ class csv_Doc(object):
         cabezal.append( Totales['MntTotal'] )                 # 'monto_total',
         cabezal.append( Totales['MntTotRetenido'] )           # 'monto_tot_retenido',
         cabezal.append( Totales['MntPagar'] )                 # 'monto_pagar'
-
-
 
         cc = list(campos_cabezal)
         # si hay descuentos/recargos globales (redondeos)
@@ -176,7 +172,6 @@ class csv_Doc(object):
 
         lineas = list()
         for lin in self.detalle:
-            
             linea = list()
             linea.append('L')                        # 'id_linea',
             linea.append(lin['NroLinDet'])           # 'nrolindet',
@@ -195,7 +190,6 @@ class csv_Doc(object):
                 for coditem in lin['CodItem']:
                     linea.append(coditem)
                     hdr += 1
-                # rango = range(5-hdr)
                 for i in range(5-hdr):
                     linea.append('None')
             else:
@@ -209,15 +203,12 @@ class csv_Doc(object):
                     linea.append(dto['DescTipo'])
                     linea.append(dto['DescVal'])
                     hdr += 1
-                # rango = range(5-hdr)
                 for i in range(5-hdr):
                     linea.append('None')
                     linea.append('None')
-                    #hdr += 1
             else:
                 for i in range(5):
                     linea.append('None')
-
             lineas.append(self.record(linea))
 
         res =  (campos_linea, lineas)
@@ -231,11 +222,9 @@ class csv_Doc(object):
             (`int.encode` => ERROR )
             `int`, `long` y `float` deben pasar a ser strings
         """
-
         res = list()
         tipos_num = (int, long, float, complex, lxml.objectify.FloatElement, lxml.objectify.IntElement, lxml.objectify.LongElement, lxml.objectify.NumberElement)
         for i in csv_row:
-
             try:
                 if getattr(i, 'pyval', False):
                     if isinstance(i.pyval, (tipos_num,)):
@@ -247,10 +236,8 @@ class csv_Doc(object):
                         res.append(str(i))
                     elif isinstance(i, (str,unicode)):
                         res.append(i)
-
             except Exception as ex:
-                #import ipdb; ipdb.set_trace()
+
                 print('no hay valor, que feo', ex)
                 sys.exit()
-
         return res

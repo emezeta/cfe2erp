@@ -70,8 +70,8 @@ Como se usa
         `$> python ./pyecee.py /carpeta_xmls/`
 
 
-Formato CSV
-'''''''''''
+Salida CSV
+''''''''''
 
 
 Para `csv` existen los tipos de registro: Cabezales y Líneas.
@@ -163,6 +163,56 @@ Los CSV generados no admiten separadores de camp adyacentes.
 
 Se asinga el valor `None` a los campos vacíos o que no existan en el CFE analizado.
 Los CSV generados no admiten separadores de camp adyacentes.
+
+
+
+Salida JSON
+'''''''''''
+
+La salida en formato `json` usa los mismos nombres que que csv pero se estructuran
+formas "llave:valor" con las siguientes diferencias sobre los elementos csv:
+
+_ No existen los campos  'id_cabezal' e 'id_linea'.
+
+_ Los descuentos o recargos globales, elementos `dr0_xxx` en los csv, son un a lista de `drg_items` de la siguiente forma:
+::
+
+    [
+        {
+            "TpoDR": "%",
+            "TpoMovDR": "D",
+            "ValorDR": 917.5,
+            "GlosaDR": "Dto.Gral. 10%",
+            "IndFactDR": "Gravado a Tasa B\u00e1sica"
+        },
+        {
+            "TpoDR": "%",
+            "TpoMovDR": "D",
+            "ValorDR": 0.15,
+            "GlosaDR": "Redondeo",
+            "IndFactDR": "Prod/Serv no facturable negativo"
+        }
+    ]
+
+_ Se sustituyen los campos `dtoN_tip`, dtoN_val` y `codN` por las listas  listas `docitem` y `subdescuento`
+::
+
+    `docitem`
+        [ { "TipCod": "EAN",
+            "Cod": 1234567890123
+        } ]
+
+
+    `subdescuento`
+        [ { "DescTipo": "%",
+            "DescVal": 20
+        } ]
+
+
+
+
+Aún puede que falten algunos campos de interés... Por el momento es `a solicitud de parte interesada`.
+
 
 
 **TODO:**
