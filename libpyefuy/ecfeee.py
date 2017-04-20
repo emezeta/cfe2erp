@@ -129,18 +129,11 @@ class Caratula(object):
 class CFE_Adenda(object):
     """
         Representa al elemento `CFE_Adenda`. Un CFE y su eventual Adenda.
-        El parámetro es un elemento con la siguiente estructura:
-            cfe   :
-                    elemento eDoc
-                    elemento Signature
-
-            Adenda:
-                    texto de la adenda o `None` (no obligatorio)
         La instancia será una tupla de 2 elementos (cfe, adenda)
     """
     def __init__(self, elem_cfead=None):
         """
-           :param elem:     El parámetro es un elemento con la estructura:
+           :param elem_cfead:   El parámetro es un elemento con la estructura:
                                 cfe   :
                                         elemento eDoc
                                         elemento Signature
@@ -163,7 +156,6 @@ class CFE_Adenda(object):
 
     def CFE(self):
         """
-        :param cfe:    cfe [eDoc, Signature]
         :return eDoc_obj
 
         @eDoc_obj:  Objeto a cuyos valores se accede mediante el operador punto (.)
@@ -226,10 +218,6 @@ class CFE_Adenda(object):
 
     def Adenda(self):
 
-        """
-            :param adenda: etree/CFE_Adenda/Adenda
-            :return: texto adenda or 'None'
-        """
         res = 'None'
         if self._adenda is not None:
             tag = tag_ns(self._adenda)
@@ -365,12 +353,12 @@ class Detalle(object):
             )
 
             if tmp_item['CodItem'] is not 'None':
-                tmp_item['CodItem'] = [{'TpoCod': cdi.TpoCod, 'Cod': cdi.Cod} for cdi in tmp_item['CodItem']]
+                tmp_item['CodItem'] = [{'TpoCod': cdi.TpoCod.pyval, 'Cod': cdi.Cod.pyval} for cdi in tmp_item['CodItem']]
 
             if tmp_item['SubDescuento'] is not 'None':
                 # DescTipo [ 1 = $ o 2 = % ]
-                tmp_item['SubDescuento'] = [ { 'DescTipo': '$' if sdto.DescTipo.pyval == 1 else '%', \
-                                               'DescVal' : sdto.DescVal.pyval } for sdto in tmp_item['SubDescuento'] \
+                tmp_item['SubDescuento'] = [ { 'DescTipo': '$' if sdto.DescTipo.pyval == 1 else '%',
+                                               'DescVal' : sdto.DescVal.pyval } for sdto in tmp_item['SubDescuento']
                                                    if sdto['DescVal'].pyval is not 0 ]
             if tmp_item['IndFact'] is not 'None':
                 tmp_item['IndFact'] = indfact[str(tmp_item['IndFact'])]
@@ -391,8 +379,8 @@ class DscRcgGlobal(object):
         if hasattr(dscrcgglobal,'DRG_Item') and len(dscrcgglobal.DRG_Item):
             for drgi in dscrcgglobal.DRG_Item:
                 tmp_drgitem = dict(
-                        TpoMovDR    =  drgi.TpoMovDR.pyval  if hasattr(drgi,'TpoMovDR'  ) else 'None',  # ValorDR  D=dto   R=recgo.
-                        TpoDR       =  drgi.TpoDR.pyval     if hasattr(drgi,'TpoDR'     ) else 'None',  # TipoDRType 1=% 2=$
+                    TpoMovDR    =  drgi.TpoMovDR.pyval  if hasattr(drgi,'TpoMovDR'  ) else 'None',
+                    TpoDR       =  drgi.TpoDR.pyval     if hasattr(drgi,'TpoDR'     ) else 'None',
                         GlosaDR     =  drgi.GlosaDR.pyval   if hasattr(drgi,'GlosaDR'   ) else 'None',
                         ValorDR     =  drgi.ValorDR.pyval   if hasattr(drgi,'ValorDR'   ) else 'None',
                         IndFactDR   =  drgi.IndFactDR.pyval if hasattr(drgi,'IndFactDR' ) else 'None'   # ver tabla  "indfactdr"

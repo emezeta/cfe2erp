@@ -6,8 +6,6 @@ from __future__ import print_function
 import cStringIO
 import csv
 import config
-import lxml
-import sys
 import codecs
 
 

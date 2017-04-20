@@ -54,11 +54,18 @@ Ubicación: `libpyefuy/config.py`. Modificar a gusto y piacere.
 
 ::
 
-    delimiter = '|'
-    lineterminator = '\r\n'
+    # [global]
     out_path = '/tmp/'
-    encoding="utf-8"
+    encoding = "utf-8"
 
+    # [csv]
+    delimiter = '|'     # cualquier utf8 menos '~'
+    lineterminator = '\r\n'
+
+    # [json]
+    indent = 4
+    sort_keys = True
+    separators = (',', ':')
 
 
 Como se usa
@@ -67,7 +74,10 @@ Como se usa
 ::
 
     Ejecutar:
-        `$> python ./pyecee.py /carpeta_xmls/`
+        $ ./pycfe2json.py /carpeta_sobres_xml/
+        $ ./pycfe2csv.py  /carpeta_sobres_xml/
+
+    Según sea el formato de salida que se pretenda.
 
 
 Salida CSV
@@ -112,7 +122,7 @@ Para `csv` existen los tipos de registro: Cabezales y Líneas.
     'adenda'              : Adenda
 
 [1]
-*Descuentos o recagros globales.*
+*descuentos o recagros globales.*
 
 Este elemento puede aparecer de 0 a 5 veces. Condicional: si no está presente en el CFE no se genera.
 Por cada "Descuento o recaglo global" se generarán 3 campos adicionales.
@@ -172,13 +182,13 @@ Salida JSON
 La salida en formato `json` usa los mismos nombres que que csv pero se estructuran
 formas "llave:valor" con las siguientes diferencias sobre los elementos csv:
 
-_ No existen los campos  'id_cabezal' e 'id_linea'.
+    No existen los campos  'id_cabezal' e 'id_linea'.
 
-_ Los descuentos o recargos globales, elementos `dr0_xxx` en los csv, son un a lista de `drg_items` de la siguiente forma:
+    Los descuentos o recargos globales, elementos `dr0_xxx` en los csv, son una lista de `drg_items` de la siguiente forma:
+
 ::
 
-    [
-        {
+    [   {
             "TpoDR": "%",
             "TpoMovDR": "D",
             "ValorDR": 917.5,
@@ -194,7 +204,7 @@ _ Los descuentos o recargos globales, elementos `dr0_xxx` en los csv, son un a l
         }
     ]
 
-_ Se sustituyen los campos `dtoN_tip`, dtoN_val` y `codN` por las listas  listas `docitem` y `subdescuento`
+    Se sustituyen los campos `dtoN_tip`, dtoN_val` y `codN` por las listas  listas `docitem` y `subdescuento`
 ::
 
     `docitem`

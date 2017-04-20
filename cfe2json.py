@@ -13,7 +13,9 @@ from libpyefuy import config, ecfeee, ecfeee_json
 
 
 OUT_DIR = config.out_path
-
+INDENT  = config.indent=4,
+SORT_K  = config.sort_keys=True,
+SEPS    = config.separators=(',', ':')
 
 """
     **pyecee.py EnvioCFE_entreEmpresas**
@@ -82,39 +84,20 @@ def sobre_consitency_chk(lista_cfe_adenda, caratula):
         sys.exit()
 
 
-def prn_caratula(caratula, xml_file):
-    print('CFEs en el sobre: %s | Archivo %s' % (caratula.CantCFE, xml_file))
-    print('Dia: %s ' % (caratula.Fecha.strftime('%Y-%m-%d %H:%M:%S'), ))
-    return True
-
-
-def write_json(out_path, jtags, out_name="eTags"):
-
-    if jtags:
-            dt = strftime('%0d%0m%0H%M%0S')
-            json_file = '%s%s%s%s' % (out_path, out_name, dt, '.json')
-            print("Json          : %s" % (json_file,))
-
-            with open(json_file, 'w') as fp:
-                json.dump(jtags, fp, indent=4, sort_keys=True, separators=(',', ':'))
-            res = True
-    else:
-        res = False
-    return res
-from bson import ObjectId
-
-class JSONEncoder(json.JSONEncoder):
-    def default(self, o):
-        print("->",o,"<-")
-        if isinstance(o, ObjectId):
-            return str(o)
-        return json.JSONEncoder.default(self, o)
+class jEncoder(json.JSONEncoder):
+    """
+        >>> import json
+        >>> json.dumps(set([1,2,3,4,5]), cls=jEncoder)
+        '[1, 2, 3, 4, 5]'
+    """
+    def default(self, obj):
+        import ipdb; ipdb.set_trace()
+        if isinstance(obj, (set,list,int,long,float)):
+            return list(obj)
+        return json.JSONEncoder.default(self, obj)
 
 
 
-
-# from IPython import embed; embed()
-# import ipdb; ipdb.set_trace()
 if __name__ == "__main__":
 
     dir_entrada = sys.argv[-1:][0]
@@ -122,8 +105,6 @@ if __name__ == "__main__":
     files = subprocess.check_output(cmd, shell=True).split()
 
     nroxml = 0
-    #files = ['./Sob_18.xml']
-    #files = ['../recibidos/Sob_63457.xml']
 
     # se procesa un xml
     for _file in files:
@@ -140,10 +121,10 @@ if __name__ == "__main__":
 
         sobre_consitency_chk(cfea_list, caratula.CantCFE)
 
-        """ prepara el manejo de la salida `csv` """
+        # prepara el manejo de la salida `csv`
         _json_fname  = _file.split('/')[-1:][0][:-4]
 
-        """ Se itera sobre la lista de CFE_Adenda del Sobre. de 1 a 250 """
+        # Se itera sobre la lista de CFE_Adenda del Sobre. de 1 a 250
         ncfe = 0
         for cfead in cfea_list:
 
@@ -158,11 +139,11 @@ if __name__ == "__main__":
             # nombre de archivo de salida del CFE
             json_fname = OUT_DIR + _json_fname + '_' + str(ncfe) + '.json'
 
-            jse_cfe = JSONEncoder().encode(json_doc.create)
+            #jse_cfe = jEncoder().encode(json_doc.create) # debug
+            #jse_cfe = json_doc.create                    # debug
 
             with open(json_fname, 'w') as fp:
-                json.dump(jse_cfe, fp, indent=4, sort_keys=True, separators=(',', ':'))
-
+                json.dump(json_doc.create, fp, INDENT, SORT_K, SEPS)
             ncfe += 1
 
 
