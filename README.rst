@@ -23,8 +23,8 @@ Sobre xml "EnvioCFE_entreEmpresas"
                 ...
             }
 
-Ocurrencia de elemetos en el sobre
-''''''''''''''''''''''''''''''''''
+Ocurrencia de elementos en el sobre
+'''''''''''''''''''''''''''''''''''
 ::
 
         Encabezado  : mínimo = 1, máximo = 1
@@ -125,20 +125,20 @@ Para `csv` existen los tipos de registro: Cabezales y Líneas.
     'adenda'              : Adenda
 
 [1]
-*descuentos o recagros globales.*
+*descuentos o recargos globales.*
 
 Este elemento puede aparecer de 0 a 5 veces. Condicional: si no está presente en el CFE no se genera.
-Por cada "Descuento o recaglo global" se generarán 3 campos adicionales.
+Por cada "Descuento o recargo global" se generarán 3 campos adicionales.
 Si el CFE contiene uno de estos elementos, el cabezal tendrá 3 campos adicionales, si contiene 2, serán 6 adicionales.
-En el extremo, 5 elementos "Descuento o recaglo global" en el CFE, dara lugar a un cabezal con 15 columnas adicionales.
+En el extremo, 5 elementos "Descuento o recargo global" en el CFE, dara lugar a un cabezal con 15 columnas adicionales.
 
 Ejemplo:
-    Cabezal de CFE con 2 elementos "Descuento o Recago Global"
+    Cabezal de CFE con 2 elementos "Descuento o Recargo Global"
 
     `id_cabezal; ... monto_pagar; dr0_glosa; dr0_valor; dr0_deta; dr1_glosa; dr1_valor; dr1_deta`
 
 
-Se asinga el valor `None` a campos vacíos o inexistentes en el CFE analizado, excepto en "Descuentos o Recargo Global",
+Se asigna el valor `None` a campos vacíos o inexistentes en el CFE analizado, excepto en "Descuentos o Recargo Global",
 Los CSV generados no admiten separadores de camp adyacentes.
 
 
@@ -174,7 +174,7 @@ Los CSV generados no admiten separadores de camp adyacentes.
     'dto5_val'            :
 
 
-Se asinga el valor `None` a los campos vacíos o que no existan en el CFE analizado.
+Se asigna el valor `None` a los campos vacíos o que no existan en el CFE analizado.
 Los CSV generados no admiten separadores de camp adyacentes.
 
 
