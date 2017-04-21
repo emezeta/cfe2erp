@@ -3,7 +3,10 @@
 cfe2erp
 =======
 
-Cargar uno o varios cfe .xml de una carpta, deserializar y almacenar en un formato estándar, de modo que su importación al ERP o el sistema de gestión de la empresa resulte significativamente más sencilla.
+La idea detrás de esta herramienta es la de usar los documentos de la facturación electrónica recibidos como forma de facilitar una vía de automatización para el ingreso de datos en los sistemas de gestion preexistentes en las empresas.
+
+Se desarrolló un pequeño módulo python capaz de leer uno o varios CFE .xml de eFactura, deserializar y almacenar los datos en un formato estándar, de modo que su importación al ERP o el sistema de gestión de la empresa resulte significativamente más sencilla.
+
 
 Sobre xml "EnvioCFE_entreEmpresas"
 ==================================
@@ -30,7 +33,7 @@ Ocurrencia de elemetos en el sobre
         Adenda      : mínimo = 0, máximo = 1
 
 
-El script `pyecee.py` lee los sobres xml de una carpeta, los parsea uno a uno creando árboles lxml (lxml.de)
+Los scrpts leen los CFE de los sobres xml de una carpeta, los parsea uno a uno creando árboles lxml (lxml.de)
 Del sobre analizado, se crearán:
 
 - `Caratula`
@@ -182,9 +185,9 @@ Salida JSON
 La salida en formato `json` usa los mismos nombres que que csv pero se estructuran
 formas "llave:valor" con las siguientes diferencias sobre los elementos csv:
 
-    No existen los campos  'id_cabezal' e 'id_linea'.
+- No existen los campos  'id_cabezal' e 'id_linea'.
 
-    Los descuentos o recargos globales, elementos `dr0_xxx` en los csv, son una lista de `drg_items` de la siguiente forma:
+- Los descuentos o recargos globales, elementos `dr0_xxx` en los csv, son una lista de `drg_items` de la siguiente forma:
 
 ::
 
@@ -204,7 +207,9 @@ formas "llave:valor" con las siguientes diferencias sobre los elementos csv:
         }
     ]
 
-    Se sustituyen los campos `dtoN_tip`, dtoN_val` y `codN` por las listas  listas `docitem` y `subdescuento`
+
+- Se sustituyen los campos `dtoN_tip`, dtoN_val` y `codN` por las listas  listas `docitem` y `subdescuento`
+
 ::
 
     `docitem`
