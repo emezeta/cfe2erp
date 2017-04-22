@@ -1,14 +1,11 @@
 ﻿# coding: utf-8
 
 
-EnvioCFE_entreEmpresas = [ Caratula,
-                           CFE_Adenda
-]
-'''
-El template contiene todos los campos de un CFE para Envio entre empresas.
-Actualmente 24/02 solo aparecen los del tipo `eFact`, falta agregar los
-campos que resulten de la interseccion de los conjuntos
-'''
+EnvioCFE_entreEmpresas = [
+                            Caratula,
+                            CFE_Adenda
+                         ]
+
 
 Caratula = {
     'CantCFE'        : None,
@@ -23,13 +20,28 @@ CFE_Adenda = {'CFE': { 'eDoc': eDoc,
                        'Signature': Signature },
               'Adenda': None,
 }
+
 '''
 eDoc:
 -----
-    Contiene todos los campos de un CFE para Envio entre empresas. Las llaves
-    del diccionario son la interseccion de los tipos de documentos:
-    `eTck`, `eFact`, `eFact_Exp`, `eRem`, `eRem_Exp` y `eResg`
+
+    Es un genérico arbitrario para representar uno de los tipos de CFE.
+
+
+    Contiene todos los campos de un CFE para Envio entre empresas.
+    Las llaves del diccionario son la interseccion de los tipos de
+    documentos:
+
+        `eTck`, `eFact`, `eFact_Exp`, `eRem`, `eRem_Exp` y `eResg`
+
     eDoc siempre adoptará uno de estos valores.
+
+
+
+    *Actualmente 24/02 solo aparecen los del tipo `eFact`, faltría agregar
+    los campos que resulten de la interseccion de los conjuntos de campos
+    del resto de los `eDocs`.
+
 '''
 
 eDoc = {
@@ -40,6 +52,7 @@ eDoc = {
                 'TipoCFE'    : None,
                 'Serie'      : None,
                 'Nro'        : None,
+                'MntBruto'   : None,
                 'FchEmis'    : None,
                 'MntBruto'   : None,
                 'FmaPago'    : None,
@@ -97,7 +110,7 @@ eDoc = {
 
     'Detalle'     : [{'Item':{
                             'NroLinDet'     : None,
-                            'IndFact'       : None,
+                            'IndFact'       : None,  [0]
                             'CodItem'       : [{'TpoCod': None, 'Cod': None}],
                             'NomItem'       : None,
                             'Cantidad'      : None,

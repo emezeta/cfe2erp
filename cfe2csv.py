@@ -102,7 +102,6 @@ if __name__ == "__main__":
 
         sobre_consitency_chk(cfea_list, caratula.CantCFE)
 
-
         # prepara el manejo de la salida `csv`
         _csv_fname  = _file.split('/')[-1:][0][:-4]
 

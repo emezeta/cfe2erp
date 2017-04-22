@@ -33,7 +33,7 @@ Ocurrencia de elementos en el sobre
         Adenda      : mínimo = 0, máximo = 1
 
 
-Los scrpts leen los CFE de los sobres xml de una carpeta, los parsea uno a uno creando árboles lxml (lxml.de)
+Los scripts leen los CFE de los sobres xml de una carpeta, los parsea uno a uno creando árboles lxml (lxml.de)
 Del sobre analizado, se crearán:
 
 - `Caratula`
@@ -100,9 +100,11 @@ Para `csv` existen los tipos de registro: Cabezales y Líneas.
     'tipo_documento'      : Nombre del CFE 'eFactura', 'eTicket', etc.(relaciona al campo anterior)
     'serie'               :
     'numero'              :
+    'lin_inc_iva'         : Indica que las líneas de datalle tienen el iva incluido
     'proveedor_nombre'    :
     'proveedor_rsocial'   : Razón Social
     'proveedor_rut'       :
+    'proveedor_domfiscal' : Dirección
     'moneda'              :
     'tipo_cambio'         : (si la Moneda es 'UYU' el 'Tipo de Cambio' es 1.00)
     'monto_exp_asim'      : Monto para exportación o asimilados.
