@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cfe2erp &#8212; cfe2erp  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="cfe2erp">
+<h1>cfe2erp<a class="headerlink" href="#cfe2erp" title="Permalink to this headline">¶</a></h1>
+<p>La idea detrás de esta herramienta es la de usar los documentos de la facturación electrónica recibidos como forma de facilitar una vía de automatización para el ingreso de datos en los sistemas de gestion preexistentes en las empresas.</p>
+<p>Se desarrolló un pequeño módulo python capaz de leer uno o varios CFE .xml de eFactura, deserializar y almacenar los datos en un formato estándar, de modo que su importación al ERP o el sistema de gestión de la empresa resulte significativamente más sencilla.</p>
+<div class="section" id="sobre-xml-enviocfe-entreempresas">
+<h2>Sobre xml “EnvioCFE_entreEmpresas”<a class="headerlink" href="#sobre-xml-enviocfe-entreempresas" title="Permalink to this headline">¶</a></h2>
+<p><strong>Estructura simplificada</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Sobre</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">Encabezado</span><span class="p">,</span>
+            <span class="n">CFE_Adenda</span><span class="p">(</span> <span class="n">CFE</span><span class="p">,</span> <span class="n">Adenda</span> <span class="p">),</span>
+            <span class="n">CFE_Adenda</span><span class="p">(</span> <span class="n">CFE</span><span class="p">,</span> <span class="n">Adenda</span> <span class="p">),</span>
+            <span class="o">...</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="ocurrencia-de-elementos-en-el-sobre">
+<h3>Ocurrencia de elementos en el sobre<a class="headerlink" href="#ocurrencia-de-elementos-en-el-sobre" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Encabezado</span>  <span class="p">:</span> <span class="n">mínimo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">máximo</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">CFE_Adenda</span>  <span class="p">:</span> <span class="n">mínimo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">máximo</span> <span class="o">=</span> <span class="mi">250</span>
+<span class="n">CFE</span>         <span class="p">:</span> <span class="n">mínimo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">máximo</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Adenda</span>      <span class="p">:</span> <span class="n">mínimo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">máximo</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Los scripts leen los CFE de los sobres xml de una carpeta, los parsea uno a uno creando árboles lxml (lxml.de)
+Del sobre analizado, se crearán:</p>
+<ul class="simple">
+<li><p><cite>Caratula</cite></p></li>
+<li><p><cite>Lista de documentos</cite></p></li>
+</ul>
+<p><cite>Caratula</cite> es un objeto python con un método por cada elemento de la carátula:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Caratula</span><span class="o">.</span><span class="n">RUCEmisor</span>
+<span class="gp">... </span><span class="mi">160010030018</span>
+</pre></div>
+</div>
+<p>Los elementos de la <cite>Lista de documentos</cite> son a su vez, listas de la forma:</p>
+<blockquote>
+<div><p>[“Encabezado”, lista de “CFE_Adenda”]</p>
+</div></blockquote>
+<p><cite>Encabezado</cite> es un objeto al estilo de <cite>Caratula</cite>, en tanto <cite>CFE_Adenda</cite> contiene un <cite>CFE</cite> y eventualmente su <cite>Adenda</cite></p>
+</div>
+<div class="section" id="configuracion">
+<h3>Configuración<a class="headerlink" href="#configuracion" title="Permalink to this headline">¶</a></h3>
+<p>Ubicación: <cite>libpyefuy/config.py</cite>. Modificar a gusto y piacere.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># [global]</span>
+<span class="n">out_path</span> <span class="o">=</span> <span class="s1">&#39;/tmp/&#39;</span>
+<span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span>
+
+<span class="c1"># [csv]</span>
+<span class="n">delimiter</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span>     <span class="c1"># cualquier utf8 menos &#39;~&#39;</span>
+<span class="n">lineterminator</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+
+<span class="c1"># [json]</span>
+<span class="n">indent</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">sort_keys</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">separators</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="como-se-usa">
+<h3>Como se usa<a class="headerlink" href="#como-se-usa" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Ejecutar:
+    $ ./pycfe2json.py /carpeta_sobres_xml/
+    $ ./pycfe2csv.py  /carpeta_sobres_xml/
+
+Según sea el formato de salida que se pretenda.
+</pre></div>
+</div>
+</div>
+<div class="section" id="salida-csv">
+<h3>Salida CSV<a class="headerlink" href="#salida-csv" title="Permalink to this headline">¶</a></h3>
+<p>Para <cite>csv</cite> existen los tipos de registro: Cabezales y Líneas.</p>
+<p><em>Campos del Cabezal</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;id_cabezal&#39;</span>          <span class="p">:</span> <span class="n">Identificador</span> <span class="n">de</span> <span class="n">registro</span> <span class="s2">&quot;C&quot;</span> <span class="o">=</span> <span class="n">cabezal</span>
+<span class="s1">&#39;cant_lin&#39;</span>            <span class="p">:</span> <span class="n">Cantidad</span> <span class="n">de</span> <span class="n">líneas</span> <span class="k">del</span> <span class="n">docuemnto</span> <span class="n">relativas</span> <span class="n">a</span> <span class="n">este</span> <span class="n">cabezal</span><span class="o">.</span>
+<span class="s1">&#39;fecha_emis&#39;</span>          <span class="p">:</span>
+<span class="s1">&#39;fecha_firma&#39;</span>         <span class="p">:</span> <span class="n">Fecha</span> <span class="n">de</span> <span class="n">firma</span> <span class="k">del</span> <span class="n">CFE</span>
+<span class="s1">&#39;tipo_cfe&#39;</span>            <span class="p">:</span> <span class="n">Número</span> <span class="n">CFE</span> <span class="s1">&#39;111&#39;</span><span class="p">,</span> <span class="s1">&#39;101&#39;</span><span class="p">,</span> <span class="s1">&#39;112&#39;</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span>      <span class="p">(</span><span class="n">relaciona</span> <span class="n">al</span> <span class="n">campo</span> <span class="n">siguiente</span><span class="p">)</span>
+<span class="s1">&#39;tipo_documento&#39;</span>      <span class="p">:</span> <span class="n">Nombre</span> <span class="k">del</span> <span class="n">CFE</span> <span class="s1">&#39;eFactura&#39;</span><span class="p">,</span> <span class="s1">&#39;eTicket&#39;</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span><span class="p">(</span><span class="n">relaciona</span> <span class="n">al</span> <span class="n">campo</span> <span class="n">anterior</span><span class="p">)</span>
+<span class="s1">&#39;serie&#39;</span>               <span class="p">:</span>
+<span class="s1">&#39;numero&#39;</span>              <span class="p">:</span>
+<span class="s1">&#39;lin_inc_iva&#39;</span>         <span class="p">:</span> <span class="n">Indica</span> <span class="n">que</span> <span class="n">las</span> <span class="n">líneas</span> <span class="n">de</span> <span class="n">datalle</span> <span class="n">tienen</span> <span class="n">el</span> <span class="n">iva</span> <span class="n">incluido</span>
+<span class="s1">&#39;proveedor_nombre&#39;</span>    <span class="p">:</span>
+<span class="s1">&#39;proveedor_rsocial&#39;</span>   <span class="p">:</span> <span class="n">Razón</span> <span class="n">Social</span>
+<span class="s1">&#39;proveedor_rut&#39;</span>       <span class="p">:</span>
+<span class="s1">&#39;proveedor_domfiscal&#39;</span> <span class="p">:</span> <span class="n">Dirección</span>
+<span class="s1">&#39;moneda&#39;</span>              <span class="p">:</span>
+<span class="s1">&#39;tipo_cambio&#39;</span>         <span class="p">:</span> <span class="p">(</span><span class="n">si</span> <span class="n">la</span> <span class="n">Moneda</span> <span class="n">es</span> <span class="s1">&#39;UYU&#39;</span> <span class="n">el</span> <span class="s1">&#39;Tipo de Cambio&#39;</span> <span class="n">es</span> <span class="mf">1.00</span><span class="p">)</span>
+<span class="s1">&#39;monto_exp_asim&#39;</span>      <span class="p">:</span> <span class="n">Monto</span> <span class="n">para</span> <span class="n">exportación</span> <span class="n">o</span> <span class="n">asimilados</span><span class="o">.</span>
+<span class="s1">&#39;monto_imp_percibido&#39;</span> <span class="p">:</span> <span class="n">Monto</span> <span class="n">de</span> <span class="n">impuestos</span> <span class="n">percibidos</span>
+<span class="s1">&#39;monto_no_gravado&#39;</span>    <span class="p">:</span>
+<span class="s1">&#39;monto_no_facturable&#39;</span> <span class="p">:</span>
+<span class="s1">&#39;neto_tminima&#39;</span>        <span class="p">:</span> <span class="n">Neto</span> <span class="n">tasa</span> <span class="n">mínima</span>
+<span class="s1">&#39;neto_tbasica&#39;</span>        <span class="p">:</span> <span class="n">Neto</span> <span class="n">tasa</span> <span class="n">básica</span>
+<span class="s1">&#39;neto_otra&#39;</span>           <span class="p">:</span> <span class="n">Neto</span> <span class="n">otras</span> <span class="n">tasas</span>
+<span class="s1">&#39;monto_iva_min&#39;</span>       <span class="p">:</span> <span class="n">Monto</span> <span class="n">iva</span> <span class="n">mínimo</span>
+<span class="s1">&#39;monto_iva_bas&#39;</span>       <span class="p">:</span> <span class="n">Monto</span> <span class="n">iva</span> <span class="n">básico</span>
+<span class="s1">&#39;monto_iva_otr&#39;</span>       <span class="p">:</span> <span class="n">Monto</span> <span class="n">iva</span> <span class="n">otras</span> <span class="n">tasas</span>
+<span class="s1">&#39;monto_iva_suspenso&#39;</span>  <span class="p">:</span> <span class="n">Monto</span> <span class="n">iva</span> <span class="n">en</span> <span class="n">suspenso</span>
+<span class="s1">&#39;monto_total&#39;</span>         <span class="p">:</span>
+<span class="s1">&#39;monto_tot_retenido&#39;</span>  <span class="p">:</span> <span class="n">Monto</span> <span class="n">total</span> <span class="n">retenido</span>
+<span class="s1">&#39;monto_pagar&#39;</span>         <span class="p">:</span> <span class="n">Monto</span> <span class="n">a</span> <span class="n">pagar</span>
+<span class="s1">&#39;dr0_glosa&#39;</span>           <span class="p">:</span> <span class="n">Nombre</span> <span class="k">del</span> <span class="n">ítem</span>           <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="s1">&#39;dr0_valor&#39;</span>           <span class="p">:</span> <span class="n">Valor</span> <span class="k">del</span> <span class="n">dto</span><span class="o">.</span> <span class="n">o</span> <span class="n">rec</span><span class="o">.</span>     <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="s1">&#39;dr0_deta&#39;</span>            <span class="p">:</span> <span class="n">Detalles</span> <span class="k">del</span> <span class="n">dto</span><span class="o">.</span> <span class="n">o</span> <span class="n">rec</span><span class="o">.</span>  <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="s1">&#39;adenda&#39;</span>              <span class="p">:</span> <span class="n">Adenda</span>
+</pre></div>
+</div>
+<p>[1]
+<em>descuentos o recargos globales.</em></p>
+<p>Este elemento puede aparecer de 0 a 5 veces. Condicional: si no está presente en el CFE no se genera.
+Por cada “Descuento o recargo global” se generarán 3 campos adicionales.
+Si el CFE contiene uno de estos elementos, el cabezal tendrá 3 campos adicionales, si contiene 2, serán 6 adicionales.
+En el extremo, 5 elementos “Descuento o recargo global” en el CFE, dara lugar a un cabezal con 15 columnas adicionales.</p>
+<dl>
+<dt>Ejemplo:</dt><dd><p>Cabezal de CFE con 2 elementos “Descuento o Recargo Global”</p>
+<p><cite>id_cabezal; … monto_pagar; dr0_glosa; dr0_valor; dr0_deta; dr1_glosa; dr1_valor; dr1_deta</cite></p>
+</dd>
+</dl>
+<p>Se asigna el valor <cite>None</cite> a campos vacíos o inexistentes en el CFE analizado, excepto en “Descuentos o Recargo Global”,
+Los CSV generados no admiten separadores de camp adyacentes.</p>
+<p><em>Campos de líneas</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;id_linea&#39;</span>            <span class="p">:</span> <span class="n">Identificador</span> <span class="n">de</span> <span class="n">registro</span> <span class="s2">&quot;L&quot;</span><span class="p">:</span> <span class="n">el</span> <span class="n">registro</span> <span class="n">es</span> <span class="n">una</span> <span class="n">línea</span> <span class="k">del</span> <span class="n">docuemnto</span><span class="o">.</span>
+<span class="s1">&#39;nrolindet&#39;</span>           <span class="p">:</span> <span class="n">Secuencia</span> <span class="n">numeradora</span> <span class="n">de</span> <span class="n">línea</span><span class="o">.</span>
+<span class="s1">&#39;indfact&#39;</span>             <span class="p">:</span> <span class="n">Indica</span> <span class="n">en</span> <span class="n">tipo</span> <span class="n">de</span> <span class="n">Iva</span> <span class="n">u</span> <span class="n">otra</span> <span class="n">calidad</span> <span class="k">del</span> <span class="n">campo</span> <span class="n">en</span> <span class="n">el</span> <span class="n">documento</span><span class="o">.</span>
+<span class="s1">&#39;nomitem&#39;</span>             <span class="p">:</span> <span class="n">Nombre</span>
+<span class="s1">&#39;cantidad&#39;</span>            <span class="p">:</span>
+<span class="s1">&#39;unimed&#39;</span>              <span class="p">:</span> <span class="n">Unidad</span> <span class="n">de</span> <span class="n">medida</span>
+<span class="s1">&#39;descitem&#39;</span>            <span class="p">:</span>
+<span class="s1">&#39;preciounitario&#39;</span>      <span class="p">:</span>
+<span class="s1">&#39;montoitem&#39;</span>           <span class="p">:</span>
+<span class="s1">&#39;descuentomonto&#39;</span>      <span class="p">:</span> <span class="n">Monto</span> <span class="k">del</span> <span class="n">descuento</span>
+<span class="s1">&#39;dtoporcentaje&#39;</span>       <span class="p">:</span> <span class="n">Porcentaje</span> <span class="k">del</span> <span class="n">descuento</span>
+<span class="s1">&#39;cod1&#39;</span>                <span class="p">:</span> <span class="n">Codigo</span> <span class="k">del</span> <span class="n">ítem</span> <span class="p">(</span><span class="n">hasta</span> <span class="mi">5</span> <span class="n">códigos</span> <span class="n">diferentes</span><span class="p">)</span>
+<span class="s1">&#39;cod2&#39;</span>                <span class="p">:</span>
+<span class="s1">&#39;cod3&#39;</span>                <span class="p">:</span>
+<span class="s1">&#39;cod4&#39;</span>                <span class="p">:</span>
+<span class="s1">&#39;cod5&#39;</span>                <span class="p">:</span>
+<span class="s1">&#39;dto1_tip&#39;</span>            <span class="p">:</span> <span class="n">Tipo</span> <span class="k">del</span> <span class="n">descuento</span> <span class="s2">&quot;$&quot;</span> <span class="n">por</span> <span class="n">valor</span><span class="p">,</span> <span class="s2">&quot;%&quot;</span> <span class="n">por</span> <span class="n">tasa</span><span class="o">.</span> <span class="p">(</span><span class="n">hasta</span> <span class="mi">5</span> <span class="n">diferentes</span><span class="p">)</span>
+<span class="s1">&#39;dto1_val&#39;</span>            <span class="p">:</span> <span class="n">Valor</span> <span class="k">del</span> <span class="n">descuento</span>  <span class="p">(</span><span class="n">hasta</span> <span class="mi">5</span> <span class="n">diferentes</span><span class="p">)</span>
+<span class="s1">&#39;dto2_tip&#39;</span>            <span class="p">:</span>
+<span class="s1">&#39;dto2_val&#39;</span>            <span class="p">:</span>
+<span class="s1">&#39;dto3_tip&#39;</span>            <span class="p">:</span>
+<span class="s1">&#39;dto3_val&#39;</span>            <span class="p">:</span>
+<span class="s1">&#39;dto4_tip&#39;</span>            <span class="p">:</span>
+<span class="s1">&#39;dto4_val&#39;</span>            <span class="p">:</span>
+<span class="s1">&#39;dto5_tip&#39;</span>            <span class="p">:</span>
+<span class="s1">&#39;dto5_val&#39;</span>            <span class="p">:</span>
+</pre></div>
+</div>
+<p>Se asigna el valor <cite>None</cite> a los campos vacíos o que no existan en el CFE analizado.
+Los CSV generados no admiten separadores de camp adyacentes.</p>
+</div>
+<div class="section" id="salida-json">
+<h3>Salida JSON<a class="headerlink" href="#salida-json" title="Permalink to this headline">¶</a></h3>
+<p>La salida en formato <cite>json</cite> usa los mismos nombres que que csv pero se estructuran
+formas “llave:valor” con las siguientes diferencias sobre los elementos csv:</p>
+<ul class="simple">
+<li><p>No existen los campos  ‘id_cabezal’ e ‘id_linea’.</p></li>
+<li><p>Los descuentos o recargos globales, elementos <cite>dr0_xxx</cite> en los csv, son una lista de <cite>drg_items</cite> de la siguiente forma:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>   <span class="p">{</span>
+        <span class="s2">&quot;TpoDR&quot;</span><span class="p">:</span> <span class="s2">&quot;%&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;TpoMovDR&quot;</span><span class="p">:</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ValorDR&quot;</span><span class="p">:</span> <span class="mf">917.5</span><span class="p">,</span>
+        <span class="s2">&quot;GlosaDR&quot;</span><span class="p">:</span> <span class="s2">&quot;Dto.Gral. 10%&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;IndFactDR&quot;</span><span class="p">:</span> <span class="s2">&quot;Gravado a Tasa B</span><span class="se">\u00e1</span><span class="s2">sica&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;TpoDR&quot;</span><span class="p">:</span> <span class="s2">&quot;%&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;TpoMovDR&quot;</span><span class="p">:</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ValorDR&quot;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+        <span class="s2">&quot;GlosaDR&quot;</span><span class="p">:</span> <span class="s2">&quot;Redondeo&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;IndFactDR&quot;</span><span class="p">:</span> <span class="s2">&quot;Prod/Serv no facturable negativo&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Se sustituyen los campos <cite>dtoN_tip</cite>, dtoN_val` y <cite>codN</cite> por las listas  listas <cite>docitem</cite> y <cite>subdescuento</cite></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>`docitem`
+    [ { &quot;TipCod&quot;: &quot;EAN&quot;,
+        &quot;Cod&quot;: 1234567890123
+    } ]
+
+
+`subdescuento`
+    [ { &quot;DescTipo&quot;: &quot;%&quot;,
+        &quot;DescVal&quot;: 20
+    } ]
+</pre></div>
+</div>
+<p>Aún puede que falten algunos campos de interés… Por el momento es <cite>a solicitud de parte interesada</cite>.</p>
+<p><strong>TODO:</strong></p>
+<ul class="simple">
+<li><p>Mejorar manejo de errores</p></li>
+<li><p>Documentar, agregar comentarios</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">cfe2erp</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, emezeta.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/README.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
