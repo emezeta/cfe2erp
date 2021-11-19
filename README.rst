@@ -3,9 +3,9 @@
 cfe2erp
 =======
 
-La idea detrás de esta herramienta es la de usar los documentos de la facturación electrónica recibidos como forma de facilitar una vía de automatización para el ingreso de datos en los sistemas de gestion preexistentes en las empresas.
+La idea detrás de esta herramienta es usar los documentos de la facturación electrónica recibidos para automatizar el ingreso de datos en los sistemas de gestion preexistentes.
 
-Se desarrolló un pequeño módulo python capaz de leer uno o varios CFE .xml de eFactura, deserializar y almacenar los datos en un formato estándar, de modo que su importación al ERP o el sistema de gestión de la empresa resulte significativamente más sencilla.
+Un pequeño módulo python de leer uno o varios CFE .xml de eFactura, o sobres de CFEs y almacenar los datos en diferentes formatos estándar. De este modo suma alternativas de intercambio de datos para su importación al sistema de gestión de la empresa.
 
 
 Sobre xml "EnvioCFE_entreEmpresas"
@@ -33,7 +33,7 @@ Ocurrencia de elementos en el sobre
         Adenda      : mínimo = 0, máximo = 1
 
 
-Los scripts leen los CFE de los sobres xml de una carpeta, los parsea uno a uno creando árboles lxml (lxml.de)
+Se leen los CFE de los sobres xml de una carpeta, los parsea uno a uno creando árboles lxml (lxml.de)
 Del sobre analizado, se crearán:
 
 - `Caratula`
