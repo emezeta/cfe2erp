@@ -3,9 +3,9 @@
 cfe2erp
 =======
 
-La idea detr&aacute;s de esta herramienta es usar los documentos de la facturación electrónica recibidos para automatizar el ingreso de datos en los sistemas de gestion preexistentes.
+La idea detras de esta herramienta es usar los documentos de la facturación electrónica recibidos para automatizar el ingreso de datos en los sistemas de gestion preexistentes.
 
-Un pequeño módulo python de leer uno o varios CFE .xml de eFactura, o sobres de CFEs y almacenar los datos en diferentes formatos estándar. De este modo suma alternativas de intercambio de datos para su importación al sistema de gestión de la empresa.
+Un pequeño módulo python lee uno o varios CFE .xml de eFactura, o sobres de CFEs y almacena los datos en diferentes formatos estándar. De este modo suma alternativas de intercambio de datos para su importación al sistema de gestión de la empresa.
 
 
 Sobre xml "EnvioCFE_entreEmpresas"
